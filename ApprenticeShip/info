@@ -1,0 +1,8 @@
+flutter create recipes
+
+cd recipes
+flutter run
+
+
+flutter clean
+https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/2-hello-flutter
