@@ -5,4 +5,16 @@ flutter run
 
 
 flutter clean
-https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/2-hello-flutter
+https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/3-basic-widgets
+
+https://forums.raywenderlich.com/c/books/flutter-apprentice
+
+Adding a package dependency to an app
+From the terminal: Run flutter pub get . 
+
+try:
+
+flutter upgrade
+then:
+
+flutter run -v
