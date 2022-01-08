@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'card1.dart';
+import 'card2.dart';
 
 
 // 1
@@ -21,7 +22,8 @@ class _HomeState extends State<Home> {
     // Container(color: Colors.red),
 
     // todo: replace with card2
-    Container(color: Colors.green),
+     const Card2(),
+    // Container(color: Colors.green),
 
     // todo: replace with card1
     Container(color: Colors.blue),

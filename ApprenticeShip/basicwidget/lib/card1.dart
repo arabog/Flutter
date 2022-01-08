@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'fooderlich_theme.dart';
+
 
 class Card1 extends StatelessWidget {
   const Card1({Key? key}) : super(key: key);
@@ -7,7 +9,7 @@ class Card1 extends StatelessWidget {
   final String category = 'Editor\'s Choice';
   final String title = 'The Art of Dough';
   final String description = 'Learn to make the perfect bread.';
-  final String chef = 'Ray Wenderlich';
+  final String chef = 'Sam Arabambi';
 
   // 2
   @override
@@ -17,6 +19,45 @@ class Card1 extends StatelessWidget {
       // todo: Card1 decorate container
       child: Container(
         // todo add a stack of text
+        child: Stack(
+          children: [
+          // 8
+            Text(
+              category,
+              style: FooderlichTheme.darkTextTheme.bodyText1,
+            ),
+
+            // 9
+            Positioned(
+                child: Text(
+                  title,
+                  style: FooderlichTheme.darkTextTheme.headline2,
+                ),
+                top: 20,
+            ),
+
+           Positioned(
+             child: Text(
+                description,
+                style: FooderlichTheme.darkTextTheme.bodyText1,
+              ),
+
+              bottom: 30,
+              right: 0,
+           ),
+
+            Positioned(
+              child: Text(
+              chef,
+              style: FooderlichTheme.darkTextTheme.bodyText1,
+            ),
+
+            bottom: 10,
+            right: 0,
+            ),
+            
+          ],
+        ),
         // 1
         padding: const EdgeInsets.all(16),
 
