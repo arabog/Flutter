@@ -5,7 +5,8 @@ flutter run
 
 
 flutter clean
-https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/4-understanding-widgets
+https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/5-scrollable-widgets
+
 
 https://forums.raywenderlich.com/c/books/flutter-apprentice
 
@@ -18,3 +19,10 @@ flutter upgrade
 then:
 
 flutter run -v
+
+
+Every widget’s build() method takes a BuildContext 
+as an argument. The build context tells you where 
+you are in the tree of widgets. You can access the 
+element for any widget through the BuildContext
+
