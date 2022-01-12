@@ -7,7 +7,6 @@ flutter run
 flutter clean
 https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/5-scrollable-widgets
 
-
 https://forums.raywenderlich.com/c/books/flutter-apprentice
 
 Adding a package dependency to an app
@@ -25,4 +24,12 @@ Every widget’s build() method takes a BuildContext
 as an argument. The build context tells you where 
 you are in the tree of widgets. You can access the 
 element for any widget through the BuildContext
+
+Column and Row widgets are like ListView but without the scroll view.
+
+Convert Stateless to Stateful Widget: 
+do ds in adroid studio
+Open author_card.dart and right-click on AuthorCard. 
+Then click Show Context Actions from the menu that pops up:
+
 
