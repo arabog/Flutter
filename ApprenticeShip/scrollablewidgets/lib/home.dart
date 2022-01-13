@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/screens/explore_screen.dart';
+import 'screens/recipes_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,10 +16,12 @@ class _HomeState extends State<Home> {
     // TODO: Replace with ExploreScreen
     ExploreScreen(),
 
-    Container(color: Colors.white),
     // TODO: Replace with RecipesScreen
-    Container(color: Colors.green),
-    Container(color: Colors.blue),
+    // Container(color: Colors.white),
+      RecipesScreen(),
+
+      Container(color: Colors.green),
+    // Container(color: Colors.blue),
   ];
 
   void _onItemTapped(int index) {
@@ -31,13 +34,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         title: Center(
-          child: Text(
+        title: Center(
+            child: Text(
           'Fooderlich',
           // textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline6,
-        )
-        ),
+        )),
       ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

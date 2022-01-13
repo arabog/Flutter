@@ -35,6 +35,9 @@ class ExploreScreen extends StatelessWidget {
               const SizedBox(height: 16),
               // 9
               // todo: replace this with frdpostlistview
+              FriendPostListView(friendPosts: snapshot.data?.friendPosts ?? []),
+
+              
               Container(
                 height: 400,
                 color: Colors.green,

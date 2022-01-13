@@ -5,6 +5,8 @@ flutter run
 
 
 flutter clean
+https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/6-interactive-widgets
+
 https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/5-scrollable-widgets
 
 https://forums.raywenderlich.com/c/books/flutter-apprentice
@@ -26,6 +28,15 @@ you are in the tree of widgets. You can access the
 element for any widget through the BuildContext
 
 Column and Row widgets are like ListView but without the scroll view.
+
+The main axis always corresponds to the scroll direction!
+
+If your scroll direction is horizontal, you can think of this(main axis) as a Row. The main axis represents the horizontal direction
+
+If your scroll direction is vertical, you can think of it(main axis) as a Column. The main axis represents the vertical direction
+
+Grid delegates help figure out the spacing and the number of columns to use to lay out the children in a GridView.
+
 
 Convert Stateless to Stateful Widget: 
 do ds in adroid studio
