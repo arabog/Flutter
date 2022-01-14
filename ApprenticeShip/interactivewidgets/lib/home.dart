@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/screens/explore_screen.dart';
+
+import 'screens/explore_screen.dart';
 import 'screens/recipes_screen.dart';
 
 class Home extends StatefulWidget {
@@ -13,15 +14,10 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
-    // TODO: Replace with ExploreScreen
-      ExploreScreen(),
-
-    // TODO: Replace with RecipesScreen
-    // Container(color: Colors.white),
-      RecipesScreen(),
-
-      Container(color: Colors.green),
-    // Container(color: Colors.blue),
+    ExploreScreen(),
+    RecipesScreen(),
+    // TODO 1: Replace with grocery screen
+    Container(color: Colors.blue),
   ];
 
   void _onItemTapped(int index) {
@@ -32,14 +28,13 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO 9: Wrap inside a Consumer Widget
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text(
+        title: Text(
           'Fooderlich',
-          // textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline6,
-        )),
+        ),
       ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
