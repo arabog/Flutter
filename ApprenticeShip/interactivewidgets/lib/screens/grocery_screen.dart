@@ -7,6 +7,9 @@ import '../models/models.dart';
 
 import 'grocery_item_screen.dart';
 
+import 'grocery_list_screen.dart';
+
+
 class GroceryScreen extends StatelessWidget {
   const GroceryScreen({Key? key}) : super(key: key);
 
@@ -66,7 +69,9 @@ class GroceryScreen extends StatelessWidget {
         // 3
         if (manager.groceryItems.isNotEmpty) {
           // todo 25 add groceryListScreen
-          return Container();
+            return GroceryListScreen(manager: manager);
+
+          // return Container();
         } else {
           // 4
           return const EmptyGroceryScreen();
