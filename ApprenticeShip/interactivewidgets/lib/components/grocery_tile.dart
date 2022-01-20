@@ -25,61 +25,64 @@ class GroceryTile extends StatelessWidget {
     // TODO 21: Change this Widget
     // return Container(
       return SizedBox(
-      height: 100.0,
-      // TODO 20: Replace this color
-      // color: Colors.red,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // TODO 22: Add Row to group (name, date, importance)
-          // 1
-              Row(
-                children: [
-                  // 2
-                  Container(width: 5.0, color: item.color),
-                  // 3
-                  const SizedBox(width: 16.0),
-                  // 4
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 5
-                      Text(
-                        item.name,
-                        style: GoogleFonts.lato(
-                          decoration: textDecoration,
-                          fontSize: 21.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4.0),
-                      buildDate(),
-                      const SizedBox(height: 4.0),
-                      buildImportance(),
-                    ],
-                  ),
-                ],
-              ),
-
-          // TODO 23: Add Row to group (quantity, checkbox)
-                                // 6
+        height: 100.0,
+        // TODO 20: Replace this color
+        // color: Colors.red,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // TODO 22: Add Row to group (name, date, importance)
+            // 1
                 Row(
                   children: [
-                    // 7
-                    Text(item.quantity.toString(),
-                        style:
-                            GoogleFonts.lato(
-                              decoration: textDecoration,
-                              fontSize: 21.0),
+                    // 2
+                    Container(width: 5.0, color: item.color),
+                    // 3
+                    const SizedBox(width: 16.0),
+                    // 4
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 5
+                        Text(
+                          item.name,
+                          style: GoogleFonts.lato(
+                            decoration: textDecoration,
+                            fontSize: 21.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                    // 8
-                    buildCheckbox(),
-                  ],
+
+                        const SizedBox(height: 4.0),
+                        buildDate(),
+                        const SizedBox(height: 4.0),
+                        buildImportance(),
+                      ],
+                    ),
+                                    ],
                 ),
 
-        ],
-      ),
+
+
+            // TODO 23: Add Row to group (quantity, checkbox)
+                                  // 6
+                  Row(
+                    children: [
+                      // 7
+                      Text(item.quantity.toString(),
+                          style:
+                              GoogleFonts.lato(
+                                decoration: textDecoration,
+                                fontSize: 21.0),
+                          ),
+                      // 8
+                      buildCheckbox(),
+                    ],
+                  ),
+
+          ],
+        ),
 
     );
   }
@@ -110,6 +113,8 @@ class GroceryTile extends StatelessWidget {
       }
     }
 
+
+  // TODO: Add buildDate()
     Widget buildDate() {
       final dateFormatter = DateFormat('MMMM dd h:mm a');
       final dateString = dateFormatter.format(item.date);
@@ -121,7 +126,6 @@ class GroceryTile extends StatelessWidget {
 
 
 
-  // TODO: Add buildDate()
 
   // TODO: Add buildCheckbox()
   Widget buildCheckbox() {

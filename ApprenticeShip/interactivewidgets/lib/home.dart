@@ -9,6 +9,15 @@ import 'package:provider/provider.dart';
 import 'models/models.dart';
 
 
+/*Split your widgets by screen to keep code modular 
+and organized.
+Create manager objects to manage functions and state 
+changes in one place. 
+
+Widgets:
+https://pub.dev/
+*/
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -89,37 +98,3 @@ class _HomeState extends State<Home> {
 }
 
 
-/*
-return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text(
-    //       'Fooderlich',
-    //       style: Theme.of(context).textTheme.headline6,
-    //     ),
-    //   ),
-
-    //   // 2
-    //   // todo: replace body
-    //   body: pages[_selectedIndex],
-    //   bottomNavigationBar: BottomNavigationBar(
-    //     selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
-    //     currentIndex: _selectedIndex,
-    //     onTap: _onItemTapped,
-    //     items: <BottomNavigationBarItem>[
-    //       const BottomNavigationBarItem(
-    //         icon: Icon(Icons.explore),
-    //         label: 'Explore',
-    //       ),
-    //       const BottomNavigationBarItem(
-    //         icon: Icon(Icons.book),
-    //         label: 'Recipes',
-    //       ),
-    //       const BottomNavigationBarItem(
-    //         icon: Icon(Icons.list),
-    //         label: 'To Buy',
-    //       ),
-    //     ],
-    //   ),
-    // );
-
-*/ 

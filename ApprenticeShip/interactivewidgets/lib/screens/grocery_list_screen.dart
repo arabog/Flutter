@@ -30,7 +30,6 @@ class GroceryListScreen extends StatelessWidget {
               // TODO 28: Wrap in a Dismissable
 
               // TODO 27: Wrap in an InkWell
-              // 1
               return Dismissible(
                   // 6
                   key: Key(item.id),
@@ -41,7 +40,8 @@ class GroceryListScreen extends StatelessWidget {
                     color: Colors.red,
                     alignment: Alignment.centerRight,
                     child: const Icon(Icons.delete_forever,
-                      color: Colors.white, size: 50.0)),
+                      color: Colors.white, size: 50.0)
+                  ),
                   // 9
                   onDismissed: (direction) {
                     // 10
@@ -83,7 +83,6 @@ class GroceryListScreen extends StatelessWidget {
               );
 
 
-
               // 5
               // return GroceryTile(
               //   key: Key(item.id),
@@ -95,6 +94,7 @@ class GroceryListScreen extends StatelessWidget {
               //       manager.completeItem(index, change);
               //     }
               // },);
+
             },
             // 8
             separatorBuilder: (context, index) {
