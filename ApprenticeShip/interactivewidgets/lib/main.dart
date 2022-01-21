@@ -6,6 +6,13 @@ import 'home.dart';
 import 'package:provider/provider.dart';
 import 'models/models.dart';
 
+/*
+You can pass data around with callbacks or 
+provider packages.
+If you need to pass data one level up, use callbacks.
+If you need to pass data deep in the widget tree, 
+use providers.
+*/ 
 
 void main() {
   runApp(const Fooderlich());
