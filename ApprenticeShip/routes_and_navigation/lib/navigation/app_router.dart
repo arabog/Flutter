@@ -60,19 +60,30 @@ class AppRouter extends RouterDelegate
         if (!appStateManager.isInitialized) SplashScreen.page(),
 
         // TODO: Add LoginScreen
-        if (appStateManager.isInitialized && ! 
-        appStateManager.isLoggedIn) LoginScreen.page(),
+        if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
+          LoginScreen.page(),
 
         // TODO: Add OnboardingScreen
-        if (appStateManager.isLoggedIn && 
-            !appStateManager.isOnboardingComplete)
-            OnboardingScreen.page(),
+        if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+          OnboardingScreen.page(),
 
         // TODO: Add Home
         if (appStateManager.isOnboardingComplete)
-        Home.page(appStateManager.getSelectedTab),
-        
+          Home.page(appStateManager.getSelectedTab),
+
         // TODO: Create new item
+        // 1
+        if (groceryManager.isCreatingNewItem)
+          // 2
+          GroceryItemScreen.page(
+              onCreate: (item) {
+                // 3
+                groceryManager.addItem(item);
+              },
+              onUpdate: (item, index) {
+                // 4 No updte
+              },
+            ),
         // TODO: Select GroceryItemScreen
         // TODO: Add Profile Screen
         // TODO: Add WebView Screen
@@ -95,9 +106,9 @@ class AppRouter extends RouterDelegate
 
     // 5
     // TODO: Handle Onboarding and splash
-      if (route.settings.name == FooderlichPages.onboardingPath) {
-          appStateManager.logout();
-      }
+    if (route.settings.name == FooderlichPages.onboardingPath) {
+      appStateManager.logout();
+    }
     // TODO: Handle when user closes grocery item screen
     // TODO: Handle when user closes profile screen
     // TODO: Handle when user closes Webview screen
