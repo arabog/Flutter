@@ -6,6 +6,13 @@ import '../models/models.dart';
 
 class ProfileScreen extends StatefulWidget {
   // TODO: ProfileScreen MaterialPage Helper
+  static MaterialPage page(User user) {
+    return MaterialPage(
+      name: FooderlichPages.profilePath,
+      key: ValueKey(FooderlichPages.profilePath),
+      child: ProfileScreen(user: user),
+    );
+  }
 
   final User user;
   const ProfileScreen({
@@ -26,6 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: const Icon(Icons.close),
           onPressed: () {
             // TODO: Close Profile Screen
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(false);
           },
         ),
       ),
