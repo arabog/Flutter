@@ -9,11 +9,11 @@ import '../models/models.dart';
 class WebViewScreen extends StatefulWidget {
   // TODO: WebViewScreen MaterialPage Helper
   static MaterialPage page() {
-      return MaterialPage(
-          name: FooderlichPages.raywenderlich,
-          key: ValueKey(FooderlichPages.raywenderlich),
-          child: const WebViewScreen(),
-      );
+    return MaterialPage(
+      name: FooderlichPages.raywenderlich,
+      key: ValueKey(FooderlichPages.raywenderlich),
+      child: const WebViewScreen(),
+    );
   }
 
   const WebViewScreen({Key? key}) : super(key: key);

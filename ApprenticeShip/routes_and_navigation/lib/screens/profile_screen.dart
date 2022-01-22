@@ -69,6 +69,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: const Text('Log out'),
           onTap: () {
             // TODO: Logout user
+            // 1
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(false);
+
+            // 2
+            Provider.of<AppStateManager>(context, listen: false).logout();
           },
         )
       ],
