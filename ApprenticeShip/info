@@ -65,3 +65,7 @@ converts a URL string into a proper data type.
 
 AppLink is the intermediary object between a URL string and your app state.
 
+Converting a URL to an app state
+When the user enters a new URL on the web or triggers a deep link on mobile,
+RouteInformationProvider notifies RouteInformationParser that there’s a new
+route
