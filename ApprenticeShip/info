@@ -5,6 +5,10 @@ flutter run
 
 
 flutter clean
+
+for Gradle task 'assembleDebug'... issue at startup:
+flutter doctor --android-licenses
+
 https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/6-interactive-widgets
 
 https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/5-scrollable-widgets
@@ -48,4 +52,16 @@ Note: Remember that the purpose of a barrel file is to group common Dart files t
 
 Tip: You should only wrap a Consumer around widgets that need it. For example, wrapping a consumer widget at the top level would force it to rebuild the entire tree!
 
+
+A deep link is a URL that navigates to a specific destination in your mobile app. You
+can think of deep links like a URL address you enter into a web browser to go to a
+specific page of a website rather than the home page.
+
+For deep links to work, you need to do two key things: convert a URL to an app state
+and convert an app state to a URL
+
+navigation state is just a user-defined data type. It
+converts a URL string into a proper data type.
+
+AppLink is the intermediary object between a URL string and your app state.
 
