@@ -69,3 +69,51 @@ Converting a URL to an app state
 When the user enters a new URL on the web or triggers a deep link on mobile,
 RouteInformationProvider notifies RouteInformationParser that there’s a new
 route
+
+Deep linking to the Home screen:
+Enter the following in your terminal:
+xcrun simctl openurl booted 'fooderlich://raywenderlich.com/
+home?tab=1'
+
+Deep linking to the Profile screen:
+xcrun simctl openurl booted 'fooderlich://raywenderlich.com/
+profile'
+
+Deep linking to create a new item:
+xcrun simctl openurl booted 'fooderlich://raywenderlich.com/
+item'
+
+
+chapter 9
+• cached_network_image: Download and cache the images you’ll use in the app.
+• flutter_slidable: Build a widget that lets the user slide a card left and right to
+perform different actions, like deleting a saved recipe.
+• flutter_svg: Load SVG images without the need to use a program to convert them
+to vector files.
+
+Saving data
+There are three primary ways to save data to your device:
+1. Write formatted data, like JSON, to a file.
+2. Use a library or plugin to write simple data to a shared location.
+3. Use a SQLite database.
+
+Why save small bits of data?
+Note that this simple data saved to a shared location is lost when the user uninstalls
+the app.
+
+The shared_preferences plugin
+shared_preferences is a Flutter plugin that allows you to save data in a key-value
+format so you can easily retrieve it later.
+
+it only supports saving simple properties like strings,
+numbers, and boolean values.
+
+Be aware that shared_preferences is not a good fit to store sensitive data. e.g store passwords or access tokens
+
+Running code in the background
+Most modern UI toolkits have a main thread that runs the UI code. Any code that takes a long time needs to run on a different thread or process so it doesn’t block the UI. Dart uses a technique similar to JavaScript to achieve this. The language includes these two keywords:
+• async
+• await
+async marks a method or code section as asynchronous. You then use the await keyword inside that method to wait until an asynchronous process finishes in the background.
+
+Dart also has a class named Future , which indicates that the method promises a future result. SharedPreferences.getInstance() returns Future<SharedPreferences> , which you use to retrieve an instance of the SharedPreferences class
