@@ -1,14 +1,13 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../../network/recipe_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../colors.dart';
-import '../widgets/custom_dropdown.dart';
-
-import 'dart:convert';
-import '../../network/recipe.model.dart';
-import 'package:flutter/services.dart';
 import '../recipe_card.dart';
+import '../widgets/custom_dropdown.dart';
 import 'recipe_details.dart';
 
 class RecipeList extends StatefulWidget {
@@ -23,6 +22,8 @@ class _RecipeListState extends State<RecipeList> {
 
   late TextEditingController searchTextController;
   final ScrollController _scrollController = ScrollController();
+
+  // TODO: Replace with new API class
   List currentSearchList = [];
   int currentCount = 0;
   int currentStartPosition = 0;
@@ -32,15 +33,13 @@ class _RecipeListState extends State<RecipeList> {
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = <String>[];
-  // TODO: Add _currentRecipes1
   APIRecipeQuery? _currentRecipes1 = null;
 
   @override
   void initState() {
     super.initState();
-    // TODO: Call loadRecipes()
+    // TODO: Remove call to loadRecipes()
     loadRecipes();
-
     getPreviousSearches();
     searchTextController = TextEditingController(text: '');
     _scrollController
@@ -64,12 +63,12 @@ class _RecipeListState extends State<RecipeList> {
       });
   }
 
-// TODO: Add loadRecipes
+  // TODO: Add getRecipeData() here
+
+  // TODO: Delete loadRecipes()
   Future loadRecipes() async {
-    // 1
     final jsonString = await rootBundle.loadString('assets/recipes1.json');
     setState(() {
-      // 2
       _currentRecipes1 = APIRecipeQuery.fromJson(jsonDecode(jsonString));
     });
   }
@@ -201,25 +200,22 @@ class _RecipeListState extends State<RecipeList> {
     });
   }
 
-// TODO: Replace method
+  // TODO: Replace this _buildRecipeLoader definition
   Widget _buildRecipeLoader(BuildContext context) {
-    // 1
     if (_currentRecipes1 == null || _currentRecipes1?.hits == null) {
       return Container();
     }
     // Show a loading indicator while waiting for the recipes
     return Center(
-      // 2
       child: _buildRecipeCard(context, _currentRecipes1!.hits, 0),
     );
   }
 
-// TODO: Add _buildRecipeCard
+  // TODO: Add _buildRecipeList()
+
   Widget _buildRecipeCard(
       BuildContext topLevelContext, List<APIHits> hits, int index) {
-    // 1
     final recipe = hits[index].recipe;
-
     return GestureDetector(
       onTap: () {
         Navigator.push(topLevelContext, MaterialPageRoute(
@@ -228,7 +224,7 @@ class _RecipeListState extends State<RecipeList> {
           },
         ));
       },
-      // 2
+      // TODO: Replace with recipeCard
       child: recipeStringCard(recipe.image, recipe.label),
     );
   }

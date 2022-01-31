@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 // TODO: Add imports
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/custom_dropdown.dart';
@@ -66,27 +67,29 @@ class _RecipeListState extends State<RecipeList> {
 
   // TODO: Add savePreviousSearches
   void savePreviousSearches() async {
-    // 1
-    final prefs = await SharedPreferences.getInstance();
-    // 2
-    prefs.setStringList(prefSearchKey, previousSearches);
+      // 1
+      final prefs = await SharedPreferences.getInstance();
+      // 2
+      prefs.setStringList(prefSearchKey, previousSearches);
   }
 
+
   void getPreviousSearches() async {
-    // 1
-    final prefs = await SharedPreferences.getInstance();
-    // 2
-    if (prefs.containsKey(prefSearchKey)) {
-      // 3
-      final searches = prefs.getStringList(prefSearchKey);
-      // 4
-      if (searches != null) {
-        previousSearches = searches;
-      } else {
-        previousSearches = <String>[];
+      // 1
+      final prefs = await SharedPreferences.getInstance();
+      // 2
+      if (prefs.containsKey(prefSearchKey)) {
+          // 3
+          final searches = prefs.getStringList(prefSearchKey);
+          // 4
+          if (searches != null) {
+              previousSearches = searches;
+          } else {
+              previousSearches = <String>[];
+          }
       }
-    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -201,26 +204,25 @@ class _RecipeListState extends State<RecipeList> {
   }
 
   // TODO: Add startSearch
-  void startSearch(String value) {
-    // 1
-    setState(() {
-      // 2
-      currentSearchList.clear();
-      currentCount = 0;
-      currentEndPosition = pageCount;
-      currentStartPosition = 0;
-      hasMore = true;
-      value = value.trim();
+    void startSearch(String value) {
+      // 1
+      setState(() {
+        // 2
+        currentSearchList.clear();
+        currentCount = 0;
+        currentEndPosition = pageCount;
+        currentStartPosition = 0;
+        hasMore = true;
+        value = value.trim();
 
-      // 3
-      if (!previousSearches.contains(value)) {
-        // 4
-        previousSearches.add(value);
-
-        // 5
-        savePreviousSearches();
-      }
-    });
+        // 3
+        if (!previousSearches.contains(value)) {
+          // 4
+          previousSearches.add(value);
+          // 5
+          savePreviousSearches();
+          }
+      });
   }
 
   Widget _buildRecipeLoader(BuildContext context) {
