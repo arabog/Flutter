@@ -1,4 +1,4 @@
-package com.raywenderlich.serialization_with_json
+package com.raywenderlich.serialization
 
 import io.flutter.embedding.android.FlutterActivity
 
