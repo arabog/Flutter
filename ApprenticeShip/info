@@ -150,3 +150,92 @@ CHECK PG 430 Diagrams
 
 An element tree stores both the widgets themselves and the states of all the stateful widgets in RecipeList:
 If the state of a widget updates, the state object also updates and the widget is redrawn with that updated state.
+This kind of management handles state only for a specific widget. But what if you want to manage state for your whole app or share state between widgets and screens? You do this using application state.
+
+Application state:
+In Flutter, a stateful widget can hold state, which its children can access, and pass data to another screen in its constructor. However, that complicates your code and you have to remember
+to pass data objects down the tree. Wouldn’t it be great if
+child widgets could easily access their parent data without having to pass in that data?
+
+There are several different ways to achieve that, both with built-in widgets and with third-party packages. You’ll look at built-in widgets first.
+
+Managing state in your app:
+Widgets --> Widget Data --> Repository --> (Local Storage & Newtwork Data)
+
+Stateful widgets
+StatefulWidget is one of the most basic ways of saving state.
+
+When you create a stateful widget, you call createState() , which stores the state internally in Flutter to reuse when the parent needs to rebuild the widget tree. When the widget is rebuilt, Flutter reuses the existing state.
+
+You use initstate() for one-time work, like initializing text controllers. Then you use setState() to change state,
+triggering a rebuild of the widget with the new state.
+
+StatefulWidget is great for maintaining internal state, but not for state outside of the widget.
+One way to achieve an architecture that allows sharing state between widgets is to adopt InheritedWidget.
+
+InheritedWidget
+InheritedWidget is a built-in class that allows its child widgets to access its data. It’s the basis for a lot of other state management widgets. If you create a class that extends InheritedWidget and give it some data, any child widget can access that data by calling
+context.dependOnInheritedWidgetOfExactType<class>() .
+
+An advantage of using InheritedWidget is it’s a built-in widget so you don’t need to worry about using external packages.
+
+A disadvantage of using InheritedWidget is that the value of a recipe can’t change unless you rebuild the whole widget tree because InheritedWidget is immutable.
+So, if you want to change the displayed recipe title, you’ll have to rebuild the whole RecipeWidget .
+
+Provider:
+Provider is a set of classes that simplifies building a state management solution on top of InheritedWidget.
+
+ChangeNotifier
+ChangeNotifier is a class that adds and removes listeners, then notifies those listeners of any changes. You usually extend the class for models so you can send notifications when your model changes.
+
+ChangeNotifierProvider
+ChangeNotifierProvider is a widget that wraps a class, implementing ChangeNotifier and uses the child widget for display. When changes are broadcast, the widget rebuilds its tree. The syntax looks like this:
+
+ChangeNotifierProvider(
+create: (context) => MyModel(),
+child: <widget>,
+);
+
+Provider offers a central point to manage state, so that you don’t need to manually update different widgets via setState() every time that state changes.
+
+But what happens if you create a model in that widget each time? That creates a new one! Any work that model did is lost the next time. By using create , Provider saves
+that model instead of re-creating it each time.
+
+Consumer
+Consumer is a widget that listens for changes in a class that implements ChangeNotifier , then rebuilds the widgets below itself when it finds any. When building your widget tree, try to put a Consumer as deep as possible in the UI hierarchy, so updates don’t recreate the whole widget tree.
+
+Consumer<MyModel>(
+builder: (context, model, child) {
+return Text('Hello ${model.value}');
+}
+);
+
+If you only need access to the model and don’t need notifications when the data changes, use Provider.of , like this:
+
+Provider.of<MyModel>(context, listen: false).<method name>
+
+listen: false indicates you don’t want notifications for any updates. This parameter is required to use Provider.of() inside initState() .
+
+FutureProvider
+FutureProvider works like other providers and uses the required create parameter that returns a Future.
+
+A Future is handy when a value is not readily available but will be in the future. Examples include calls that request data from the internet or asynchronously read data from a database.
+
+MultiProvider
+What if you need more than one provider? You could nest them, but it’d get messy, making them hard to read and maintain.
+
+Instead, use MultiProvider to create a list of providers and a single child:
+
+MultiProvider(
+providers: [
+Provider<MyModel>(create: (_) => Something()),
+Provider<MyDatabase>(create: (_) => SomethingMore()),
+],
+child: <widget>
+);
+
+StreamProvider
+works the same way as FutureProvider. Stream providers are handy when data comes in via streams and values change over time like, for example, when you’re monitoring the connectivity of a device.
+
+equatable: ^2.0.3:
+Equatable helps with equality checks by providing equals() and toString() as well as hashcode . This allows you to check models for equality in maps and it’s necessary for providers.
