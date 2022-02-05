@@ -1,14 +1,12 @@
 Application ID: a87aa4cc
 
 Application Keys:
-dab715fcf9c38c9a93f4fd0256fface8	
-
+dab715fcf9c38c9a93f4fd0256fface8
 
 flutter create recipes
 
 cd recipes
 flutter run
-
 
 flutter clean
 
@@ -22,7 +20,7 @@ https://www.raywenderlich.com/books/flutter-apprentice/v2.0/chapters/5-scrollabl
 https://forums.raywenderlich.com/c/books/flutter-apprentice
 
 Adding a package dependency to an app
-From the terminal: Run flutter pub get . 
+From the terminal: Run flutter pub get .
 
 try:
 
@@ -31,10 +29,9 @@ then:
 
 flutter run -v
 
-
-Every widget’s build() method takes a BuildContext 
-as an argument. The build context tells you where 
-you are in the tree of widgets. You can access the 
+Every widget’s build() method takes a BuildContext
+as an argument. The build context tells you where
+you are in the tree of widgets. You can access the
 element for any widget through the BuildContext
 
 Column and Row widgets are like ListView but without the scroll view.
@@ -47,17 +44,14 @@ If your scroll direction is vertical, you can think of it(main axis) as a Column
 
 Grid delegates help figure out the spacing and the number of columns to use to lay out the children in a GridView.
 
-
-Convert Stateless to Stateful Widget: 
+Convert Stateless to Stateful Widget:
 do ds in adroid studio
-Open author_card.dart and right-click on AuthorCard. 
+Open author_card.dart and right-click on AuthorCard.
 Then click Show Context Actions from the menu that pops up:
-
 
 Note: Remember that the purpose of a barrel file is to group common Dart files together. This allows you to group classes that are commonly used together so you only have to import a single file — in this case, models.dart.
 
 Tip: You should only wrap a Consumer around widgets that need it. For example, wrapping a consumer widget at the top level would force it to rebuild the entire tree!
-
 
 A deep link is a URL that navigates to a specific destination in your mobile app. You
 can think of deep links like a URL address you enter into a web browser to go to a
@@ -89,7 +83,6 @@ Deep linking to create a new item:
 xcrun simctl openurl booted 'fooderlich://raywenderlich.com/
 item'
 
-
 chapter 9
 • cached_network_image: Download and cache the images you’ll use in the app.
 • flutter_slidable: Build a widget that lets the user slide a card left and right to
@@ -99,6 +92,7 @@ to vector files.
 
 Saving data
 There are three primary ways to save data to your device:
+
 1. Write formatted data, like JSON, to a file.
 2. Use a library or plugin to write simple data to a shared location.
 3. Use a SQLite database.
@@ -123,3 +117,36 @@ Most modern UI toolkits have a main thread that runs the UI code. Any code that 
 async marks a method or code section as asynchronous. You then use the await keyword inside that method to wait until an asynchronous process finishes in the background.
 
 Dart also has a class named Future , which indicates that the method promises a future result. SharedPreferences.getInstance() returns Future<SharedPreferences> , which you use to retrieve an instance of the SharedPreferences class
+
+Chap: 13
+adopting a pattern that programmatically establishes how to track changes and how to broadcast details
+about states to the rest of your app is called state management.
+
+Clean Architecture principles by organizing your project so it’s easy to change and understand. You do this by separating your code into separate directories and classes, with each class handling just one task. You
+also use interfaces to define contracts that different classes can implement, allowing you to easily swap in different classes or reuse classes in other apps.
+
+UI ---> Biz login ----> (Network & Databases);
+
+the business logic layer should be in charge of deciding how to react to the user’s actions and how to delegate tasks like retrieving and saving data to other classes.
+
+Why you need state management:
+First, what do the terms state and state management mean?
+State is when a widget is active and stores its data in memory.
+The Flutter framework handles some state,
+but as mentioned earlier, Flutter is declarative. That means it rebuilds a UI StatefulWidget from memory when the state or data changes or when another part of your app uses it.
+State management is, as the name implies, how you manage the state of your widgets and app.
+
+Two state types to consider are ephemeral state, also known as UI state and app state
+• Use Ephemeral state when no other component in the widget tree needs to access a widget’s data. Examples include whether a TabBarView tab is selected or FloatingActionButton is pressed.
+• Use App state when other parts of your app need to access a widget’s state data.
+One example is an image that changes over time, like an icon for the current weather. Another example is information that the user selects on one screen and which should then display on another screen, like when the user adds an item to a shopping cart.
+
+Widget state:
+A stateless widget is drawn with the same state it had when it was
+created.
+A stateful widget preserves its state and uses it to (re)draw itself in the future.
+
+CHECK PG 430 Diagrams
+
+An element tree stores both the widgets themselves and the states of all the stateful widgets in RecipeList:
+If the state of a widget updates, the state object also updates and the widget is redrawn with that updated state.
