@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
-import 'ui/main_screen.dart';
-
 import 'package:provider/provider.dart';
 import 'data/memory_repository.dart';
-
 import 'mock_service/mock_service.dart';
-
+import 'ui/main_screen.dart';
 
 Future<void> main() async {
   _setupLogging();
@@ -30,30 +27,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-    // 1
-    providers: [
-      // 2
-      ChangeNotifierProvider<MemoryRepository>(
-        lazy: false,
-        create: (_) => MemoryRepository(),
-      ),
-      // 3
-      Provider(
-        // 4
-        create: (_) => MockService()..create(),
-        lazy: false,
-      ),
-    ],
-    // 5
-    child: MaterialApp(
-      title: 'Recipes',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.white,
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      providers: [
+        // TODO: Update ChangeNotifierProvider
+        ChangeNotifierProvider<MemoryRepository>(
+          lazy: false,
+          create: (_) => MemoryRepository(),
+        ),
+        Provider(
+          create: (_) => MockService()..create(),
+          lazy: false,
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Recipes',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.white,
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         home: const MainScreen(),
       ),
     );

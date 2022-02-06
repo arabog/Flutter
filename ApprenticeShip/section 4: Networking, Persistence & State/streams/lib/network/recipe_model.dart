@@ -3,7 +3,6 @@ import '../data/models/models.dart';
 
 part 'recipe_model.g.dart';
 
-
 @JsonSerializable()
 class APIRecipeQuery {
   factory APIRecipeQuery.fromJson(Map<String, dynamic> json) =>
@@ -99,16 +98,11 @@ class APIIngredients {
   Map<String, dynamic> toJson() => _$APIIngredientsToJson(this);
 }
 
-// TODO: Add convertIngredients() here
 List<Ingredient> convertIngredients(List<APIIngredients> apiIngredients) {
-  // 1
   final ingredients = <Ingredient>[];
-  // 2
   apiIngredients.forEach((ingredient) {
     ingredients
-    .add(Ingredient(name: ingredient.name, weight:
-    ingredient.weight));
+        .add(Ingredient(name: ingredient.name, weight: ingredient.weight));
   });
-  
   return ingredients;
 }
