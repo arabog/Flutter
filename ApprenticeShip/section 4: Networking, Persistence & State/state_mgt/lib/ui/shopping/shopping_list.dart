@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import '../../data/memory_repository.dart';
+
+import '../../data/repository.dart';
+import '../../data/models/ingredient.dart';
 
 
 class ShoppingList extends StatefulWidget {
@@ -18,8 +20,16 @@ class _ShoppingListState extends State<ShoppingList> {
   @override
   Widget build(BuildContext context) {
     // TODO: Add Consumer widget
-    return Consumer<MemoryRepository>(builder: (context, repository, child) {
-      final ingredients = repository.findAllIngredients();
+    final repository = Provider.of<Repository>(context);
+    return StreamBuilder(
+      stream: repository.watchAllIngredients(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final ingredients = snapshot.data as List<Ingredient>?;
+
+          if (ingredients == null) {
+            return Container();
+          }
 
     return ListView.builder(
         itemCount: ingredients.length,
@@ -39,6 +49,9 @@ class _ShoppingListState extends State<ShoppingList> {
           );
         });
     // TODO: Add closing brace and parenthesis
+        } else {
+          return Container();
+        }
     },
     );
   }

@@ -4,7 +4,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:provider/provider.dart';
 import '../../data/models/recipe.dart';
-import '../../data/memory_repository.dart';
+
+import '../../data/repository.dart';
 
 
 class MyRecipesList extends StatefulWidget {
@@ -28,8 +29,18 @@ class _MyRecipesListState extends State<MyRecipesList> {
 
   Widget _buildRecipeList(BuildContext context) {
     // TODO: Add Consumer
-	return Consumer<MemoryRepository>(builder: (context, repository, child) {
-		recipes = repository.findAllRecipes();
+  // 1
+  final repository = Provider.of<Repository>(context, listen: false);
+    // 2
+    return StreamBuilder<List<Recipe>>(
+    // 3
+    stream: repository.watchAllRecipes(),
+    // 4
+    builder: (context, AsyncSnapshot<List<Recipe>> snapshot) {
+    // 5
+    if (snapshot.connectionState == ConnectionState.active) {
+    // 6
+    final recipes = snapshot.data ?? [];
 
 	return ListView.builder(
 		itemCount: recipes.length,
@@ -76,9 +87,7 @@ class _MyRecipesListState extends State<MyRecipesList> {
                     iconWidget: const Icon(Icons.delete, color: Colors.red),
 
                     // TODO: Update first onTap
-                    onTap: () => deleteRecipe(
-			repository,
-			recipe)),
+                    onTap: () => deleteRecipe(repository, recipe)),
 
               ],
               secondaryActions: <Widget>[
@@ -92,15 +101,17 @@ class _MyRecipesListState extends State<MyRecipesList> {
               ],
             ),
           );
-	});
-        });
+	},);
+    }else {
+      return Container();
+    }
+        },);
     // TODO: Add final brace and parenthesis
   }
   
 
 	// TODO: Add deleteRecipe() here
-	void deleteRecipe(MemoryRepository repository, Recipe recipe)
-	async {
+	void deleteRecipe(Repository repository, Recipe recipe) async {
 		if (recipe.id != null) {
 			// 1
 			repository.deleteRecipeIngredients(recipe.id!);
