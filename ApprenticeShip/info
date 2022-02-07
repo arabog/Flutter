@@ -239,3 +239,28 @@ works the same way as FutureProvider. Stream providers are handy when data comes
 
 equatable: ^2.0.3:
 Equatable helps with equality checks by providing equals() and toString() as well as hashcode . This allows you to check models for equality in maps and it’s necessary for providers.
+
+
+CHAP 14: STREAMS
+A stream in Dart — sends data events for a
+listener to grab.
+
+You can send one data event at a time while other parts of your app listen for those events. Such events can be collections, maps or any other type of data you’ve created.
+Streams can send errors in addition to data; you can also stop the stream, if you need to.
+
+Types of streams
+Streams are part of Dart, and Flutter inherits them. There are two types of streams in Flutter: single subscription streams and broadcast streams.
+
+A single subscription stream can only be listened to once. It doesn’t start generating events until it has a listener and it stops sending events when the listener stops listening, even if the source of events could still provide more data.
+
+Single subscription streams are useful to download a file or for any single-use
+operation. For example, a widget can subscribe to a stream to receive updates about a value, like the progress of a download, and update its UI accordingly.
+If you need multiple parts of your app to access the same stream, use a broadcast
+stream, instead.
+
+A broadcast stream allows any number of listeners. It fires when its events are ready, whether there are listeners or not.
+To create a broadcast stream, you simply call asBroadcastStream() on an existing
+single subscription stream.
+final broadcastStream =
+singleStream.asBroadcastStream();
+
