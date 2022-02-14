@@ -9,106 +9,116 @@ import '../../data/repository.dart';
 
 
 class MyRecipesList extends StatefulWidget {
-  const MyRecipesList({Key? key}) : super(key: key);
+	const MyRecipesList({Key? key}) : super(key: key);
 
-  @override
-  _MyRecipesListState createState() => _MyRecipesListState();
+	@override
+	_MyRecipesListState createState() => _MyRecipesListState();
 }
 
 class _MyRecipesListState extends State<MyRecipesList> {
-  // TODO: Update recipes declaration
-  List<Recipe> recipes = [];
+	// TODO: Update recipes declaration
+	List<Recipe> recipes = [];
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: _buildRecipeList(context),
-    );
-  }
+	@override
+	Widget build(BuildContext context) {
+		return Padding(
+			padding: const EdgeInsets.all(16.0),
+			child: _buildRecipeList(context),
+		);
+	}
 
-  Widget _buildRecipeList(BuildContext context) {
-    // TODO: Add Consumer
-  // 1
-  final repository = Provider.of<Repository>(context, listen: false);
-    // 2
-    return StreamBuilder<List<Recipe>>(
-    // 3
-    stream: repository.watchAllRecipes(),
-    // 4
-    builder: (context, AsyncSnapshot<List<Recipe>> snapshot) {
-    // 5
-    if (snapshot.connectionState == ConnectionState.active) {
-    // 6
-    final recipes = snapshot.data ?? [];
+	Widget _buildRecipeList(BuildContext context) {
+		// TODO: Add Consumer
+		// 1
+		final repository = Provider.of<Repository>(context, listen: false);
+		// 2
+		return StreamBuilder<List<Recipe>>(
+		// 3
+		stream: repository.watchAllRecipes(),
+		// 4
+		builder: (context, AsyncSnapshot<List<Recipe>> snapshot) {
+			// 5
+			if (snapshot.connectionState == ConnectionState.active) {
+				// 6
+				final recipes = snapshot.data ?? [];
 
-	return ListView.builder(
-		itemCount: recipes.length,
-		itemBuilder: (BuildContext context, int index) {
+				return ListView.builder(
+					itemCount: recipes.length,
+					itemBuilder: (BuildContext context, int index) {
 
-		// TODO: Add recipe definition
-		final recipe = recipes[index];
+						// TODO: Add recipe definition
+						final recipe = recipes[index];
 
-          return SizedBox(
-            height: 100,
-            child: Slidable(
-              actionPane: const SlidableDrawerActionPane(),
-              actionExtentRatio: 0.25,
-              child: Card(
-                elevation: 1.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                color: Colors.white,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading: CachedNetworkImage(
-                          // TODO: Replace imageUrl hardcoding 
-				imageUrl: recipe.image ?? '',
+						return SizedBox(
+							height: 100,
+							child: Slidable(
+								actionPane: const SlidableDrawerActionPane(),
+								actionExtentRatio: 0.25,
 
-                          height: 120,
-                          width: 60,
-                          fit: BoxFit.cover),
+								child: Card(
+									elevation: 1.0,
+									shape: RoundedRectangleBorder(
+										borderRadius: BorderRadius.circular(10.0),
+									),
 
-                      // TODO: Replace title hardcoding
-			title: Text(recipe.label ?? ''),
-                    ),
-                  ),
-                ),
-              ),
-              actions: <Widget>[
-                IconSlideAction(
-                    caption: 'Delete',
-                    color: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    iconWidget: const Icon(Icons.delete, color: Colors.red),
+									color: Colors.white,
 
-                    // TODO: Update first onTap
-                    onTap: () => deleteRecipe(repository, recipe)),
+									child: Align(
+										alignment: Alignment.center,
 
-              ],
-              secondaryActions: <Widget>[
-                IconSlideAction(
-                    caption: 'Delete',
-                    color: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    iconWidget: const Icon(Icons.delete, color: Colors.red),
-                    // TODO: Update second onTap
-                    onTap: () {})
-              ],
-            ),
-          );
-	},);
-    }else {
-      return Container();
-    }
-        },);
-    // TODO: Add final brace and parenthesis
-  }
-  
+										child: Padding(
+											padding: const EdgeInsets.all(8.0),
+
+											child: ListTile(
+												leading: CachedNetworkImage(
+									//                           // TODO: Replace imageUrl hardcoding 
+													imageUrl: recipe.image ?? '',
+
+													height: 120,
+													width: 60,
+													fit: BoxFit.cover
+												),
+
+									//                       // TODO: Replace title hardcoding
+												title: Text(recipe.label ?? ''),
+											),
+										),
+									),
+								),
+
+								actions: <Widget>[
+									IconSlideAction(
+										caption: 'Delete',
+										color: Colors.transparent,
+										foregroundColor: Colors.black,
+										iconWidget: const Icon(Icons.delete, color: Colors.red),
+
+										// TODO: Update first onTap
+										onTap: () => deleteRecipe(repository, recipe)
+									),
+
+								],
+
+								secondaryActions: <Widget>[
+									IconSlideAction(
+									caption: 'Delete',
+									color: Colors.transparent,
+									foregroundColor: Colors.black,
+									iconWidget: const Icon(Icons.delete, color: Colors.red),
+									// TODO: Update second onTap
+									onTap: () {})
+								],
+							)
+								// ),
+						);
+					},
+				);
+			} else {
+				return Container();
+			}
+		//     // TODO: Add final brace and parenthesis
+		},);
+	}
 
 	// TODO: Add deleteRecipe() here
 	void deleteRecipe(Repository repository, Recipe recipe) async {

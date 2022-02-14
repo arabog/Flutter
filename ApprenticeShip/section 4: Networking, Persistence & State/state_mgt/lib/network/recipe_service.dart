@@ -3,9 +3,10 @@ import 'recipe_model.dart';
 import 'model_response.dart';
 import 'model_converter.dart';
 
+import 'service_interface.dart';
+
 part 'recipe_service.chopper.dart';
 
-import 'service_interface.dart';
 
 // 2
 const String apiKey = '<ab715fcf9c38c9a93f4fd0256fface8>';
