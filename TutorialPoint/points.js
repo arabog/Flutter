@@ -100,4 +100,101 @@ void main() {
           emp.result(); //function call
 }
 
+
+Widget Build Visualization
+In Flutter, widgets can be grouped into multiple categories based on their features, as
+listed below:
+ Platform specific widgets
+ Layout widgets
+ State maintenance widgets
+ Platform independent / basic widgets
+
+Platform specific widgets
+Flutter has widgets specific to a particular platform - Android or iOS.
+Android specific widgets are designed in accordance with Material design 
+guideline by Android OS. Android specific widgets are called as Material 
+widgets.
+iOS specific widgets are designed in accordance with Human Interface 
+Guidelines by Apple and they are called as Cupertino widgets.
+
+Layout widgets
+          Container: A rectangular box decorated using BoxDecoration widgets 
+          with background, border and shadow.
+          Center: Center its child widget
+          Row: Arrange its children in the horizontal direction.
+          Column: Arrange its children in the vertical direction.
+          Stack: Arrange one above the another.
+
+State maintenance widgets
+In Flutter, all widgets are either derived from StatelessWidget or 
+StatefulWidget. Widget derived from StatelessWidget does not have 
+any state information but it may contain widget derived from StatefulWidget.
+
+Text
+Text widget is used to display a piece of string. The style of the string can 
+be set by using style property and TextStyle class. The sample code for this 
+purpose is as follows:
+Text('Hello World!', style: TextStyle(fontWeight: FontWeight.bold))
+
+
+7. Layout
+Widgets build by composing other widgets normally use layout widgets
+Type of Layout Widgets
+Layout widgets can be grouped into two distinct category based on its child:
+ Widget supporting a single child
+ Widget supporting multiple child
+
+
+9:
+A state management can be divided into two categories based on the duration the
+particular state lasts in an application.
+ Ephemeral - Last for a few seconds like the current state of an animation or a single
+page like current rating of a product. Flutter supports its through StatefulWidget.
+ app state - Last for entire application like logged in user details, cart information,
+etc., Flutter supports its through scoped_model.
+
+Ephemeral State Management
+Since Flutter application is composed of widgets, the state management is also 
+done by widgets. The entry point of the state management is Statefulwidget. 
+Widget can be inherited from Statefulwidget to maintain its state and its children 
+state. Statefulwidget provides an option for a widget to create a state, State<T> 
+(where T is the inherited widget) when the widget is created for the first time 
+through createState method and then a method, setState to change the state 
+whenever needed. The state change will be done through gestures. For example, 
+the rating of a product can be changed by tapping a star in the rating widget
+
+
+Application State - scoped_model:
+Model:
+Model encapsulates the state of an application. We can use as many Model (by inheriting
+Model class) as needed to maintain the application state. It has a single method,
+notifyListeners, which needs to be called whenever the Model state changes.
+notifyListeners will do necessary things to update the UI.
+
+ScopedModel
+ScopedModel is a widget, which holds the given model and then passes it to all the
+descendant widget if requested. If more than one model is needed, then we need to nest
+the ScopedModel.
+
+Single model
+ScopedModel<Product>(
+          model: item,
+          child: AnyWidget()
+)
+
+Multiple model
+ScopedModel<Product>(
+          model: item1,
+          child: ScopedModel<Product>(
+                    model: item2,
+                    child: AnyWidget(),
+          ),
+)
+
+ScopedModel.of is a method used to get the model underlying the ScopedModel. 
+It can be used when no UI changes are necessary even though the model is going 
+to change. The following will not change the UI (rating) of the product.
+ScopedModel.of<Product>(context).updateRating(2);
+
+
 */ 
