@@ -197,4 +197,31 @@ to change. The following will not change the UI (rating) of the product.
 ScopedModel.of<Product>(context).updateRating(2);
 
 
+11. Flutter – Writing Android Specific Code
+Platform specific functionality like camera, battery level, browser, etc., can 
+be accessed easily through the framework.
+
+Flutter code, Client and the platform code and Host binds to a common Message
+Channel. Client sends message to the Host through the Message Channel. 
+Host listens on the Message Channel, receives the message and does the 
+necessary functionality and finally, returns the result to the Client through 
+Message Channel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 */ 
