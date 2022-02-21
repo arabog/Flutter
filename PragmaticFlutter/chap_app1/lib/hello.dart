@@ -128,5 +128,40 @@ void main() {
 FILTERING
 The `where` method on `List` can help filter items meeting specific criteria.
 
+List theList = ['Dart', 'Kotlin'];
 
+void main() {
+	dynamic result;
+
+	result = theList.where((element) => element.toString().contains('a'));
+
+	print(result);	// (Dart)
+}
+
+
+Set:
+The Set (Set<E> class) data structure holds a collection of objects only once. The dupli-
+cates are not allowed when storing data in `Set`.
 */ 
+
+Set langSet = { 'Dart', 'Kotlin', 'Swift' };
+Set sdkSet = { 'Flutter', 'Android', 'iOS' };
+
+void main() {
+	dynamic result;
+
+	// adding 'Java' to Set
+	langSet.add("Java");
+	print(langSet);
+
+	// remove Java from Set
+	langSet.remove('Java');
+	print(langSet);
+
+	// adding multiple items to each set
+	langSet.addAll( ['C#', 'Java'] );
+	print(langSet);
+
+	sdkSet.addAll( ['C', 'Xamarin'] );
+	print(sdkSet);
+}
