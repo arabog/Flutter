@@ -434,7 +434,6 @@ void main() {
 Anonymous Function
 dy don’t have a name and can be assigned to a variable either
 using the keyword `var` or `Function.
-*/ 
 
 Function anonymousAdd = (int a, int b) {
 	return a + b;
@@ -448,3 +447,81 @@ void main() {
 	print(result);	// 9
 }
 
+CLASSES
+Dart classes are created using the keyword `class`. Let’s define a 
+class Person to represent a person in the real world. This person 
+has a name, an age, and the food it eats.
+*/ 
+
+// class Person {
+// 	String name;
+// 	int age;
+// 	String food;
+// }
+
+// Constructor
+// Dart supports easy to use constructors. Let’s see two types of constructors. The
+// short-form constructor looks like below. The first part is required. The parameters
+// inside ‘[]’ are optional.
+
+// class Person {
+// 	String name;
+// 	int age;
+// 	String food;
+
+	// short-form constructor
+	// Person(this.name, [this.age])
+// }
+
+
+
+// Another type of constructor is the named constructor. All parameters are enclosed
+// in the curly braces ‘{}’.
+class Person {
+	String? name;
+	int? age;
+	String? food;
+
+	// short-form constructor
+	Person(this.name, [this.age]);
+
+	// named constructor
+	Person.basicInfo( { this.name, this.age } );
+
+	  // Getter
+	String? get personName => this.name;
+
+	// Setter
+	set personName(String? value) => this.name = value;
+
+	 //Method
+	void eats(String food) {
+		this.food = food;
+	}
+
+	 //Overriding method from Object
+	String toString() {
+		return "My name is $name, and I like to eat $food";
+	}
+}
+
+void main() {
+	// usage: short-form
+	Person person = Person("Priyanka");
+	print(person.toString());
+
+	// usage: named constructor
+	Person child = Person.basicInfo(name: 'Krisha', age: 6);
+	child.eats('Pizza');
+	print(child.toString());
+
+	 child
+		..name = 'Kalp'
+		..eats("Pasta");
+	print(child.toString());
+
+	child
+		..personName = 'Tanmay'
+		..eats("Pesto");
+	print(child.toString());
+}
