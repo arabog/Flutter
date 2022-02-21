@@ -67,7 +67,7 @@ COLLECTIONS:
 
 LIST:
 Dart’s List (List<E> class) is a collection that holds indexable objects. 
-An empty list can is declared using two square brackets ‘[]’. List items 
+An empty list is declared using two square brackets ‘[]’. List items 
 can be put inside these brackets separated by commas.
 
 void main() {
@@ -231,7 +231,7 @@ void main() {
 }
 
 
-M ap
+Map
 The Map (Map<K, V> class) data structure is a collection that contains key/value
 pairs. A value is accessed using the key for that entry.
 
@@ -258,18 +258,19 @@ void main() {
 	result = intToStringMap.entries.last;
 	print(result);	// MapEntry(2: 2)
 }
-*/ 
 
-// Let’s create a `Map` with the key and value of type `String` as below:
+
+
+Let’s create a `Map` with the key and value of type `String` as below:
 var techMap = {
 	'Flutter': 'Dart',
 	'Android': 'Kotlin',
 	'iOS': 'Swift',
 };
 
-// CHECKING FOR KEY
-// The `containsKey(String key)` method on the map returns a boolean true or
-// false depending on whether the given `key` exists in the Map or not.
+CHECKING FOR KEY
+The `containsKey(String key)` method on the map returns a boolean true or
+false depending on whether the given `key` exists in the Map or not.
 
 void main() {
 	dynamic result;
@@ -278,12 +279,105 @@ void main() {
 	print(result);
 }
 
-// CHECKING FOR VALUE
-// The `containsValue(String value)` method returns the boolean value as
-// ‘true’ if the given value exists in the Map.
+CHECKING FOR VALUE
+The `containsValue(String value)` method returns the boolean value as
+‘true’ if the given value exists in the Map.
+void main() {
+	dynamic result;
+
+	result = techMap.containsValue('Dart');
+	print(result);
+}
+
+ACCESSING ALL VALUES
+All values of the key/value pairs in Map collection can be accessed calling
+`foreach` on `values` as below:
+var techMap = {
+	'Flutter': 'Dart',
+	'Android': 'Kotlin',
+	'iOS': 'Swift',
+};
+
+void main() {
+	// print all values
+	techMap.values.forEach((element) {
+		print("$element");
+	});
+}
+
+Dart
+Kotlin
+Swift
+
+ITERATING KEY/VALUE PAIRS
+All key/value pairs in Map collection are iterated
+
+var techMap = {
+	'Flutter': 'Dart',
+	'Android': 'Kotlin',
+	'iOS': 'Swift',
+};
+
+void main() {
+	// Iterates over all key-value pairs and prints them
+	techMap.entries.forEach((element) {
+		print("${element.value} is used for developing ${element.key} applications");
+	});
+}
+
+Dart is used for developing Flutter applications.
+Kotlin is used for developing Android applications.
+Swift is used for developing iOS applications.
+
+
+FUNCTIONS:
+Let’s create a function that checks if the passed argument is ‘Flutter’ or not and
+returns a boolean value. It returns true if it’s precise ‘Flutter’ or false other-
+wise. Such functions are known as ‘Named Function’ because the function’s name
+describes what they are intended to.
+
+
+
+bool isFlutter(String str) {
+	return str == "Flutter";
+}
+
+void main() {
+	dynamic result;
+
+	result = isFlutter("Flutter");
+	print(result);	// true
+}
+
+F unction with O ptional P arameters
+Let’s create a function `concat(...)` that joins two strings together when 
+the second string is available. In such a case, the second string can be 
+passed as optional using square brackets ‘[]’.
+*/ 
+// Function with optional parameters in brackets []
+// String concat(String str1, [String? str2]) {
+// 	return str2 != null ? "$str1 $str2" : str1;
+// }
+
+
 // void main() {
 // 	dynamic result;
 
-// 	result = techMap.containsValue('Dart');
+// 	 // Using function with optional params with brackets []
+// 	result = concat('Priyanka', 'Tyagi');
 // 	print(result);
 // }
+
+
+// Named Parameters: Function with optional parameters in curly braces []
+String concat2(String str1, { String? str2 } ) {
+	return str2 != null ? "$str1 $str2" : str1;
+}
+
+void main() {
+	dynamic result;
+
+	 // Using function with optional params with curly braces {}
+	result = concat2('Priyanka', str2: 'Tyagi');
+	print(result);
+}
