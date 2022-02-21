@@ -414,11 +414,37 @@ void main() {
 	dynamic result;
 
 	result = calculate(5, 4, substract);
-	print(result);
+	print(result);	// 1
 }
 
 Arrow Syntax
 The arrow syntax can be used to write functions in one line
 
 
+int add(int a, int b) => a + b;
+
+void main() {
+	dynamic result;
+
+	result = add(5, 4);
+	print(result);	// 9
+}
+
+
+Anonymous Function
+dy don’t have a name and can be assigned to a variable either
+using the keyword `var` or `Function.
 */ 
+
+Function anonymousAdd = (int a, int b) {
+	return a + b;
+};
+
+
+void main() {
+	dynamic result;
+
+	result = anonymousAdd(5, 4);
+	print(result);	// 9
+}
+
