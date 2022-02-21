@@ -141,8 +141,7 @@ void main() {
 
 Set:
 The Set (Set<E> class) data structure holds a collection of objects only once. The dupli-
-cates are not allowed when storing data in `Set`.
-*/ 
+cates are not allowed when storing data in `Set.
 
 Set langSet = { 'Dart', 'Kotlin', 'Swift' };
 Set sdkSet = { 'Flutter', 'Android', 'iOS' };
@@ -151,17 +150,140 @@ void main() {
 	dynamic result;
 
 	// adding 'Java' to Set
-	langSet.add("Java");
+	langSet.add("Java");	// {Dart, Kotlin, Swift, Java}
 	print(langSet);
 
 	// remove Java from Set
-	langSet.remove('Java');
+	langSet.remove('Java');		// {Dart, Kotlin, Swift}
 	print(langSet);
 
 	// adding multiple items to each set
 	langSet.addAll( ['C#', 'Java'] );
+	print(langSet);		// { Dart, Kotlin, Swift, C#, Java }
+
+	sdkSet.addAll( ['C#', 'Xamarin'] );
+	print(sdkSet);	// {Flutter, Android, iOS, C#, Xamarin}
+}
+
+INTERSECTION OF TWO SET(S)
+The `intersection` method on `Set` returns the shared items from 
+both sets. The `langSet` and `sdkSet` both contain the ‘C#’ item in 
+them. The intersection on those sets will return the ‘C#’.
+
+Set langSet = { 'Dart', 'Kotlin', 'Swift' };
+Set sdkSet = { 'Flutter', 'Android', 'iOS' };
+
+void main() {
+	dynamic result;
+
+	// adding 'Java' to Set
+	langSet.add("Java");	// {Dart, Kotlin, Swift, Java}
 	print(langSet);
 
-	sdkSet.addAll( ['C', 'Xamarin'] );
-	print(sdkSet);
+	// remove Java from Set
+	langSet.remove('Java');		// {Dart, Kotlin, Swift}
+	print(langSet);
+
+	// adding multiple items to each set
+	langSet.addAll( ['C#', 'Java'] );
+	print(langSet);		// { Dart, Kotlin, Swift, C#, Java }
+
+	sdkSet.addAll( ['C#', 'Xamarin'] );
+	print(sdkSet);	// {Flutter, Android, iOS, C#, Xamarin}
+
+	result = langSet.intersection(sdkSet);
+	print(result);	// { 'C#' }
 }
+
+UNION OF TWO SET(S)
+The `union` returns items combined from `langSet` and `sdkSet` without any
+duplicates. Both sets contain ‘C#’, and it’ll be added in the `result` only once.
+
+
+Set langSet = { 'Dart', 'Kotlin', 'Swift' };
+Set sdkSet = { 'Flutter', 'Android', 'iOS' };
+
+void main() {
+	dynamic result;
+
+	// adding 'Java' to Set
+	langSet.add("Java");	// {Dart, Kotlin, Swift, Java}
+	print(langSet);
+
+	// remove Java from Set
+	langSet.remove('Java');		// {Dart, Kotlin, Swift}
+	print(langSet);
+
+	// adding multiple items to each set
+	langSet.addAll( ['C#', 'Java'] );
+	print(langSet);		// { Dart, Kotlin, Swift, C#, Java }
+
+	sdkSet.addAll( ['C#', 'Xamarin'] );
+	print(sdkSet);	// {Flutter, Android, iOS, C#, Xamarin}
+
+	// find intersectn
+	result = langSet.intersection(sdkSet);
+	print(result);	// { 'C#' }
+
+	// find union
+	result = langSet.union(sdkSet);
+	print(result);	// {Dart, Kotlin, Swift, C#, Java, Flutter, Android, iOS, Xamarin}
+}
+
+
+M ap
+The Map (Map<K, V> class) data structure is a collection that contains key/value
+pairs. A value is accessed using the key for that entry.
+
+create a `Map` with a key of `int` type, and value is of `String` type.
+var intToStringMap = Map<int, String>();
+
+The new key/value pair can be added as shown in the code snippet below:
+void main() {
+	dynamic result;
+
+	intToStringMap[1] = '1';
+
+	intToStringMap[2] = '2';
+
+	/*
+		The first or last entry of the map can be accessed using `first` 
+		and `last` properties of entries (entries property) iterable.
+	*/ 
+	// first Map entry
+	result = intToStringMap.entries.first;
+	print(result);	// MapEntry(1: 1)
+
+	// last Map entry
+	result = intToStringMap.entries.last;
+	print(result);	// MapEntry(2: 2)
+}
+*/ 
+
+// Let’s create a `Map` with the key and value of type `String` as below:
+var techMap = {
+	'Flutter': 'Dart',
+	'Android': 'Kotlin',
+	'iOS': 'Swift',
+};
+
+// CHECKING FOR KEY
+// The `containsKey(String key)` method on the map returns a boolean true or
+// false depending on whether the given `key` exists in the Map or not.
+
+void main() {
+	dynamic result;
+
+	result = techMap.containsKey('Flutter');
+	print(result);
+}
+
+// CHECKING FOR VALUE
+// The `containsValue(String value)` method returns the boolean value as
+// ‘true’ if the given value exists in the Map.
+// void main() {
+// 	dynamic result;
+
+// 	result = techMap.containsValue('Dart');
+// 	print(result);
+// }
