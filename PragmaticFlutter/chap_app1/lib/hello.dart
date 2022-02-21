@@ -336,8 +336,6 @@ returns a boolean value. It returns true if it’s precise ‘Flutter’ or fals
 wise. Such functions are known as ‘Named Function’ because the function’s name
 describes what they are intended to.
 
-
-
 bool isFlutter(String str) {
 	return str == "Flutter";
 }
@@ -349,25 +347,28 @@ void main() {
 	print(result);	// true
 }
 
-F unction with O ptional P arameters
+Function with Optional Parameters
 Let’s create a function `concat(...)` that joins two strings together when 
 the second string is available. In such a case, the second string can be 
 passed as optional using square brackets ‘[]’.
-*/ 
 // Function with optional parameters in brackets []
-// String concat(String str1, [String? str2]) {
-// 	return str2 != null ? "$str1 $str2" : str1;
-// }
+String concat(String str1, [String? str2]) {
+	return str2 != null ? "$str1 $str2" : str1;
+}
 
 
-// void main() {
-// 	dynamic result;
+void main() {
+	dynamic result;
 
-// 	 // Using function with optional params with brackets []
-// 	result = concat('Priyanka', 'Tyagi');
-// 	print(result);
-// }
+	 // Using function with optional params with brackets []
+	result = concat('Priyanka', 'Tyagi'); 
+	print(result);	// Priyanka Tyagi
+}
 
+
+// Named Parameters
+The other way to provide optional parameters is to use named parameters. 
+They can be passed using curly braces ‘{}’.
 
 // Named Parameters: Function with optional parameters in curly braces []
 String concat2(String str1, { String? str2 } ) {
@@ -379,5 +380,45 @@ void main() {
 
 	 // Using function with optional params with curly braces {}
 	result = concat2('Priyanka', str2: 'Tyagi');
+	print(result);	// Priyanka Tyagi
+}
+
+// without 2nd argument:
+void main() {
+	dynamic result;
+
+	 // Using function with optional params with curly braces {}
+	result = concat2('Priyanka');
+	print(result);	// Priyanka 
+}
+
+
+Passing Function as Parameter
+The Dart 2 programming language allows passing a function as a 
+parameter to another function. Let’s create a function `int subtract(int a, int b)`
+to find the difference between the two values ‘a’ and ‘b’. The method `calcu-
+late(...)` takes two numbers and a function as a parameter to operate on the
+values passed.
+
+
+int substract (int a, int b) {
+	return a > b ? a - b : b - a;
+}
+
+// passing fxn as parameter
+int calculate(int value1, int value2, Function(int, int) function) {
+	return function(value1, value2);
+}
+
+void main() {
+	dynamic result;
+
+	result = calculate(5, 4, substract);
 	print(result);
 }
+
+Arrow Syntax
+The arrow syntax can be used to write functions in one line
+
+
+*/ 
