@@ -1,6 +1,8 @@
 /* 
 https://github.com/ptyagicodecamp/pragmatic_flutter
 
+chap 1
+
 THE main FUNCTION
 The `main()` function is the entry point for any Dart program 
 
@@ -561,10 +563,9 @@ void main() {
 		..eats("Pesto");
 	print(child.toString());
 }
-*/ 
 
 
-Cascading S yntax
+Cascading Syntax
 Dart supports cascading syntaxes. It’s useful in assigning the values 
 to properties and methods at once using two dots.
 ```
@@ -578,3 +579,4 @@ code snippet below:
 child
 	..personName = 'Tanmay'
 	..eats("Pesto");
+*/ 
