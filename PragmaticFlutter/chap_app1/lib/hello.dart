@@ -451,32 +451,68 @@ CLASSES
 Dart classes are created using the keyword `class`. Let’s define a 
 class Person to represent a person in the real world. This person 
 has a name, an age, and the food it eats.
-*/ 
-
-// class Person {
-// 	String name;
-// 	int age;
-// 	String food;
-// }
-
-// Constructor
-// Dart supports easy to use constructors. Let’s see two types of constructors. The
-// short-form constructor looks like below. The first part is required. The parameters
-// inside ‘[]’ are optional.
-
-// class Person {
-// 	String name;
-// 	int age;
-// 	String food;
-
-	// short-form constructor
-	// Person(this.name, [this.age])
-// }
 
 
+class Person {
+	String name;
+	int age;
+	String food;
+}
 
-// Another type of constructor is the named constructor. All parameters are enclosed
-// in the curly braces ‘{}’.
+Constructor
+Dart supports easy to use constructors. Let’s see two types of constructors. The
+short-form constructor looks like below. The first part is required. The parameters
+inside ‘[]’ are optional.
+
+class Person {
+	String name;
+	int age;
+	String food;
+
+	short-form constructor
+	Person(this.name, [this.age])
+}
+
+G etters
+The getters in Dart classes are defined using the `get` keyword. Let’s 
+create a getter,`personName` to get the name.
+```
+String get personName => this.name;
+
+
+S etters
+The setters in the Dart classes are defined using the `set` keyword. Let’s 
+create a setter `personName` to set the name as below:
+```
+set personName(String value) => this.name = value;
+
+Method
+Let’s add a method to the class `Person` to define the eating behavior. 
+The method`eats(String food)` takes the food as `String` and assigns it 
+to the class `food`property.
+```
+void eats(String food) {
+	this.food = food;
+}
+// Usage
+Person child = Person.basicInfo(name: "Krisha", age: 6);
+child.eats("Pizza");
+
+Let’s override the method `toString()` from the Object (Object class)
+class toprint a custom message. Every class in Dart extends from the 
+base Object class.
+```
+String toString() {
+	return "My name is $name, and I like to eat $food";
+}
+
+//Usage
+print(child.toString());
+//Output on console
+My name is Krisha, and I like to eat Pizza
+
+// Another type of constructor is the named constructor. All parameters 
+are enclosed in the curly braces ‘{}’.
 class Person {
 	String? name;
 	int? age;
@@ -515,7 +551,7 @@ void main() {
 	child.eats('Pizza');
 	print(child.toString());
 
-	 child
+	child
 		..name = 'Kalp'
 		..eats("Pasta");
 	print(child.toString());
@@ -525,3 +561,20 @@ void main() {
 		..eats("Pesto");
 	print(child.toString());
 }
+*/ 
+
+
+Cascading S yntax
+Dart supports cascading syntaxes. It’s useful in assigning the values 
+to properties and methods at once using two dots.
+```
+child
+	..name = 'Kalp'
+	..eats("Pasta");
+
+The setters can also be called using cascaded syntax as shown in the 
+code snippet below:
+```
+child
+	..personName = 'Tanmay'
+	..eats("Pesto");
