@@ -27,6 +27,24 @@ e.g: `flutter channel dev`
 After switching to your preferred channel, you need to run the command `flutter
 upgrade` to bring in updates.
 
-continue from pg 25
+
+You can also see device listing using the `flutter devices` command.
+
+Test Your Setup
+Create a test project using `flutter create testapp`, and run it as below:
+```
+flutter create testapp
+cd testapp
+flutter run -d android
+
+
+SETTING UP FOR WEB
+Flutter’s support for the Web is still in the early stages at the time of this writing.
+Support for the web is available in the beta channel at this time. Switch to beta
+channel using `flutter channel beta`. Don’t forget to run the `flutter
+upgrade` command and enable web support.
+```
+flutter channel beta
+flutter upgrade
 
 */ 

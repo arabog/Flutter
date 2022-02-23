@@ -475,14 +475,14 @@ class Person {
 	Person(this.name, [this.age])
 }
 
-G etters
+Getters
 The getters in Dart classes are defined using the `get` keyword. Let’s 
 create a getter,`personName` to get the name.
 ```
 String get personName => this.name;
 
 
-S etters
+Setters
 The setters in the Dart classes are defined using the `set` keyword. Let’s 
 create a setter `personName` to set the name as below:
 ```
