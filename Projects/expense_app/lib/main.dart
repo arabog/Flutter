@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screens/welcome_page.dart';
+// import 'screens/welcome_page.dart';
+import 'screens/login.dart';
 
 
 void main() {
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
 			),
 
 			// home: const MyHomePage(title: 'Laundromat App'),
-      home: WelcomePage(),
+      // home: WelcomePage(),
+      home: LoginPage(),
 		);
 	}
 }

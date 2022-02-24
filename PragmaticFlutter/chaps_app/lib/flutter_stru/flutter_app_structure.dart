@@ -308,7 +308,13 @@ class HelloBooksApp extends StatelessWidget {
 			home: Scaffold(
 
 				appBar: AppBar(
-					title: Text("Hello Books")
+					// centerTitle: true,
+
+					// title: Text("Hello Books")
+
+					title: Center(
+						child: Text('Hello Books'),
+					),
 				),
 
 				body: Center(
@@ -317,6 +323,8 @@ class HelloBooksApp extends StatelessWidget {
 
 						style: Theme.of(context).textTheme.headline4,
 					),
+
+					
 				),
 
 				floatingActionButton: FloatingActionButton (
@@ -326,6 +334,9 @@ class HelloBooksApp extends StatelessWidget {
 
 					child: Icon(Icons.insert_emoticon),
 				),
+
+				
+
 				
 			),
 		);

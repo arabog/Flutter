@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class WelcomePage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
 	
 	@override
 	Widget build(BuildContext context) {
@@ -28,27 +28,22 @@ class WelcomePage extends StatelessWidget {
 												height: 16,
 											),
 
-											Text("Hayster's Laundromat"),
+											buildTextfield("Username", false),
 
 											const SizedBox(
-												height: 16,
+												height:20,
 											),
 
-											const SizedBox(
-												height: 16,
-											),
-
-
-											childWidget(context),
+											buildTextfield("Password",  true),
 
 											const SizedBox(
-												height: 16,
+												height:20,
 											),
 
 											buildButton(context),
 
 											const SizedBox(
-												height: 16,
+												height:20,
 											),
 
 											TextButton(
@@ -83,7 +78,7 @@ class WelcomePage extends StatelessWidget {
 				shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
 
 				child: const Text(
-					"Get started",
+					"Login",
 					style: TextStyle(color: Colors.white),
 				),
 
@@ -94,27 +89,41 @@ class WelcomePage extends StatelessWidget {
 		);
 	}
 
-	Widget childWidget(BuildContext context) {
-		return Container (
-			color: Colors.red,
+	  Widget buildTextfield(String hintText, bool obscureText) {
+		return SizedBox(
+			height: 40,
 			width: 300,
-			height: 150,
+		  
+		 	child: TextField(
+				 obscureText: obscureText,
+				 
+			
+				// cursorColor: rwColor,
+				decoration: InputDecoration(
+					border: const OutlineInputBorder(
+						borderSide: BorderSide(
+							color: Colors.green,
+							width: 1.0,
+						),
+					),
 
-			padding: const EdgeInsets.all(10.0),
+					focusedBorder: const OutlineInputBorder(
+						borderSide: BorderSide(
+							color: Colors.green,
+						),
+					),
 
-			child: Center(
+				
+					hintText: (hintText),
+					hintStyle: const TextStyle(height: 0.5),
 
-				child: Text(
-					"Get ready to make your life easy with single click away which makes laundry service much easier",				
-					style: TextStyle(fontSize: 20, color: Colors.white),
-					
-					textAlign: TextAlign.center,
 					
 				),
-
-			),
+			)
 		);
 	}
+
+
 }
 
 
