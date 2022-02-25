@@ -10,8 +10,19 @@ the text. We will be using a StatefulWidget for this example
 reference to the TextEditingController as ` _ controller`. The `userText` 
 variable contains the text entered in the `TextField` widget.
 
-This controller needs to be initialized inside the `initState()` method. Remember
-to remove the controller in the `dispose()` method to avoid memory leaks.
+This controller needs to be initialized inside the `initState()` method. 
+Remember to remove the controller in the `dispose()` method to 
+avoid memory leaks.
+
+Next, let’s add the TextField widget as one of the children to the 
+Column layout widget. The TextField widget’s `autofocus` property is 
+set to `true` to prompt users to enter text. 
+The TextEditingController reference ` _ controller` is assigned to the 
+`controller` property. 
+The `onSubmitted` property tells the widget what to do with the 
+entered text. In this example, the entered text `value` is assigned to 
+the `userText` variable. The `TextField` widget is cleared using
+` _ controller.clear()`.
 
 */ 
 

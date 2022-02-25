@@ -228,6 +228,9 @@ class _ImagePageState extends State<ImagePage> {
 							}
 						),
 
+						SizedBox(
+							height: 40,
+						),
 
 						TextFieldDemo(),
 					],
