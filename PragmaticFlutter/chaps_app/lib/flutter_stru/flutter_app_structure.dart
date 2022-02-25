@@ -297,7 +297,7 @@ class HelloBooksApp extends StatelessWidget {
 	}
 }
 
-*/ 
+
 
 import 'package:flutter/material.dart';
 
@@ -343,4 +343,87 @@ class HelloBooksApp extends StatelessWidget {
 	}
 }
 
-// continue from pg 57
+
+Managing State with StatefulWidget
+We want to change the greetings text by clicking the smiley floating 
+action button. 
+First, we need to store all the greetings in a list. 
+Second, we need to enable the floating action button to pick the next 
+available string from the list.
+We need StatefulWidget to keep track of the current state of the selected
+greeting. This widget is assigned as `home` to MaterialApp.
+
+import 'package:flutter/material.dart';
+
+class HelloBooksApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			home: MyHomePage(title: 'Hello Books'),
+		);
+	}
+}
+
+
+Stateful Widget: MyHomePage
+The Stateful widgets are useful when a part of the screen needs to 
+be updated with new information. In our app, we want to update 
+the greeting text while rest of the screen remains unchanged. 
+The MyHomePage extends StatefulWidget accepts a title parameter. 
+The widget has a mutable state and represented using class `
+_ MyHomePageState.
+
+
+*/ 
+
+import 'package:flutter/material.dart';
+
+class HelloBooksApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
+
+		return MaterialApp(
+			home: MyHomePage(title: 'Hello Books'),
+		);
+
+	}
+}
+
+
+class MyHomePage extends StatefulWidget {
+	MyHomePage({Key? key, required this.title}) : super(key: key);
+
+	final String title;
+
+	_MyHomePageState createState() => _MyHomePageState();
+}
+
+
+class _MyHomePageState extends State<MyHomePage> {}
+
+
+
+/*
+State Widget : _ MyHomePageState
+The widgets are rebuilt whenever the state change is requested 
+from the `setState` (setState method) method.
+
+FloatingActionButton is pressed by the user, which updates 
+the currently selected greeting to display on the screen.
+
+*/ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// continue from pg 68

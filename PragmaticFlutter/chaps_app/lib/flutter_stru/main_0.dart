@@ -34,10 +34,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 	final List<String> greetings = [
-		'Hello Books',
-		'Hola Libros',
-		'Ciao Libri',
-		'हैलो किताबें',
+		'Hello Books ',
+		'Hola Libros ',
+		'Ciao Libri ',
+		'हैलो किताबें ',
 	];
 
 
