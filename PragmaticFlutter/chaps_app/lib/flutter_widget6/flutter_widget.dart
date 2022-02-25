@@ -125,7 +125,7 @@ Airplane Mode Off
 When airplane mode is off, applications can access the Internet. The 
 toggle button airplane_mode_off loads an image from an Internet URL.
 
-A irplane Mode On
+Airplane Mode On
 When airplane mode is on, the application can’t access the Internet 
 and can only access the local assets. The toggle button airplane_mode_on 
 loads an image from the local assets folder.
@@ -136,6 +136,10 @@ loads an image from the local assets folder.
 
 
 import 'package:flutter/material.dart';
+
+// import anoda component
+import 'text_field.dart';
+
 
 class ImageApp extends StatelessWidget {
 	@override 
@@ -149,7 +153,7 @@ class ImageApp extends StatelessWidget {
 }
 
 class ImagePage extends StatefulWidget {
-	ImagePage({Key? key }) : super(key: key);
+	ImagePage({Key key }) : super(key: key);
 
 	@override
 	_ImagePageState createState() => _ImagePageState();
@@ -223,13 +227,14 @@ class _ImagePageState extends State<ImagePage> {
 								});
 							}
 						),
+
+
+						TextFieldDemo(),
 					],
 				),
 			),
 		);
 	}
-
-
 
 }
 
