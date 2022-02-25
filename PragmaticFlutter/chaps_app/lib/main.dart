@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'project_structure/main_0.dart';
-import 'package:flutter_app1/flutter_stru5/flutter_app_structure.dart';
+// import 'package:flutter_app1/flutter_stru5/flutter_app_structure.dart';
+import 'flutter_widget6/flutter_widget.dart';
 
 
 void main() {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
 			// home: const MyHomePage(title: 'Flutter Demo Home Page'),
 			
 			// home: MyAppBook(),
-			home: HelloBooksApp()
+			// home: HelloBooksApp()
+			home: ImageApp()
 		);
 	}
 }
