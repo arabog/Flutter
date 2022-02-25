@@ -407,7 +407,6 @@ from the `setState` (setState method) method.
 FloatingActionButton is pressed by the user, which updates 
 the currently selected greeting to display on the screen.
 
-*/ 
 
 import 'package:flutter/material.dart';
 
@@ -455,7 +454,9 @@ class _MyHomePageState extends State<MyHomePage> {
 	Widget build(BuildContext context) {
 		return Scaffold (
 			appBar: AppBar(
-				title: Text(widget.title),
+				title: Center(
+					child: Text(widget.title),
+				)
 			),
 
 			body: Center (
@@ -477,17 +478,53 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
+The `greetings` list contains greetings in four languages. The variable
+`index` keeps the index of the currently selected item in the `greetings`
+list. On pressing smiley floating action button or FAB, 
+_ updateGreeting` method is called. The ` _ updateGreeting` method 
+updates currently selected greeting text and updates `index` by one. 
+The `index` is reset to zero when it reaches the end of the list.
 
 
+Conclusion:
+You are also introduced to the basic Flutter widgets like
+MaterialApp, Container, AppBar, Scaffold, FloatingActionButton,
+Text, StatelessWidget, and StatefulWidget.
+
+Usage of container in:
+
+StatelessWidget:
+class MyStatelessWidget extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		return Container();
+	}
+}
 
 
+StatefulWidget:
+class ContainerUsage extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
 
+		return MaterialApp(
+			home: MyStatefulWidget(title: 'Hello Books'),
+		);
 
+	}
+}
 
+class MyStatefulWidget extends StatefulWidget {
+	@override
+	final String title,
 
+	_MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
 
-
-
-
-
-// continue from pg 68
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+	@override
+	Widget build(BuildContext context) {
+		return Container();
+	}
+}
+*/ 
