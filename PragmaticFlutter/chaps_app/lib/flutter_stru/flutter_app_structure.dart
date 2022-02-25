@@ -374,8 +374,6 @@ The widget has a mutable state and represented using class `
 _ MyHomePageState.
 
 
-*/ 
-
 import 'package:flutter/material.dart';
 
 class HelloBooksApp extends StatelessWidget {
@@ -402,8 +400,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {}
 
 
-
-/*
 State Widget : _ MyHomePageState
 The widgets are rebuilt whenever the state change is requested 
 from the `setState` (setState method) method.
@@ -412,6 +408,74 @@ FloatingActionButton is pressed by the user, which updates
 the currently selected greeting to display on the screen.
 
 */ 
+
+import 'package:flutter/material.dart';
+
+class HelloBooksApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
+
+		return MaterialApp(
+			home: MyHomePage(title: 'Hello Books'),
+		);
+
+	}
+}
+
+
+class MyHomePage extends StatefulWidget {
+	MyHomePage({Key? key, required this.title}) : super(key: key);
+
+	final String title;
+
+	_MyHomePageState createState() => _MyHomePageState();
+}
+
+
+class _MyHomePageState extends State<MyHomePage> {
+	final List<String> greetings = [
+		"Hello Books",
+		'Hola Libros',
+		'Ciao Libri',
+		'हैलो िकताबें ',
+	];
+
+	int index = 0;
+	String? current;
+
+	void _updateGreeting() {
+		setState(() {
+			current = greetings[index];
+
+			index = index == (greetings.length - 1) ? 0 : index + 1;
+		});
+	}
+
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold (
+			appBar: AppBar(
+				title: Text(widget.title),
+			),
+
+			body: Center (
+				child: Text(
+					greetings[index],
+
+					style: Theme.of(context).textTheme.headline4,
+				),
+			),
+
+			floatingActionButton: FloatingActionButton(
+				onPressed: _updateGreeting,
+
+				tooltip: 'Greeting',
+
+				child: Icon(Icons.insert_emoticon),
+			),
+		);
+	}
+}
 
 
 
