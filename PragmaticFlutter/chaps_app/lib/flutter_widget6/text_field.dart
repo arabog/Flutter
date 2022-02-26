@@ -24,7 +24,6 @@ entered text. In this example, the entered text `value` is assigned to
 the `userText` variable. The `TextField` widget is cleared using
 ` _ controller.clear()`.
 
-*/ 
 
 import 'package:flutter/material.dart';
 
@@ -74,18 +73,20 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
 
 	Widget build(BuildContext context) {
 		return Scaffold(
-			appBar: AppBar(
-				title: Center(
-					child: Text("TextField Widget"),
-				),
-			),
+			// appBar: AppBar(
+			// 	title: Center(
+			// 		child: Text("TextField Widget"),
+			// 	),
+			// ),
 
 
 			body: Padding(
 				padding: const EdgeInsets.all(20.0),
 
+
 				child: Column(
 					children: [
+                        
 						TextField(
 							autofocus: true,
 
@@ -101,14 +102,19 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
 						),
 
 						SizedBox(
-							height: 20,
+							height: 5,
 						),
 
 
-						Text("User entered $userText"),
-					]
+						Text("User entered:- $userText"),
+
+					],
 				),
+
 			)
 		);
 	}
 }
+
+
+*/

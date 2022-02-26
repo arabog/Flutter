@@ -130,7 +130,7 @@ When airplane mode is on, the application can’t access the Internet
 and can only access the local assets. The toggle button airplane_mode_on 
 loads an image from the local assets folder.
 
-// continue from pg 68
+
 */ 
 
 
@@ -138,7 +138,7 @@ loads an image from the local assets folder.
 import 'package:flutter/material.dart';
 
 // import anoda component
-import 'text_field.dart';
+// import 'text_field.dart';
 
 
 class ImageApp extends StatelessWidget {
@@ -179,18 +179,17 @@ class _ImagePageState extends State<ImagePage> {
 
 						Container(
 							width: 300,
-							height: 300,
+							height: 150,
 							
-							padding: const EdgeInsets.all(20.0),
+							padding: const EdgeInsets.all(10.0),
 
 							child: isLocal == true
 								? Image.asset("assets/images/image_pic.png")
 								:  Image.network("https://raw.githubusercontent.com/ptyagicodecamp/flutter_cookbook2/master/assets/flutter_icon.png")
 						),
 
-
 						SizedBox(
-							height: 40,
+							height: 10,
 						),
 
 
@@ -209,7 +208,7 @@ class _ImagePageState extends State<ImagePage> {
 
 						
 						SizedBox(
-							height: 40,
+							height: 10,
 						),
 
 
@@ -229,10 +228,19 @@ class _ImagePageState extends State<ImagePage> {
 						),
 
 						SizedBox(
-							height: 40,
+							height: 10,
 						),
 
-						TextFieldDemo(),
+						// external compont
+						// Container(
+						// 	width: 300,
+						// 	height: 100,
+							
+						// 	padding: const EdgeInsets.all(10.0),
+
+						// 	child: TextFieldDemo(),
+						// ),
+
 					],
 				),
 			),

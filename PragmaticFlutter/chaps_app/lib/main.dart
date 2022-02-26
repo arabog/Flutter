@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'project_structure/main_0.dart';
 // import 'package:flutter_app1/flutter_stru5/flutter_app_structure.dart';
-import 'flutter_widget6/flutter_widget.dart';
+// import 'flutter_widget6/flutter_widget.dart';
+
+import 'flutter_widget6/future_builder_widget.dart';
 
 
 void main() {
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
 			
 			// home: MyAppBook(),
 			// home: HelloBooksApp()
-			home: ImageApp()
+			// home: ImageApp()
+
+      home: FutureBuilderDemo(),
 		);
 	}
 }
