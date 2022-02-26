@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 
 // import 'flutter_widget6/placeholder_widget.dart';
 
+// import 'flutter_widget6/stream_builder.dart';
 
-import 'flutter_widget6/stream_builder.dart';
+import 'flutter_widget6/alert_dialog.dart';
+
 
 void main() {
 	runApp(const MyApp());
@@ -38,7 +40,8 @@ class MyApp extends StatelessWidget {
 
       // home: PlaceholderDemo(),
 
-      home: StreamBuilderDemo()
+      // home: StreamBuilderDemo()
+      home: AlertDialogDemo()
 		);
 	}
 }

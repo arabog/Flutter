@@ -27,6 +27,16 @@ Stream<int> _streamError = (() async* {
 	yield throw ("Error in calculating number");
 })();
 
+StreamBuilder Widget
+The StreamBuilder widget reads ` _ streamData` using its `stream` 
+property. The `builder` takes the asynchronous snapshot events received 
+from the stream and creates a child widget, `futureChild`. If an error is 
+received, the error message is displayed on the screen in a Text widget. 
+The `snapshot.connectionState` provides the state of the connection. 
+When the connection state is `ConnectionState.done`, the data received 
+is displayed in the Text widget. When the connection state is active, it 
+says “Loading....” on the screen. In any other state, a circular progress 
+indicator widget is shown on the screen.
 
 */ 
 
