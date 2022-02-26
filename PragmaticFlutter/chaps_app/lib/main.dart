@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 // import 'flutter_widget6/future_builder_widget.dart';
 
-import 'flutter_widget6/placeholder_widget.dart';
+// import 'flutter_widget6/placeholder_widget.dart';
 
+
+import 'flutter_widget6/stream_builder.dart';
 
 void main() {
 	runApp(const MyApp());
@@ -34,7 +36,9 @@ class MyApp extends StatelessWidget {
 
       // home: FutureBuilderDemo(),
 
-      home: PlaceholderDemo(),
+      // home: PlaceholderDemo(),
+
+      home: StreamBuilderDemo()
 		);
 	}
 }
