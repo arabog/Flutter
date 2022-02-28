@@ -850,8 +850,7 @@ the width for the given column. It’s a mapping between the column
 number to FractionColumnWidth (FractionColumnWidth class) for 
 the given column.
 
-
-Table(
+body: Table(
 	border: TableBorder.all(width: 2.0),
 
 	columnWidths: {
@@ -882,9 +881,31 @@ can hold multiple children. It can stack one widget on top of another
 widget, just as its name says. This widget is useful when one widget 
 is required to be overlapped by another.
 
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index)
+		width: 200 + index * 20.toDouble(),
+		height: 200 + index * 30.toDouble(),
 
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
 
+Next, put three `childWidgets()` in the Stack widget as below:
 
+body: Stack (
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+		childWidget(3),
+	],
+),
 
 
 
@@ -1020,34 +1041,44 @@ class _MyHomePageState extends State<MyHomePage> {
 			// ),
 
 			// Table widget
-			body: Padding(
-				padding: EdgeInsets.all(12.0),
+			// body: Padding(
+			// 	padding: EdgeInsets.all(12.0),
 
-				child: Table(
-					border: TableBorder.all(width: 2.0),
+			// 	child: Table(
+			// 		border: TableBorder.all(width: 2.0),
 
 					
-					columnWidths: {
-						0: FractionColumnWidth(.5),
-						1: FractionColumnWidth(.5),
-					},
+			// 		columnWidths: {
+			// 			0: FractionColumnWidth(.5),
+			// 			1: FractionColumnWidth(.5),
+			// 		},
 
-					children: [
-						TableRow(
-							children: [
-								childWidget(0),
-								childWidget(1),
-							],
-						),
+			// 		children: [
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(0),
+			// 					childWidget(1),
+			// 				],
+			// 			),
 
-						TableRow(
-							children: [
-								childWidget(2),
-								childWidget(3),
-							],
-						),
-					],
-				),
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(2),
+			// 					childWidget(3),
+			// 				],
+			// 			),
+			// 		],
+			// 	),
+			// ),
+
+			// Stack
+			body: Stack (
+				children: [
+					childWidget(3),
+					childWidget(2),
+					childWidget(1),
+					childWidget(0),
+				],
 			),
 
 
