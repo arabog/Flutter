@@ -1218,7 +1218,6 @@ Color getColor(int index) {
 }
 
 
-
 IndexedStack WIDGET
 The IndexedStack (IndexedStack class) widget is a Multi-child layout 
 widget as well. It’s like the Stack widget but only shows one child at a 
@@ -1294,7 +1293,6 @@ SizedBox, IntrinsicHeight, and IntrinsicWidth. You also learned
 about the Multi-child layouts like Row, Column, ListView, GridView, Table,
 Stack, and IndexedStack.
 
-*/ 
 
 import 'package:flutter/material.dart';
 
@@ -1409,3 +1407,7 @@ class _MyIndexedStackState extends State<MyIndexedStack> {
 	}
 
 }
+
+*/ 
+
+

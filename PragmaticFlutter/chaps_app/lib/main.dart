@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 
 import 'buliding_layouts7/buliding_layouts.dart';
 
+import 'buliding_layouts7/project/int_page.dart';
+
 
 void main() {
 	runApp(const MyApp());
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
 
       // home: StreamBuilderDemo()
       // home: AlertDialogDemo()
-      home: LayoutApp()
+      // home: LayoutApp()
+      home: ScrollApp(),
 		);
 	}
 }
