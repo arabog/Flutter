@@ -913,7 +913,6 @@ height, and it’s purple in color. This widget goes first. The next child widge
 placed on top of the purple widget. The third widget, `childWidget(0)`, is red
 and smallest. It’s placed on top of the stack.
 
-*/ 
 
 import 'package:flutter/material.dart';
 
@@ -1216,4 +1215,197 @@ Color getColor(int index) {
 	}
 
 	return color;
+}
+
+
+
+IndexedStack WIDGET
+The IndexedStack (IndexedStack class) widget is a Multi-child layout 
+widget as well. It’s like the Stack widget but only shows one child at a 
+time. It uses `index` property to switch from one child to another. Let’s 
+use the same example we discussed above for the Stack widget. This time 
+these three `childWidget()` are wrapped inside IndexedStack instead of 
+Stack widget and have an `index` property to show the currently selected 
+child. We will wrap IndexedStack inside a GestureDetector 
+(GestureDetector class) widget to add a tapping gesture on the widget. 
+Each time the widget is tapped, the index changes to the next child and
+keeps going one by one
+
+int _childIndex = 0;
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+		body: Center(
+			child: IndexedStack(
+				index: _childIndex,
+
+				children: [
+					childWidget(0),
+					childWidget(1),
+					childWidget(2),
+				],
+			),
+		),
+	);
+}
+
+The `childWidget(int index)` method returns a Container widget
+wrapped in a GestureDetector method. Tapping on the child widget 
+increases the ` _ childIndex` by one. Once it reaches the maximum 
+possible index two, the ` _ childIndex` resets itself to zero. The clamp 
+(clamp method) method returns the number between zero and two.
+
+Widget childWidget(int index) {
+	return GestureDetector(
+		onTap: () {
+			setState(() {
+				index = index == 2 ? 0 : index + 1;
+
+				_childIndex = index.clamp(0, 2);
+			});
+		},
+
+		child: Container(
+			color: getColor(index),
+
+			width: 200 + index * 20.toDouble(),
+			height: 200 + index * 30.toDouble(),
+
+			child: Center(
+				child: Text(
+					"$index",
+					style: TextStyle(fontSize: 40),
+				),
+			),
+		),
+	);
+}
+
+The red widget is stacked at the top, followed by green and purple. 
+
+Ordering of children doesn’t matter in the case of the IndexedStack 
+widget. The child widget is displayed based on the selected `index` 
+property.???
+
+CONCLUSION:
+We discussed Single-child layouts like Container, Padding, ConstrainedBox,
+SizedBox, IntrinsicHeight, and IntrinsicWidth. You also learned
+about the Multi-child layouts like Row, Column, ListView, GridView, Table,
+Stack, and IndexedStack.
+
+*/ 
+
+import 'package:flutter/material.dart';
+
+class LayoutApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
+
+		return MaterialApp(
+			home: MyIndexedStack(),
+		);
+
+	}
+}
+
+
+class MyIndexedStack extends StatefulWidget {
+	// MyIndexedStack({Key key}) : super(key: key);
+
+	@override
+
+	_MyIndexedStackState createState() => _MyIndexedStackState();
+}
+
+
+
+class _MyIndexedStackState extends State<MyIndexedStack> {
+	int _childIndex = 0;
+
+	@override
+	Widget build(BuildContext context) {
+
+		return Scaffold(
+			appBar: AppBar(
+				title: Text("IndexedStack Widget"),
+			),
+
+			body: Center(
+				child: IndexedStack(
+					index: _childIndex,
+
+					children: [
+						childWidget(0),
+						childWidget(1),
+						childWidget(2),
+					],
+				),
+			),
+		);
+	}
+
+	// intrinsicHeight widget
+	Widget childWidget(int index) {
+		final _selectedBox = (() {
+			setState( () {
+				index = index == 2 ? 0 : index + 1;
+
+				_childIndex = index.clamp(0, 2);
+			});
+		});
+
+		return GestureDetector(
+			// saving d state in a variable
+			onTap: _selectedBox,
+
+			// using d state directly
+			// onTap: () {
+			// 	setState( () {
+			// 		index = index == 2 ? 0 : index + 1;
+
+			// 		_childIndex = index.clamp(0, 2);
+			// 	});
+			// },
+
+			child: Container(
+				color: getColor(index),
+
+				width: 200 + index * 20.toDouble(),
+				height: 200 + index * 30.toDouble(),
+
+				child: Center(
+					child: Text(
+						"$index",
+						style: TextStyle(fontSize: 40),
+					),
+				),
+			),
+		);
+	}
+
+
+	Color getColor(int index) {
+		Color color = Colors.grey;	//default color
+
+		switch (index) {
+			case 0:
+				color = Colors.red;
+
+				break;
+
+			case 1:
+				color = Colors.green;
+
+				break;
+
+			case 2:
+				color = Colors.deepPurple;
+
+				break;
+		}
+
+		return color;
+	}
+
 }
