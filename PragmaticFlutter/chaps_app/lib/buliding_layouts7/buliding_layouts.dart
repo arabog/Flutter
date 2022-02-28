@@ -750,13 +750,65 @@ stretch` to make all Container children of the same widths.
 
 body: Column(
 	crossAxisAlignment: CrossAxisAlignment.stretch,
-	
+
 	children: [
 		childWidget(0),
 		childWidget(1),
 		childWidget(2),
 	],
 ),
+
+Again, the problem with this approach is that it takes up all the cross-axis 
+horizontal space
+
+The IntrinsicWidth widget can help solve this issue by wrapping the 
+Column widget as its child. It expands all of the Column widget’s 
+children to the same width as the widest child widget.
+
+IntrinsicWidth(
+	child: Column(
+		crossAxisAlignment: CrossAxisAlignment.stretch,
+
+		children: [
+			childWidget(0),
+			childWidget(1),
+			childWidget(2),
+		],
+	),
+),
+
+
+ListView WIDGET
+The ListView (ListView class) widget is a Multi-child and scrolling widget. 
+It makes its children scroll in the main axis while filling the space in the 
+cross-axis. Let’s add four children to the ListView widget
+
+body: ListView(
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+		childWidget(3),
+	],
+),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 */ 
@@ -823,20 +875,48 @@ class _MyHomePageState extends State<MyHomePage> {
 			// ),
 
 			// column
-			body: Column(
-				crossAxisAlignment: CrossAxisAlignment.stretch,
+			// body: Column(
+			// 	crossAxisAlignment: CrossAxisAlignment.stretch,
 
+			// 	children: [
+			// 		childWidget(0),
+			// 		childWidget(1),
+			// 		childWidget(2),
+			// 		childWidget(3),
+			// 		childWidget(2),
+			// 		childWidget(1),
+			// 		childWidget(0),
+			// 	],
+			// ),
+
+			// body: IntrinsicWidth(
+			// 	child: Column(
+			// 		crossAxisAlignment: CrossAxisAlignment.stretch,
+
+			// 		children: [
+			// 			childWidget(0),
+			// 			childWidget(1),
+			// 			childWidget(2),
+			// 			childWidget(3),
+			// 			childWidget(2),
+			// 			childWidget(1),
+			// 			childWidget(0),
+			// 		],
+			// 	),
+			// ),
+
+
+			// ListView
+			body: ListView(
 				children: [
 					childWidget(0),
 					childWidget(1),
 					childWidget(2),
 					childWidget(3),
-					childWidget(2),
-					childWidget(1),
-					childWidget(0),
 				],
 			),
-				
+
+
 
 			floatingActionButton: FloatingActionButton (
 				onPressed: () {},
