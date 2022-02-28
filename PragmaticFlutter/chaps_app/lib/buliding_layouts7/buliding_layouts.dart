@@ -369,7 +369,31 @@ SizedBox(
 	),
 )
 
+There’s a convenience constructor, `SizedBox.expand` (SizedBox.expand
+constructor), that can also be used to create a box that takes the width 
+and height of its parent.
+```
+SizedBox.expand(
+	child: Container(
+		color: Colors.deepPurpleAccent,
+	),
+)
 
+
+The same results can be attained by assigning the SizedBox widget’s 
+`width` and `height` properties to `double.infinity`.
+SizedBox(
+	height: double.infinity,
+	width: double.infinity,
+
+	child: Container(
+		color: Colors.deepPurpleAccent,
+	),
+)
+
+
+It is common to use a `SizedBox` without a child to add space between 
+widgets when building interfaces.
 
 cont on pg 108
 */ 
@@ -480,18 +504,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 			// BoxConstraints.loose
-			body: Center(
-				child: ConstrainedBox(
-					constraints: BoxConstraints.loose(
-						Size(100, 200),
-					),
+			// body: Center(
+			// 	child: ConstrainedBox(
+			// 		constraints: BoxConstraints.loose(
+			// 			Size(100, 200),
+			// 		),
 
-					child: Container(
-						color: Colors.grey,
-						child: Text(message),
-					),
+			// 		child: Container(
+			// 			color: Colors.grey,
+			// 			child: Text(message),
+			// 		),
+			// 	),
+			// ),
+
+			// SizedBox
+			// body: SizedBox.expand (
+			body: SizedBox (
+				height: double.infinity,
+				width: double.infinity,
+
+				child: Container(
+					color: Colors.deepPurpleAccent,
 				),
 			),
+
 
 			floatingActionButton: FloatingActionButton (
 				onPressed: () {},
