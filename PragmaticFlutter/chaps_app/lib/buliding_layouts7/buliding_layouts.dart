@@ -170,7 +170,7 @@ Container(
 	),
 ),
 
-Padding P roperty
+Padding Property
 The padding property (padding property) adds empty space between 
 the child widget and the Container (Container class) widget’s boundary, 
 The EdgeInsetsGeometry (EdgeInsetsGeometry class) is used to
@@ -214,6 +214,146 @@ Container(
 	),
 ),
 
+Constraints Property
+The `constraints` property applies the size constraints to the Container 
+widget. For example, BoxConstraints.tightFor(width:x, height:y) creates 
+a box for the given width ‘x’, and/or height ‘y’.
+
+Container(
+	constraints: BoxConstraints.tightFor(width: 100.0, height:100.0),
+
+	child: Text(
+		"Hello Container",
+		style: TextStyle(fontSize: 30),
+	),
+),
+
+Transform Property
+The `transform` property (transform property) is used to transform 
+the child before adding to the layout widget `Container`. The value 
+`Matrix4.rotationZ(0.3)` rotates the Container widget clockwise by 
+the given amount.
+
+Container(
+	transform: Matrix4.rotationZ(0.3),
+
+	child: Text(
+		"Hello Container",
+		style: TextStyle(fontSize: 30),
+	),
+),
+
+Decoration Property
+The `decoration` property is used to add shape to the Container widget. 
+It uses BoxDecoration to provide details. The BoxDecoration (BoxDecoration
+class) tells the widget how the box around the Container widget will be painted.
+In simple words, this property lets Container create a border around it or drop 
+a shadow. Please note that the Container widget’s `color` property cannot be 
+used along with `decoration`. The Container widget’s `color` and `decoration`
+property can’t be used together.
+
+Container(
+	decoration: BoxDecoration(
+		border: Border.all(
+			color: Colors.amber,
+			width: 5.0,
+			style: BorderStyle.solid,
+		),
+	),
+
+	child: Text(
+		"Hello Container",
+		style: TextStyle(fontSize: 30),
+	),
+),
+
+Padding WIDGET
+The Padding (Padding class) widget insets its child as per the given padding. 
+It creates empty space around the child. It takes care of resizing any constraints 
+passed to the child to be able to provide the given empty space around it. It uses 
+the `padding` property to assign the amount of space for the inset. The 
+EdgeInsets (EdgeInsets class) class specifies the offset from all four edges. In the 
+example below, an offset of 8 dip(Density-independent Pixels) is provided from 
+the top, bottom, left, and right sides. The keyword `const` is required when you 
+are sure that the provided padding won’t change.
+
+double padding = 8.0;
+Padding(
+	padding: EdgeInsets.all(padding),
+
+	child: Text(
+		"Hello Padding",
+		style: TextStyle(fontSize: 30),
+	),
+)
+
+The difference between `padding` and `margin` is that Padding creates the
+empty space around the child widget of the layout widget like Container. 
+The`margin` property creates the space around the layout widget itself.
+
+ConstrainedBox WIDGET
+Sometimes you may want to render a widget of a given size. The 
+ConstrainedBox (ConstrainedBox class) is a layout widget that puts 
+additional constraints on its child.
+Let’s check out three types of `BoxContraints` applied to the ConstrainedBox
+widget. It specifies a maximum and minimum width and height its child is 
+allowed to expand. `BoxConstraints.expand()` fills the parent.
+
+Minimum Width & Height
+This constraint imposes minimum width and height on the child. In this 
+example, a ConstrainedBox widget is added in the center of the body of 
+the app. A Container widget is added as the child displaying a message 
+in the Text widget.
+
+body: Center(
+	child: ConstrainedBox(
+		constraints: BoxConstraints(
+			minWidth: 100,
+			minHeight: 100,
+		),
+
+		child: Container(
+			color: Colors.grey,
+			child: Text(message),
+		),
+	),
+),
+
+BoxConstraints.expand()
+The `BoxConstraints.expand()` let its child expand to the given 
+width and height.
+
+body: Center(
+	child: ConstrainedBox(
+		constraints: BoxConstraints.expand(
+			width: 200,
+			height: 200,
+		),
+
+		child: Container(
+			color: Colors.grey,
+			child: Text(message),
+		),
+	),
+),
+
+BoxConstraints.loose()
+The `BoxConstraints.loose()` constrains its child to the given size. It can’t go
+beyond the provided size.
+
+body: Center(
+	child: ConstrainedBox(
+		constraints: BoxConstraints.loose(
+			Size(100, 200),
+		),
+
+		child: Container(
+			color: Colors.grey,
+			child: Text(message),
+		),
+	),
+),
+
 
 
 
@@ -246,6 +386,12 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
+	// double padding = 8.0;
+	double padding = 88.0;
+	// double padding = 104.0;
+
+	final message = "Contrained Box Contrained Box Contrained Box";
+
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -260,22 +406,78 @@ class _MyHomePageState extends State<MyHomePage> {
 				),
 			),
 
-			body: Container(
-				color: Colors.red,
+			// Container widget
+			// body: Container(
+			// 	decoration: BoxDecoration(
+			// 		border: Border.all(
+			// 			color: Colors.amber,
 
-				padding: const EdgeInsets.all(16.0),
+			// 			width: 5.0,
 
-				margin: const EdgeInsets.all(20.0),
+			// 			style: BorderStyle.solid,
+			// 		),
+			// 	),
+			// 	// color: Colors.red,
 
-				alignment: Alignment.center,
+			// 	// padding: const EdgeInsets.all(16.0),
 
-				child: Text (
-					"Hello Container",
+			// 	// margin: const EdgeInsets.all(20.0),
 
-					style: TextStyle(fontSize: 30),
-				),
+			// 	// alignment: Alignment.center,
+
+			// 	constraints: BoxConstraints.tightFor(width: 300, height: 100),
+				
+			// 	// transform: Matrix4.rotationZ(0.3),
+
+			// 	child: Text (
+			// 		"Hello Container",
+
+			// 		style: TextStyle(fontSize: 30),
+			// 	),
 
 				
+			// ),
+
+			// Padding widget: Padding(with capital P) can't be used with with Container
+			// body: Padding(
+			// 	padding: EdgeInsets.all(padding),
+
+			// 	child: Text (
+			// 		"Hello Padding",
+
+			// 		style: TextStyle(fontSize: 30),
+			// 	),
+			// ),
+
+			// ContrainedBox Widget
+			// body: Center(
+			// 	child: ConstrainedBox(
+			// 		constraints: BoxConstraints.expand (
+			// 			width: 200,
+			// 			height: 200,
+			// 		),
+
+			// 		child: Container(
+			// 			color: Colors.grey,
+
+			// 			child: Text(message),
+			// 		),
+			// 	),
+			// ),
+
+
+			// BoxConstraints.loose
+			body: Center(
+				child: ConstrainedBox(
+					constraints: BoxConstraints.loose(
+						Size(100, 200),
+					),
+
+					child: Container(
+						color: Colors.grey,
+						child: Text(message),
+					),
+				),
 			),
 
 			floatingActionButton: FloatingActionButton (
