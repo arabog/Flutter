@@ -135,6 +135,8 @@ Stack (Stack class), IndexedStack (IndexedStack class), Flow (Flow
 class), LayoutBuilder (LayoutBuilder class), ListBody (ListBody class),
 Table (Table class), Wrap (Wrap class).
 
+
+SINGLE CHILD WIDGET:
 Container WIDGET
 The Container (Container class) widget is a simple and versatile layout 
 widget. It can hold only one child as its descendant. It has versatile 
@@ -395,8 +397,7 @@ SizedBox(
 It is common to use a `SizedBox` without a child to add space between 
 widgets when building interfaces.
 
-cont on pg 108
-*/ 
+
 
 
 import 'package:flutter/material.dart';
@@ -542,3 +543,169 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
+cont on pg 108
+*/ 
+
+
+
+
+/*
+MULTI CHILD WIDGET:
+Row WIDGET
+The Row (Row class) widget is used to arrange its children in a horizontal 
+fashion. Let’s add three Container widgets as children. 
+The `childWidget(int index)` method returns a Container widget of width 
+and height device-independent pixels or dips (devicePixelRatio property). 
+The container has a Text widget as its child, which displays the number 
+passed to the method as a parameter.
+
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 100,
+		height: 100,
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
+
+Now that we have got a child, let’s add this three times in the Row 
+widget as below:
+```
+Row(
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+		childWidget(3),
+	],
+),
+
+Let’s try to add one more widget, `childWidget(3)` to Row widget’s 
+children and observe the change.
+
+You’ll notice that there’s not enough space for all four widgets to fit 
+horizontally. The last child renders with yellow and black lines. 
+You will see those lines whenever a widget overflows the available 
+space to render itself.
+
+*/ 
+
+import 'package:flutter/material.dart';
+
+class LayoutApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
+
+		return MaterialApp(
+			home: MyHomePage(title: 'Hello Books'),
+		);
+
+	}
+}
+
+
+class MyHomePage extends StatefulWidget {
+	MyHomePage({Key key, this.title}) : super(key: key);
+
+	final String title;
+
+	_MyHomePageState createState() => _MyHomePageState();
+}
+
+
+class _MyHomePageState extends State<MyHomePage> {
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+
+			appBar: AppBar(
+
+				title: Center(
+					child: Text('Hello Books'),
+				),
+			),
+
+			// body: Center(
+			// 	child: Row(
+			// 		children: [
+			// 			childWidget(0),
+			// 			childWidget(1),
+			// 			childWidget(2),
+			// 		],
+			// 	),
+
+				
+			// ),
+
+			body: Row(
+				children: [
+					childWidget(0),
+					childWidget(1),
+					childWidget(2),
+					childWidget(3),
+
+				],
+			),
+				
+
+			floatingActionButton: FloatingActionButton (
+				onPressed: () {},
+
+				tooltip: "Greeting",
+
+				child: Icon(Icons.insert_emoticon),
+			),
+
+		);
+
+
+	}
+}
+
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 100,
+		height: 100,
+
+		child: Center(
+			child: Text(
+				"$index",
+
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
+
+
+Color getColor(int index) {
+	Color color = Colors.grey;	//default color
+
+	switch (index) {
+		case 0:
+			color = Colors.red;
+
+			break;
+
+		case 1:
+			color = Colors.green;
+
+			break;
+
+		case 2:
+			color = Colors.deepPurple;
+
+			break;
+	}
+
+	return color;
+}
