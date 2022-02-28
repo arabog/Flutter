@@ -823,8 +823,9 @@ The Table layout widget is useful to design interfaces that don’t require
 any scrolling and to avoid multiple levels of nested Row and Column 
 widgets. 
 The Table widget can be wrapped inside a SingleChildScrollView 
-(SingleChildScrollView class) to make it scrollable. The SingleChildScrollView 
-widget is like a scrollable box, which makes its only child scrollable.
+(SingleChildScrollView class) to make it scrollable. The 
+SingleChildScrollView  widget is like a scrollable box, which makes 
+its only child scrollable.
 Let’s add four children to the Table layout. Each child is a Container 
 widget of different sizes and colors.
 
@@ -900,14 +901,17 @@ Next, put three `childWidgets()` in the Stack widget as below:
 
 body: Stack (
 	children: [
-		childWidget(0),
-		childWidget(1),
 		childWidget(2),
-		childWidget(3),
+		childWidget(1),
+		childWidget(0),
 	],
 ),
 
-
+The `childWidget(2)` is the Container widget with the biggest width and
+height, and it’s purple in color. This widget goes first. The next child widget,
+`childWidget(1)`, is green and slightly smaller than the purple widget. It is
+placed on top of the purple widget. The third widget, `childWidget(0)`, is red
+and smallest. It’s placed on top of the stack.
 
 */ 
 
@@ -1071,14 +1075,74 @@ class _MyHomePageState extends State<MyHomePage> {
 			// 	),
 			// ),
 
+			// SingleChildScrollView
+			// body: SingleChildScrollView(
+			// 	padding: EdgeInsets.all(12.0),
+
+			// 	child: Table(
+			// 		border: TableBorder.all(width: 2.0),
+
+					
+			// 		columnWidths: {
+			// 			0: FractionColumnWidth(.5),
+			// 			1: FractionColumnWidth(.5),
+			// 		},
+
+			// 		children: [
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(0),
+			// 					childWidget(1),
+			// 				],
+			// 			),
+
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(2),
+			// 					childWidget(3),
+			// 				],
+			// 			),
+
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(0),
+			// 					childWidget(1),
+			// 				],
+			// 			),
+
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(2),
+			// 					childWidget(3),
+			// 				],
+			// 			),
+
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(0),
+			// 					childWidget(1),
+			// 				],
+			// 			),
+
+			// 			TableRow(
+			// 				children: [
+			// 					childWidget(2),
+			// 					childWidget(3),
+			// 				],
+			// 			),
+			// 		],
+			// 	),
+			// ),
+
 			// Stack
-			body: Stack (
-				children: [
-					childWidget(3),
-					childWidget(2),
-					childWidget(1),
-					childWidget(0),
-				],
+			body:  Center(
+				child: Stack(
+					children: [
+						childWidget(2),
+						childWidget(1),
+						childWidget(0),
+					],
+				),
 			),
 
 
