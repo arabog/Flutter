@@ -354,7 +354,20 @@ body: Center(
 	),
 ),
 
+SizedBox WIDGET
+The SizedBox (SizedBox class) widget is a Single-child layout widget. It’s a box
+widget of a specific size and can add one another widget as its child. It’s useful 
+when you know the size of the widget. The `width` property is used to set the 
+width of the box, and the `height` property is used to set the box’s height.
 
+SizedBox(
+	height: 200,
+	width: 200,
+
+	child: Container(
+		color: Colors.deepPurpleAccent,
+	),
+)
 
 
 
