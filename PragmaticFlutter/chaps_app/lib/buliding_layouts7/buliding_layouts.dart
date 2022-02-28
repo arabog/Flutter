@@ -814,13 +814,73 @@ body: GridView.count(
 	],
 ),
 
+Table WIDGET
+The Table (Table class) layout widget supports multiple children. This 
+layout widget arranges its children in a tabular layout. This layout 
+doesn’t scroll and is used for a fixed number of widgets. 
+
+The Table layout widget is useful to design interfaces that don’t require 
+any scrolling and to avoid multiple levels of nested Row and Column 
+widgets. 
+The Table widget can be wrapped inside a SingleChildScrollView 
+(SingleChildScrollView class) to make it scrollable. The SingleChildScrollView 
+widget is like a scrollable box, which makes its only child scrollable.
+Let’s add four children to the Table layout. Each child is a Container 
+widget of different sizes and colors.
+
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index)
+		width: 200 + index * 20.toDouble(),
+		height: 200 + index * 30.toDouble(),
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
+
+The Table widget has multiple children of type TableRow widget, as 
+shown in the code snippet below. The `border` property is used to 
+border each cell. The `columnWidths` property is used to assign 
+the width for the given column. It’s a mapping between the column 
+number to FractionColumnWidth (FractionColumnWidth class) for 
+the given column.
 
 
+Table(
+	border: TableBorder.all(width: 2.0),
 
+	columnWidths: {
+		0: FractionColumnWidth(.5),
+		1: FractionColumnWidth(.5),
+	},
 
+	children: [
+		TableRow(
+			children: [
+				childWidget(0),
+				childWidget(1),
+			],
+		),
 
+		TableRow(
+			children: [
+				childWidget(2),
+				childWidget(3),
+			],
+		),
+	],
+)
 
-
+Stack WIDGET
+The Stack (Stack class) widget is a Multi-child layout widget since it 
+can hold multiple children. It can stack one widget on top of another 
+widget, just as its name says. This widget is useful when one widget 
+is required to be overlapped by another.
 
 
 
@@ -939,26 +999,56 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 			// GridView
-			body: GridView.count(
-				crossAxisCount: 2,
-				// crossAxisCount: 3,
-				
-				children: [
-					childWidget(0),
-					childWidget(1),
-					childWidget(2),
-					childWidget(3),
-					childWidget(0),
-					childWidget(1),
-					childWidget(2),
-					childWidget(3),
-					childWidget(2),
-					childWidget(3),
-					childWidget(1),
-					childWidget(0),
-				],
-			),
+			// body: GridView.count(
+			// 	// crossAxisCount: 2,
+			// 	crossAxisCount: 3,
 
+			// 	children: [
+			// 		childWidget(0),
+			// 		childWidget(1),
+			// 		childWidget(2),
+			// 		childWidget(3),
+			// 		childWidget(0),
+			// 		childWidget(1),
+			// 		childWidget(2),
+			// 		childWidget(3),
+			// 		childWidget(2),
+			// 		childWidget(3),
+			// 		childWidget(1),
+			// 		childWidget(0),
+			// 	],
+			// ),
+
+			// Table widget
+			body: Padding(
+				padding: EdgeInsets.all(12.0),
+
+				child: Table(
+					border: TableBorder.all(width: 2.0),
+
+					
+					columnWidths: {
+						0: FractionColumnWidth(.5),
+						1: FractionColumnWidth(.5),
+					},
+
+					children: [
+						TableRow(
+							children: [
+								childWidget(0),
+								childWidget(1),
+							],
+						),
+
+						TableRow(
+							children: [
+								childWidget(2),
+								childWidget(3),
+							],
+						),
+					],
+				),
+			),
 
 
 			floatingActionButton: FloatingActionButton (
@@ -975,39 +1065,39 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
-Widget childWidget(int index) {
-	return Container(
-		color: getColor(index),
-
-		width: 100,
-		height: 100,
-
-		child: Center(
-			child: Text(
-				"$index",
-
-				style: TextStyle(fontSize: 40),
-			),
-		),
-	);
-}
-
-// intrinsicHeight widget
 // Widget childWidget(int index) {
 // 	return Container(
 // 		color: getColor(index),
 
-// 		width: 100 + index * 20.toDouble(),
-// 		height: 100 + index * 30.toDouble(),
+// 		width: 100,
+// 		height: 100,
 
 // 		child: Center(
 // 			child: Text(
 // 				"$index",
+
 // 				style: TextStyle(fontSize: 40),
 // 			),
 // 		),
 // 	);
 // }
+
+// intrinsicHeight widget
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 100 + index * 20.toDouble(),
+		height: 100 + index * 30.toDouble(),
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
 
 
 Color getColor(int index) {
