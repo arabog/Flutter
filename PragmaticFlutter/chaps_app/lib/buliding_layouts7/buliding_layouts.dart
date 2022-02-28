@@ -595,6 +595,70 @@ horizontally. The last child renders with yellow and black lines.
 You will see those lines whenever a widget overflows the available 
 space to render itself.
 
+IntrinsicHeight WIDGET
+The IntrinsicHeight (IntrinsicHeight class) widget is a Single-child layout
+widget. IntrinsicHeight widget helps to set the height of its child widget 
+when there’s unlimited height available to it. This class is expensive. 
+The cheap way of limiting the widget size is to use the SizedBox (SizedBox 
+class) layout widget. 
+This widget is used when children of a Row (Row class) widget are 
+expected to expand to the height of the tallest child.
+First, create children of varying sizes with the help of the following 
+`childWidget(int index)` method:
+
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 100 + index * 20.toDouble(),
+		height: 100 + index * 30.toDouble(),
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
+
+The code above will render the three Container widgets of varying 
+sizes in a horizontal array
+
+The goal is to stretch all the children to the same height. So, let’s set 
+the Row widget’s `crossAxisAlignment` property to `
+CrossAxisAlignment.stretch` to make all children equally tall.
+
+body: Row(
+	crossAxisAlignment: CrossAxisAlignment.stretch,
+
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+		childWidget(3),
+
+	],
+),
+
+However, the problem is that they’ll take up all the available space vertically
+
+We want to make all the children as tall as the tallest child widget while not
+taking up all the available vertical space. This is where IntrinsicHeight
+(IntrinsicHeight class) widget comes to play. All you need to do is to wrap the Row
+widget inside IntrinsicHeight
+
+IntrinsicHeight(
+	child: Row(
+		crossAxisAlignment: CrossAxisAlignment.stretch,
+
+		children: [
+			childWidget(0),
+			childWidget(1),
+			childWidget(2),
+		],
+	),
+),
 */ 
 
 import 'package:flutter/material.dart';
@@ -644,14 +708,18 @@ class _MyHomePageState extends State<MyHomePage> {
 				
 			// ),
 
-			body: Row(
-				children: [
-					childWidget(0),
-					childWidget(1),
-					childWidget(2),
-					childWidget(3),
+			body: IntrinsicHeight(
+				child: Row(
+					crossAxisAlignment: CrossAxisAlignment.stretch,
 
-				],
+					children: [
+						childWidget(0),
+						childWidget(1),
+						childWidget(2),
+						childWidget(3),
+
+					],
+				),
 			),
 				
 
@@ -669,17 +737,34 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
+// Widget childWidget(int index) {
+// 	return Container(
+// 		color: getColor(index),
+
+// 		width: 100,
+// 		height: 100,
+
+// 		child: Center(
+// 			child: Text(
+// 				"$index",
+
+// 				style: TextStyle(fontSize: 40),
+// 			),
+// 		),
+// 	);
+// }
+
+// intrinsicHeight widget
 Widget childWidget(int index) {
 	return Container(
 		color: getColor(index),
 
-		width: 100,
-		height: 100,
+		width: 100 + index * 20.toDouble(),
+		height: 100 + index * 30.toDouble(),
 
 		child: Center(
 			child: Text(
 				"$index",
-
 				style: TextStyle(fontSize: 40),
 			),
 		),
