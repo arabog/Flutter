@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 
 // import 'flutter_widget6/stream_builder.dart';
 
-import 'flutter_widget6/alert_dialog.dart';
+// import 'flutter_widget6/alert_dialog.dart';
+
+import 'buliding_layouts7/buliding_layouts.dart';
 
 
 void main() {
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
       // home: PlaceholderDemo(),
 
       // home: StreamBuilderDemo()
-      home: AlertDialogDemo()
+      // home: AlertDialogDemo()
+      home: LayoutApp()
 		);
 	}
 }
