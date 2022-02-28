@@ -793,9 +793,26 @@ body: ListView(
 ),
 
 
+GridView WIDGET
+The GridView (GridView class) widget is a Multi-child and scrolling 
+widget like ListView. It arranges its children in a two-dimensional array. 
+In this section, we will focus on creating a grid layout using GridView.count 
+(GridView.count constructor) constructor. It creates a grid with a given number 
+of tiles on the cross-axis. The direction a GridView scroll is the main-axis. 
+The `crossAxisCount` property is used for the number of tiles arranged in the 
+cross-axis. In the following code snippet, `crossAxisCount` is two, which 
+means there are two tiles in the horizontal direction.
 
+body: GridView.count(
+	crossAxisCount: 2,
 
-
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+		childWidget(3),
+	],
+),
 
 
 
@@ -907,12 +924,38 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 			// ListView
-			body: ListView(
+			// body: ListView(
+			// 	children: [
+			// 		childWidget(0),
+			// 		childWidget(1),
+			// 		childWidget(2),
+			// 		childWidget(3),
+			// 		childWidget(3),
+			// 		childWidget(2),
+			// 		childWidget(1),
+			// 		childWidget(0),
+			// 	],
+			// ),
+
+
+			// GridView
+			body: GridView.count(
+				crossAxisCount: 2,
+				// crossAxisCount: 3,
+				
 				children: [
 					childWidget(0),
 					childWidget(1),
 					childWidget(2),
 					childWidget(3),
+					childWidget(0),
+					childWidget(1),
+					childWidget(2),
+					childWidget(3),
+					childWidget(2),
+					childWidget(3),
+					childWidget(1),
+					childWidget(0),
 				],
 			),
 
@@ -932,39 +975,39 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
-// Widget childWidget(int index) {
-// 	return Container(
-// 		color: getColor(index),
-
-// 		width: 100,
-// 		height: 100,
-
-// 		child: Center(
-// 			child: Text(
-// 				"$index",
-
-// 				style: TextStyle(fontSize: 40),
-// 			),
-// 		),
-// 	);
-// }
-
-// intrinsicHeight widget
 Widget childWidget(int index) {
 	return Container(
 		color: getColor(index),
 
-		width: 100 + index * 20.toDouble(),
-		height: 100 + index * 30.toDouble(),
+		width: 100,
+		height: 100,
 
 		child: Center(
 			child: Text(
 				"$index",
+
 				style: TextStyle(fontSize: 40),
 			),
 		),
 	);
 }
+
+// intrinsicHeight widget
+// Widget childWidget(int index) {
+// 	return Container(
+// 		color: getColor(index),
+
+// 		width: 100 + index * 20.toDouble(),
+// 		height: 100 + index * 30.toDouble(),
+
+// 		child: Center(
+// 			child: Text(
+// 				"$index",
+// 				style: TextStyle(fontSize: 40),
+// 			),
+// 		),
+// 	);
+// }
 
 
 Color getColor(int index) {
