@@ -559,6 +559,15 @@ and height device-independent pixels or dips (devicePixelRatio property).
 The container has a Text widget as its child, which displays the number 
 passed to the method as a parameter.
 
+body: Row(
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+	],
+),
+
+
 Widget childWidget(int index) {
 	return Container(
 		color: getColor(index),
@@ -659,6 +668,48 @@ IntrinsicHeight(
 		],
 	),
 ),
+
+The IntrinsicHeight widget expands all of the Row widget’s children to the
+same height as the tallest child widget
+
+
+Column WIDGET
+The Column (Column class) widget is used to arrange its children in a 
+vertical manner. Let’s add three Container widgets as children similar
+to the Row widget. The `childWidget(int index)` method returns a 
+Container widget of width and height as 200 dips. The container 
+has a Text widget as its child, which displays the number passed 
+to the method as a parameter.
+
+body: Column(
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+	],
+),
+
+
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 200,
+		height: 200,
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}	
+
+
+
+
+
 */ 
 
 import 'package:flutter/material.dart';
@@ -708,18 +759,27 @@ class _MyHomePageState extends State<MyHomePage> {
 				
 			// ),
 
-			body: IntrinsicHeight(
-				child: Row(
-					crossAxisAlignment: CrossAxisAlignment.stretch,
+			// body: IntrinsicHeight(
+			// 	child: Row(
+			// 		crossAxisAlignment: CrossAxisAlignment.stretch,
 
-					children: [
-						childWidget(0),
-						childWidget(1),
-						childWidget(2),
-						childWidget(3),
+			// 		children: [
+			// 			childWidget(0),
+			// 			childWidget(1),
+			// 			childWidget(2),
+			// 			childWidget(3),
 
-					],
-				),
+			// 		],
+			// 	),
+			// ),
+
+			// column
+			body: Column(
+				children: [
+					childWidget(0),
+					childWidget(1),
+					childWidget(2),
+				],
 			),
 				
 
@@ -737,39 +797,39 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
-// Widget childWidget(int index) {
-// 	return Container(
-// 		color: getColor(index),
-
-// 		width: 100,
-// 		height: 100,
-
-// 		child: Center(
-// 			child: Text(
-// 				"$index",
-
-// 				style: TextStyle(fontSize: 40),
-// 			),
-// 		),
-// 	);
-// }
-
-// intrinsicHeight widget
 Widget childWidget(int index) {
 	return Container(
 		color: getColor(index),
 
-		width: 100 + index * 20.toDouble(),
-		height: 100 + index * 30.toDouble(),
+		width: 100,
+		height: 100,
 
 		child: Center(
 			child: Text(
 				"$index",
+
 				style: TextStyle(fontSize: 40),
 			),
 		),
 	);
 }
+
+// intrinsicHeight widget
+// Widget childWidget(int index) {
+// 	return Container(
+// 		color: getColor(index),
+
+// 		width: 100 + index * 20.toDouble(),
+// 		height: 100 + index * 30.toDouble(),
+
+// 		child: Center(
+// 			child: Text(
+// 				"$index",
+// 				style: TextStyle(fontSize: 40),
+// 			),
+// 		),
+// 	);
+// }
 
 
 Color getColor(int index) {
