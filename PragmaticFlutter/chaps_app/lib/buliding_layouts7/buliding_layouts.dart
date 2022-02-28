@@ -706,8 +706,57 @@ Widget childWidget(int index) {
 	);
 }	
 
+You’ll notice the same yellow and black overflow lines that you observed 
+earlier in the Row widget. This is because there’s not enough space for 
+all four widgets to fit vertically
+
+IntrinsicWidth WIDGET
+The IntrinsicWidth (IntrinsicWidth class) widget is a Single-child layout 
+widget. This widget is useful to limit the width of the child widget to a given 
+width; otherwise, it’ll expand to the maximum width available to it. This 
+widget is usually used when each child of a Column widget is expected to 
+have the same width. All children expand to the width of the widest child 
+widget of the Column widget.
+
+body: Column(
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+	],
+),
+
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 100 + index * 20.toDouble(),
+		height: 100 + index * 30.toDouble(),
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
+
+The three children with different sizes will be shown in Column widget
+
+We can set the `crossAxisAlignment` property to `CrossAxisAlignment.
+stretch` to make all Container children of the same widths.
 
 
+body: Column(
+	crossAxisAlignment: CrossAxisAlignment.stretch,
+	
+	children: [
+		childWidget(0),
+		childWidget(1),
+		childWidget(2),
+	],
+),
 
 
 */ 
@@ -775,10 +824,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
 			// column
 			body: Column(
+				crossAxisAlignment: CrossAxisAlignment.stretch,
+
 				children: [
 					childWidget(0),
 					childWidget(1),
 					childWidget(2),
+					childWidget(3),
+					childWidget(2),
+					childWidget(1),
+					childWidget(0),
 				],
 			),
 				
@@ -797,39 +852,39 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
-Widget childWidget(int index) {
-	return Container(
-		color: getColor(index),
-
-		width: 100,
-		height: 100,
-
-		child: Center(
-			child: Text(
-				"$index",
-
-				style: TextStyle(fontSize: 40),
-			),
-		),
-	);
-}
-
-// intrinsicHeight widget
 // Widget childWidget(int index) {
 // 	return Container(
 // 		color: getColor(index),
 
-// 		width: 100 + index * 20.toDouble(),
-// 		height: 100 + index * 30.toDouble(),
+// 		width: 100,
+// 		height: 100,
 
 // 		child: Center(
 // 			child: Text(
 // 				"$index",
+
 // 				style: TextStyle(fontSize: 40),
 // 			),
 // 		),
 // 	);
 // }
+
+// intrinsicHeight widget
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
+
+		width: 100 + index * 20.toDouble(),
+		height: 100 + index * 30.toDouble(),
+
+		child: Center(
+			child: Text(
+				"$index",
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
 
 
 Color getColor(int index) {
