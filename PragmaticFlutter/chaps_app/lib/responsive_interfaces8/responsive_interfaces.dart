@@ -22,6 +22,23 @@ body: Row(
 	],
 )
 
+When the code above is added to the `body` of the Scaffold 
+widget, the second image overflows to the right of the screen
+
+Wrapping the Row widget in FittedBox makes sure that both 
+of the Image widgets are contained inside the FittedBox 
+without overflowing out of the screen.
+
+body: FittedBox (
+	child: Row (
+		children: [
+			Image.asset("assets/image_pic.png"),
+			Image.asset("assets/image_pic.png"),
+		]
+	)
+)
+
+
 */ 
 
 import 'package:flutter/material.dart';
@@ -59,15 +76,20 @@ class _MyIndexedStackState extends State<MyIndexedStack> {
 				title: Text("FittedBox Widget"),
 			),
 
-			body: Row(
+			body: FittedBox(
+				child: Row(
 
-				children: [
-					Image.asset("assets/images/image_pic.png"),
+					children: [
+						Image.asset("assets/images/image_pic.png"),
 
-					Image.asset("assets/images/image_pic.png"),
-				],
-				
+						Image.asset("assets/images/image_pic.png"),
+					],
+				),
+
 			),
 		);
 	}
 }
+
+
+// cont from pg 152
