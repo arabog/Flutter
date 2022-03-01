@@ -146,6 +146,41 @@ body: Row (
 )
 
 
+The `FlexFit.loose` Property
+The `FlexFit.loose` will keep the default Flexible behavior and 
+let them take their maximum sizes. In the code snippet below, 
+the three children to Row widget are assigned four, three, and 
+one out of eight parts, respectively, as above. When the `fit` 
+property is set to `FlexFit.loose`, they only take the space 
+assigned to each of them but don’t take up the remaining space 
+available horizontally.
+
+body: Row (
+	children: [
+		Flexible (
+			fit: FlexFit.loose,
+			flex: 4,
+			child: childWidget("4/8")
+		),
+
+		Flexible (
+			fit: FlexFit.loose,
+			flex: 3,
+			child: childWidget("3/8")
+		),
+
+		Flexible (
+			fit: FlexFit.loose,
+			flex: 1,
+			child: childWidget("1/8")
+		),
+	]
+)
+
+
+
+
+
 */ 
 
 import 'package:flutter/material.dart';
@@ -230,28 +265,53 @@ class _ExpandedDefaultState extends State<ExpandedDefault> {
 			// 	],
 			// ),
 
-			// Expanded with FlexFit ppty
+			// Expanded with FlexFit.tight ppty
+			// body: Row (
+			// 	children: [
+			// 		Flexible (
+			// 			fit: FlexFit.tight,
+			// 			flex: 4,
+			// 			child: childWidget("4/8")
+			// 		),
+
+			// 		Flexible (
+			// 			fit: FlexFit.tight,
+			// 			flex: 3,
+			// 			child: childWidget("3/8")
+			// 		),
+
+			// 		Flexible (
+			// 			fit: FlexFit.tight,
+			// 			flex: 1,
+			// 			child: childWidget("1/8")
+			// 		),
+			// 	]
+			// ),
+
+
+			// Expanded with FlexFit.loose ppty
 			body: Row (
 				children: [
 					Flexible (
-						fit: FlexFit.tight,
+						fit: FlexFit.loose,
 						flex: 4,
 						child: childWidget("4/8")
 					),
 
 					Flexible (
-						fit: FlexFit.tight,
+						fit: FlexFit.loose,
 						flex: 3,
 						child: childWidget("3/8")
 					),
 
 					Flexible (
-						fit: FlexFit.tight,
+						fit: FlexFit.loose,
 						flex: 1,
 						child: childWidget("1/8")
 					),
 				]
-			),
+			)
+
 
 		);
 
