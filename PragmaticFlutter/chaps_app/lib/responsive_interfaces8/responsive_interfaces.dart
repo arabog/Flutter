@@ -138,7 +138,6 @@ class ExpandedApp extends StatelessWidget {
 		return MaterialApp(
 			home: ExpandedDefault(),
 		);
-
 	}
 }
 
@@ -178,22 +177,6 @@ class _ExpandedDefaultState extends State<ExpandedDefault> {
 				],
 			),
 		);
-
-		// return Row (
-		// 	children: [
-		// 		Expanded (
-		// 			child: childWidget("")
-		// 		),
-
-		// 		Expanded (
-		// 			child: childWidget("")
-		// 		),
-
-		// 		Expanded (
-		// 			child: childWidget("")
-		// 		),
-		// 	],
-		// );
 
 	}
 
