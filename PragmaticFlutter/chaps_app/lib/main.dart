@@ -11,9 +11,11 @@ import 'package:flutter/material.dart';
 
 // import 'flutter_widget6/alert_dialog.dart';
 
-import 'buliding_layouts7/buliding_layouts.dart';
+// import 'buliding_layouts7/buliding_layouts.dart';
 
-import 'buliding_layouts7/project/int_page.dart';
+// import 'buliding_layouts7/project/int_page.dart';
+
+import 'responsive_interfaces8/responsive_interfaces.dart';
 
 
 void main() {
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
       // home: StreamBuilderDemo()
       // home: AlertDialogDemo()
       // home: LayoutApp()
-      home: ScrollApp(),
+      // home: ScrollApp(),
+
+      home: FittedBoxApp(),
 		);
 	}
 }
