@@ -38,57 +38,6 @@ body: FittedBox (
 	)
 )
 
-
-import 'package:flutter/material.dart';
-
-class FittedBoxApp extends StatelessWidget {
-	@override 
-	Widget build(BuildContext context) {
-
-		return MaterialApp(
-			home: MyIndexedStack(),
-		);
-
-	}
-}
-
-
-class MyIndexedStack extends StatefulWidget {
-	// MyIndexedStack({Key key}) : super(key: key);
-
-	@override
-
-	_MyIndexedStackState createState() => _MyIndexedStackState();
-}
-
-
-
-class _MyIndexedStackState extends State<MyIndexedStack> {
-
-	@override
-	Widget build(BuildContext context) {
-
-		return Scaffold(
-			appBar: AppBar(
-				title: Text("FittedBox Widget"),
-			),
-
-			body: FittedBox(
-				child: Row(
-
-					children: [
-						Image.asset("assets/images/image_pic.png"),
-
-						Image.asset("assets/images/image_pic.png"),
-					],
-				),
-
-			),
-		);
-	}
-}
-
-
 Expanded WIDGET
 The Expanded (Expanded class) widget is a single-child layout widget. 
 This layout widget is used for a specific child of the multi-layout widgets 
@@ -125,87 +74,7 @@ body: Row (
 
 
 
-import 'package:flutter/material.dart';
-
-
-class ExpandedApp extends StatelessWidget {
-	@override 
-	Widget build(BuildContext context) {
-
-		return MaterialApp(
-			home: ExpandedDefault(),
-		);
-	}
-}
-
-
-class ExpandedDefault extends StatefulWidget {
-	// ExpandedDefault({Key key}) : super(key: key);
-
-	@override
-
-	_ExpandedDefaultState createState() => _ExpandedDefaultState();
-}
-
-
-class _ExpandedDefaultState extends State<ExpandedDefault> {
-
-	@override
-	// Widget expandedDefault() {
-	Widget build(BuildContext context) {
-		return Scaffold(
-			appBar: AppBar(
-				title: Text("Expanded Widget"),
-			),
-
-			body: Row (
-				children: [
-					Expanded (
-						child: childWidget("")
-					),
-
-					Expanded (
-						child: childWidget("")
-					),
-
-					Expanded (
-						child: childWidget("")
-					),
-				],
-			),
-		);
-
-	}
-
-
-	Widget childWidget(String text) {
-		return Container(
-
-			width: 100,
-			height: 100,
-
-			decoration: BoxDecoration(
-				image: const DecorationImage(
-					image: AssetImage("assets/images/image_pic.png"),
-
-					fit: BoxFit.cover,
-				),
-
-				border: Border.all(
-					color: Colors.black,
-
-					width: 3,
-				),
-			),
-
-			child: Text(text),
-		);
-	}
-
-}
-
-
-E xpanded with ` flex` Property
+Expanded with ` flex` Property
 In the example below, each child is wrapped in an Expanded 
 widget as well as uses its `flex` property. Each of the children 
 takes up the space based on the value of `flex` property. The 
@@ -230,6 +99,50 @@ body: Row (
 			child: childWidget("")
 		),
 	],
+)
+
+
+Flexible WIDGET
+The Flexible (Flexible class) widget is similar to the Expand widget 
+but with a twist. It lets a child of Row, Column, and Flex layout 
+widgets expand in the available space based on the constraint 
+using the `flex` property. Flexible widgets only take space for 
+how much is declared using the `flex` property. They don’t claim 
+extra available space by default.
+
+The `FlexFit.tight` Property
+The `FlexFit.tight` forces the children to take up all the entire 
+available space. 
+
+The Flexible widget behaves like the Expand widget when its 
+`fit` property is set to `FlexFit.tight`. The `Expanded(child: Text())` 
+is the same as `Flexible(fit: FlexFit.tight, child: Text()).
+
+In the code snippet below, the three children of the Row widget 
+are assigned four, three, and one out of eight parts, respectively. 
+When the `fit` property is set to `FlexFit.tight`, they take the space 
+assigned to each of them while filling up the available space horizontally.
+
+body: Row (
+	children: [
+		Flexible (
+			fit: FlexFit.tight,
+			flex: 4,
+			child: childWidget("4/8")
+		),
+
+		Flexible (
+			fit: FlexFit.tight,
+			flex: 3,
+			child: childWidget("3/8")
+		),
+
+		Flexible (
+			fit: FlexFit.tight,
+			flex: 1,
+			child: childWidget("1/8")
+		),
+	]
 )
 
 
@@ -261,31 +174,85 @@ class ExpandedDefault extends StatefulWidget {
 class _ExpandedDefaultState extends State<ExpandedDefault> {
 
 	@override
-	// Widget expandedDefault() {
 	Widget build(BuildContext context) {
 		return Scaffold(
 			appBar: AppBar(
 				title: Text("Expanded Widget"),
 			),
 
+			// FittedBox
+			// body: FittedBox(
+			// 	child: Row(
+
+			// 		children: [
+			// 			Image.asset("assets/images/image_pic.png"),
+
+			// 			Image.asset("assets/images/image_pic.png"),
+			// 		],
+			// 	),
+
+			// ),
+
+			// Expanded
+			// body: Row (
+			// 	children: [
+			// 		Expanded (
+			// 			child: childWidget("")
+			// 		),
+
+			// 		Expanded (
+			// 			child: childWidget("")
+			// 		),
+
+			// 		Expanded (
+			// 			child: childWidget("")
+			// 		),
+			// 	],
+			// ),
+
+			// Expanded with flex ppty
+			// body: Row (
+			// 	children: [
+			// 		Expanded (
+			// 			flex: 4,
+			// 			child: childWidget("")
+			// 		),
+
+			// 		Expanded (
+			// 			flex: 3,
+			// 			child: childWidget("")
+			// 		),
+
+			// 		Expanded (
+			// 			flex: 1,
+			// 			child: childWidget("")
+			// 		),
+			// 	],
+			// ),
+
+			// Expanded with FlexFit ppty
 			body: Row (
 				children: [
-					Expanded (
+					Flexible (
+						fit: FlexFit.tight,
 						flex: 4,
-						child: childWidget("")
+						child: childWidget("4/8")
 					),
 
-					Expanded (
+					Flexible (
+						fit: FlexFit.tight,
 						flex: 3,
-						child: childWidget("")
+						child: childWidget("3/8")
 					),
 
-					Expanded (
+					Flexible (
+						fit: FlexFit.tight,
 						flex: 1,
-						child: childWidget("")
+						child: childWidget("1/8")
 					),
-				],
+				]
 			),
+
 		);
 
 	}
