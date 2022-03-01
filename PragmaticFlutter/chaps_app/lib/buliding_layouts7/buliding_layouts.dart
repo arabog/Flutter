@@ -1158,22 +1158,22 @@ class _MyHomePageState extends State<MyHomePage> {
 	}
 }
 
-// Widget childWidget(int index) {
-// 	return Container(
-// 		color: getColor(index),
+Widget childWidget(int index) {
+	return Container(
+		color: getColor(index),
 
-// 		width: 100,
-// 		height: 100,
+		width: 100,
+		height: 100,
 
-// 		child: Center(
-// 			child: Text(
-// 				"$index",
+		child: Center(
+			child: Text(
+				"$index",
 
-// 				style: TextStyle(fontSize: 40),
-// 			),
-// 		),
-// 	);
-// }
+				style: TextStyle(fontSize: 40),
+			),
+		),
+	);
+}
 
 // intrinsicHeight widget
 Widget childWidget(int index) {

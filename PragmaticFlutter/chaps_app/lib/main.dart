@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'responsive_interfaces8/responsive_interfaces.dart';
 
 
+
 void main() {
 	runApp(const MyApp());
 }
@@ -51,7 +52,9 @@ class MyApp extends StatelessWidget {
       // home: LayoutApp()
       // home: ScrollApp(),
 
-      home: FittedBoxApp(),
+      // home: FittedBoxApp(),
+
+      home: ExpandedApp(),
 		);
 	}
 }
