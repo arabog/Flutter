@@ -41,7 +41,6 @@ body: FittedBox (
 
 import 'package:flutter/material.dart';
 
-
 class FittedBoxApp extends StatelessWidget {
 	@override 
 	Widget build(BuildContext context) {
@@ -108,25 +107,23 @@ a widget that’s added as a child to the Row widget. In the code snippet
 below, each child is wrapped in an Expanded widget. Each Expanded 
 widget distributes the available horizontal space equally
 
-Widget expandedDefault () {
-	return Row (
-		children: [
-			Expanded (
-				child: childWidget("")
-			),
+body: Row (
+	children: [
+		Expanded (
+			child: childWidget("")
+		),
 
-			Expanded (
-				child: childWidget("")
-			),
+		Expanded (
+			child: childWidget("")
+		),
 
-			Expanded (
-				child: childWidget("")
-			),
-		],
-	),
-}
+		Expanded (
+			child: childWidget("")
+		),
+	],
+),
 
-*/ 
+
 
 import 'package:flutter/material.dart';
 
@@ -172,6 +169,119 @@ class _ExpandedDefaultState extends State<ExpandedDefault> {
 					),
 
 					Expanded (
+						child: childWidget("")
+					),
+				],
+			),
+		);
+
+	}
+
+
+	Widget childWidget(String text) {
+		return Container(
+
+			width: 100,
+			height: 100,
+
+			decoration: BoxDecoration(
+				image: const DecorationImage(
+					image: AssetImage("assets/images/image_pic.png"),
+
+					fit: BoxFit.cover,
+				),
+
+				border: Border.all(
+					color: Colors.black,
+
+					width: 3,
+				),
+			),
+
+			child: Text(text),
+		);
+	}
+
+}
+
+
+E xpanded with ` flex` Property
+In the example below, each child is wrapped in an Expanded 
+widget as well as uses its `flex` property. Each of the children 
+takes up the space based on the value of `flex` property. The 
+first child is assigned `flex` as four, the second is assigned
+three, and the third child has `flex` property as one. In this 
+case, the total space will be eight parts (4 + 3 + 1 = 8). 
+
+body: Row (
+	children: [
+		Expanded (
+			flex: 4,
+			child: childWidget("")
+		),
+
+		Expanded (
+			flex: 3,
+			child: childWidget("")
+		),
+
+		Expanded (
+			flex: 1,
+			child: childWidget("")
+		),
+	],
+)
+
+
+*/ 
+
+import 'package:flutter/material.dart';
+
+
+class ExpandedApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) {
+
+		return MaterialApp(
+			home: ExpandedDefault(),
+		);
+	}
+}
+
+
+class ExpandedDefault extends StatefulWidget {
+	// ExpandedDefault({Key key}) : super(key: key);
+
+	@override
+
+	_ExpandedDefaultState createState() => _ExpandedDefaultState();
+}
+
+
+class _ExpandedDefaultState extends State<ExpandedDefault> {
+
+	@override
+	// Widget expandedDefault() {
+	Widget build(BuildContext context) {
+		return Scaffold(
+			appBar: AppBar(
+				title: Text("Expanded Widget"),
+			),
+
+			body: Row (
+				children: [
+					Expanded (
+						flex: 4,
+						child: childWidget("")
+					),
+
+					Expanded (
+						flex: 3,
+						child: childWidget("")
+					),
+
+					Expanded (
+						flex: 1,
 						child: childWidget("")
 					),
 				],
