@@ -465,11 +465,7 @@ class BooksListing extends StatelessWidget {
 													Text(
 														'${booksListing[index]['title']}',
 
-														style: TextStyle(
-															fontSize: 14, 
-															
-															fontWeight: FontWeight.bold
-														),
+														style: Theme.of(context).textTheme.headline6,
 													),
 
 													SizedBox(
