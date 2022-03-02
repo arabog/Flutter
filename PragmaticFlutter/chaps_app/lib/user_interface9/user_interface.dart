@@ -2,19 +2,188 @@
 THE BooksApp ANATOMY: see d diagrams on pg 147
 
 // ===================
+class BooksApp extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
 
-THE BooksApp ANATOMY
+			home: Scaffold(
+				appBar: AppBar(
+					title: Text("Books Listing")
+				),
+
+				body: BooksListing(),
+			),
+		);
+	}
+}
+
+THE BooksApp ANATOMY: see d diagrams on pg 147
 Let’s take a look at the BooksApp’s widget structure. The MaterialApp 
 widget is at the root of the BooksApp. It has a Scaffold widget as its 
 child. The Scaffold widget has an AppBar widget and ListView widget 
-for its `body` property. The `ListView.builder()` is used to build the 
-ListView of Card (Card class) widgets. Each Card widget displays 
-title, author, and image information for the book. We’re using mocked 
-sample book data for demonstration purposes. It has two book entries. 
-The ListView has two children of Card widgets
+(i.e BooksListing) for its `body` property. 
 
+The `ListView.builder()` is used to build the ListView of Card (Card 
+class) widgets. Each Card widget displays  title, author, and image 
+information for the book. We’re using mocked sample book data for 
+demonstration purposes. It has two book entries. The ListView has 
+two children of Card widgets.
+
+ListView.builder has 2 children: 
+	ListView.builder(
+		itemCount: itemCount,
+
+		itemBuilder: itemBuilder,
+	)
+
+// ===================
+
+class BooksListing extends StatelessWidget {
+	final booksListing = bookData();
+
+	@override
+	Widget build(BuildContext context) {
+		return ListView.builder(
+			itemCount: booksListing == null ? 0 : booksListing.length,
+
+			itemBuilder: (context, index) {
+				return Card (
+					
+					shape: RoundedRectangleBorder(
+						borderRadius: BorderRadius.circular(10.0),
+					),
+
+					elevation: 5,
+
+					margin: EdgeInsets.all(10),
+
+					child: Padding(
+						padding: const EdgeInsets.all(8.0),
+
+						child: Row(
+							mainAxisAlignment: MainAxisAlignment.spaceBetween,
+							
+							children: [
+								Flexible(
+									child: Column(
+										crossAxisAlignment: CrossAxisAlignment.start,
+
+										children: <Widget>[
+											Text(
+												'${booksListing[index]['title']}',
+
+												style: TextStyle(
+													fontSize: 14, 
+													
+													fontWeight: FontWeight.bold
+												),
+											),
+
+											booksListing[index]['authors'] != null
+												? Text(
+													'Author(s): ${booksListing[index]['authors'].join(", ")}',
+
+													style: TextStyle(fontSize: 14),
+												)
+
+												: Text(""),
+										],
+									),
+								),
+
+
+								booksListing[index]['image'] != null
+									? Container(
+										height: 200,
+										width: 250,
+
+										child: Image.asset(
+											booksListing[index]['image'],
+
+											fit: BoxFit.fill,
+										),
+									)
+
+									: Container(),
+
+							],
+						),
+					),				
+				);
+			},
+		);
+	}
+}
+
+See pg 147 for d Card diagram
+
+Card (
+	
+	shape: RoundedRectangleBorder(
+		borderRadius: BorderRadius.circular(10.0),
+	),
+
+	elevation: 5,
+
+	margin: EdgeInsets.all(10),
+
+	child: Padding(
+		padding: const EdgeInsets.all(8.0),
+
+		child: Row(
+			mainAxisAlignment: MainAxisAlignment.spaceBetween,
+			
+			children: [
+				Flexible(
+					child: Column(
+						crossAxisAlignment: CrossAxisAlignment.start,
+
+						children: <Widget>[
+							Text(
+								'${booksListing[index]['title']}',
+
+								style: TextStyle(
+									fontSize: 14, 
+									
+									fontWeight: FontWeight.bold
+								),
+							),
+
+							booksListing[index]['authors'] != null
+								? Text(
+									'Author(s): ${booksListing[index]['authors'].join(", ")}',
+
+									style: TextStyle(fontSize: 14),
+								)
+
+								: Text(""),
+						],
+					),
+				),
+
+
+				booksListing[index]['image'] != null
+					? Container(
+						height: 200,
+						width: 250,
+
+						child: Image.asset(
+							booksListing[index]['image'],
+
+							fit: BoxFit.fill,
+						),
+					)
+
+					: Container(),
+
+			],
+		),
+	),				
+);
 The Card widget has a Padding widget as its child. The Padding widget 
-insets its child Row widget. The padding makes sure that the content of 
+has its child, Row widget. The padding makes sure that the content of 
 the Row widget is not bleeding over the edges. 
 
 The Row widget displays its children horizontally. The Row widget has 
@@ -25,7 +194,7 @@ the bottom.
 The Column widget is appropriate to align its children in vertical 
 alignment. The Column widget has two Text widgets as its children. 
 The first Text widget is to display the title of the book, and the 
-second Text widget is to display the author list
+second Text widget is to display the author list:.
 
 
 IMPLEMENTING USER INTERFACE
@@ -54,8 +223,7 @@ List bookData() {
 The first book entry has two authors and the second book has only 
 one author. The same cover art is used for both books to keep it 
 simple. The `bookData()` function returns a List of JSON (Introducing 
-JSON) entries for each book. The JSON stands for ‘JavaScript Object 
-Notation’. It is data interchange format. This data format is used for 
+JSON) entries for each book. This data format is used for 
 transferring data from one source to another.
 
 
@@ -74,7 +242,9 @@ class BooksApp extends StatelessWidget {
 
 			home: Scaffold(
 				appBar: AppBar(
-				title: Text("Books Listing")),
+					title: Text("Books Listing")
+				),
+
 				body: BooksListing(),
 			),
 		);
@@ -96,11 +266,12 @@ class BooksListing extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return ListView.builder(
-		itemCount: booksListing == null? 0 : booksListing.length,
+			itemCount: booksListing == null ? 0 : booksListing.length,
 
-		itemBuilder: (context, index) {
-			return Card();
-		}
+			itemBuilder: (context, index) {
+				return Card();
+			}
+		)
 	}
 }
 
@@ -116,6 +287,7 @@ Card(
 	),
 
 	elevation: 5,
+
 	margin: EdgeInsets.all(10),
 );
 
@@ -131,15 +303,42 @@ Card(
 	),
 );
 
+Row Widget
+The Row widget displays its children in a horizontal array. We’ll use 
+this array to display the book’s title, authors’ list to the left, and cover 
+image to the screen’s right. The Row widget’s `mainAxisAlignment` 
+attribute aligns the children widgets along its main axis, which is 
+horizontal in this case. The `MainAxisAlignment.spaceBetween` 
+property distributes free space available evenly between the chil-
+dren widgets. The first child is the Flexible widget.
+
+Card(
+	child: Padding(
+		child: Row(
+			mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+			children: [
+				Flexible(),
+
+				Image.asset(
+					booksListing[index]['image'],
+					fit: BoxFit.fill,
+				),
+			],
+		),
+	),
+);
+
 Flexible Widget
 The Flexible widget renders the book’s title and its authors’ list 
 in a Column widget. A Column widget renders its children vertically. 
 The Flexible widget gives flexibility to its child, the Column widget’s 
-children flexibility to expand to fill the available space in its main axis. 
+to expand to fill the available space in its main axis. 
+
 The main axis for the Column widget is vertical. The book’s title and 
 authors’ list expand vertically rather than horizontally and hereby 
-giving ample space for the cover image to render to the right side of the
-screen.
+giving ample space for the cover image to render to the right side 
+of the screen.
 
 Flexible(
 	child: Column(
@@ -227,14 +426,34 @@ List bookData() {
 		{
 			'title': 'Book Title',
 			'authors': ['Author1', 'Author2'],
-			'image': "assets/images/image_pic.png"
+			'image': "assets/images/image_pic.png",
+
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
 		},
 
 		{
 			'title': 'Book Title 2',
 			'authors': ['Author1'],
-			'image': "assets/images/image_pic.png"
-		}
+			'image': "assets/images/image_pic.png",
+
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
+
+		{
+			'title': 'Book Title 3',
+			'authors': ['Author1'],
+			'image': "assets/images/image_pic.png",
+
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
+
+		{
+			'title': 'Book Title 4',
+			'authors': ['Author1'],
+			'image': "assets/images/image_pic.png",
+
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
 	];
 }
 
@@ -259,36 +478,64 @@ class BooksListing extends StatelessWidget {
 					margin: EdgeInsets.all(10),
 
 					child: Padding(
-						padding: const EdgeInsets.all(8.0),
+						padding: const EdgeInsets.only(left: 0, top: 0, right:16.0),
 
 						child: Row(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							
 							children: [
 								Flexible(
-									child: Column(
-										crossAxisAlignment: CrossAxisAlignment.start,
+									
+									child: Padding(
+										padding: const EdgeInsets.all(16.0),
 
-										children: <Widget>[
-											Text(
-												'${booksListing[index]['title']}',
 
-												style: TextStyle(
-													fontSize: 14, 
-													
-													fontWeight: FontWeight.bold
+										child: Column(
+
+											crossAxisAlignment: CrossAxisAlignment.start,
+
+											children: <Widget>[
+												Text(
+													'${booksListing[index]['title']}',
+
+													style: TextStyle(
+														fontSize: 14, 
+														
+														fontWeight: FontWeight.bold
+													),
 												),
-											),
 
-											booksListing[index]['authors'] != null
-												? Text(
-													'Author(s): ${booksListing[index]['authors'].join(", ")}',
+												SizedBox(
+													height: 10,
+												),
 
-													style: TextStyle(fontSize: 14),
-												)
+												Text(
+													
+													'${booksListing[index]['description']}',
 
-												: Text(""),
-										],
+													textAlign: TextAlign.justify,
+													
+													style: TextStyle(
+														fontSize: 14, 
+														
+														fontWeight: FontWeight.bold
+													),
+												),
+
+												SizedBox(
+													height: 10,
+												),
+
+												booksListing[index]['authors'] != null
+													? Text(
+														'Author(s): ${booksListing[index]['authors'].join(", ")}',
+
+														style: TextStyle(fontSize: 14),
+													)
+
+													: Text(""),
+											],
+										),
 									),
 								),
 
