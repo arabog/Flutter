@@ -119,11 +119,80 @@ ThemeData darkTheme = ThemeData(
 	brightness: Brightness.dark,
 
 	primaryColor: Colors.orange,
-	
+
 	accentColor: Colors.yellowAccent,
 );
 
+Using Dark Theme
+The `darkTheme` is assigned to the `theme` property of `MaterialApp`.
 
+MaterialApp(
+	theme: darkTheme,
+
+	home: Scaffold(
+		appBar: AppBar(
+			leading: Icon(Icons.home),
+			title: Text("Books Listing"),
+		),
+
+		body: BooksListing(),
+	),
+);
+
+MODULARIZING THEMES
+All themes can be kept in a separate file. This file needs to be imported 
+into the referencing file. This helps to keep all the styling code together. 
+
+You may be tempted to create a class with one static method for each 
+theme. However, a class with only static methods is discouraged per 
+this lint rule (avoid_classes_with_only_static_members).
+
+If utility methods are not logically related in Dart, they shouldn’t be 
+put inside a class. Such methods can be put at top-level in a dart file.
+All global themes can be put in a file themes.dart to keep all themes 
+together.
+
+
+theme.dart
+import 'package:flutter/material.dart';
+
+//Themes definitions
+ThemeData get defaultTheme => ThemeData(
+	// Define the default brightness and colors for the overall app.
+	brightness: Brightness.light,
+	
+	primaryColor: Colors.blue,
+
+	accentColor: Colors.lightBlueAccent,
+
+	appBarTheme: AppBarTheme(
+		color: Colors.blue,
+
+		iconTheme: IconThemeData(
+			color: Colors.white,
+		),
+	),
+);
+
+
+ThemeData get pinkTheme => ThemeData(
+	// Define the default brightness and colors for the overall app.
+	brightness: Brightness.light,
+
+	primaryColor: Colors.pink,
+	
+	accentColor: Colors.pinkAccent,
+);
+
+
+ThemeData get darkTheme => ThemeData(
+	// Define the default brightness and colors for the overall app.
+	brightness: Brightness.dark,
+
+	primaryColor: Colors.orange,
+	
+	accentColor: Colors.yellowAccent,
+);
 
 
 
