@@ -408,66 +408,72 @@ enum AppThemes { light, dark }
 
 //Showing book listing in ListView
 class PersistingDataApp extends StatefulWidget {
-  @override
-  _PersistingDataAppState createState() => _PersistingDataAppState();
+	@override
+	_PersistingDataAppState createState() => _PersistingDataAppState();
 }
 
 class _PersistingDataAppState extends State<PersistingDataApp> {
-  AppThemes currentTheme = AppThemes.light;
+	AppThemes currentTheme = AppThemes.light;
 
-  //NEW CODE: Save theme_id using SharedPreference
-  Future<void> switchTheme() async {
-    currentTheme =
-        currentTheme == AppThemes.light ? AppThemes.dark : AppThemes.light;
+	//NEW CODE: Save theme_id using SharedPreference
+	Future<void> switchTheme() async {
+		currentTheme = currentTheme == AppThemes.light ? AppThemes.dark : AppThemes.light;
 
-    //NEW CODE: save current selection
-    var sharedPrefs = await SharedPreferences.getInstance();
-    await sharedPrefs.setInt('theme_id', currentTheme.index);
-  }
+		//NEW CODE: save current selection
+		var sharedPrefs = await SharedPreferences.getInstance();
+		await sharedPrefs.setInt('theme_id', currentTheme.index);
+	}
 
-  //NEW CODE: Fetching theme_id from SharedPreference
-  void loadActiveTheme(BuildContext context) async {
-    var sharedPrefs = await SharedPreferences.getInstance();
-    //if theme_id key is null (not found), then set default theme
-    int themeId = sharedPrefs.getInt('theme_id') ?? AppThemes.light.index;
+	//NEW CODE: Fetching theme_id from SharedPreference
+	void loadActiveTheme(BuildContext context) async {
+		var sharedPrefs = await SharedPreferences.getInstance();
 
-    setState(() {
-      currentTheme = AppThemes.values[themeId];
-    });
-  }
+		//if theme_id key is null (not found), then set default theme
+		int themeId = sharedPrefs.getInt('theme_id') ?? AppThemes.light.index;
 
-  @override
-  void initState() {
-    super.initState();
+		setState(() {
+			currentTheme = AppThemes.values[themeId];
+		});
+	}
 
-    //NEW CODE: Load theme from sharedPreference
-    loadActiveTheme(context);
-  }
+	@override
+	void initState() {
+		super.initState();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      //Applying theme to the app
-      theme: currentTheme == AppThemes.light ? defaultTheme : darkTheme,
-      home: Scaffold(
-        appBar: AppBar(
-            leading: Icon(Icons.home),
-            title: Text("Books Listing"),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.all_inclusive),
-                onPressed: () {
-                  setState(() {
-                    switchTheme();
-                  });
-                },
-              )
-            ]),
-        body: BooksListing(),
-      ),
-    );
-  }
+		//NEW CODE: Load theme from sharedPreference
+		loadActiveTheme(context);
+	}
+
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
+			
+			//Applying theme to the app
+			theme: currentTheme == AppThemes.light ? defaultTheme : darkTheme,
+			
+			home: Scaffold(
+				appBar: AppBar(
+					leading: Icon(Icons.home),
+					title: Text("Books Listing"),
+
+					actions: [
+						IconButton(
+							icon: Icon(Icons.all_inclusive),
+
+							onPressed: () {
+								setState(() {
+									switchTheme();
+								});
+							},
+						)
+					]
+				),
+
+				body: BooksListing(),
+			),
+		);
+	}
 }
 
 List bookData() {
@@ -508,55 +514,92 @@ List bookData() {
 
 
 class BooksListing extends StatelessWidget {
-  final booksListing = bookData();
+	final booksListing = bookData();
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: booksListing == null ? 0 : booksListing.length,
-      itemBuilder: (context, index) {
-        return Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 5,
-          margin: EdgeInsets.all(10),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${booksListing[index]['title']}',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
-                      ),
-                      booksListing[index]['authors'] != null
-                          ? Text(
-                              'Author(s): ${booksListing[index]['authors'].join(", ")}',
-                              style: TextStyle(fontSize: 14),
-                            )
-                          : Text(""),
-                    ],
-                  ),
-                ),
-                booksListing[index]['image'] != null
-                    ? Image.asset(
-                        booksListing[index]['image'],
-                        fit: BoxFit.fill,
-                      )
-                    : Container(),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+	@override
+	Widget build(BuildContext context) {
+		return ListView.builder(
+			itemCount: booksListing == null ? 0 : booksListing.length,
+
+			itemBuilder: (context, index) {
+				return Card(
+					shape: RoundedRectangleBorder(
+						borderRadius: BorderRadius.circular(10.0),
+					),
+
+					elevation: 5,
+
+					margin: EdgeInsets.all(10),
+
+					child: Padding(
+						padding: const EdgeInsets.all(8.0),
+
+						child: Row(
+							mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+							children: [
+								Flexible(
+									child: Column(
+										crossAxisAlignment: CrossAxisAlignment.start,
+
+										children: <Widget>[
+											Text(
+												'${booksListing[index]['title']}',
+												style: TextStyle(
+												fontSize: 14, fontWeight: FontWeight.bold),
+											),
+
+											Text(
+												
+												'${booksListing[index]['description']}',
+
+												textAlign: TextAlign.justify,
+												
+												style: TextStyle(
+													fontSize: 14, 
+													
+													fontWeight: FontWeight.bold
+												),
+											),
+
+											SizedBox(
+												height: 10,
+											),
+
+											booksListing[index]['authors'] != null
+												? Text(
+													'Author(s): ${booksListing[index]['authors'].join(", ")}',
+													style: TextStyle(fontSize: 14),
+												)
+
+												: Text(""),
+										],
+									),
+								),
+
+
+								booksListing[index]['image'] != null
+									? Container(
+										height: 200,
+										width: 250,
+
+										child: Image.asset(
+											booksListing[index]['image'],
+
+											fit: BoxFit.fill,
+										),
+									)
+
+									: Container(),
+
+			
+							],
+						),
+					),
+				);
+			},
+		);
+	}
 }
 
 /*
