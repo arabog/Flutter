@@ -47,7 +47,7 @@ ThemeData defaultTheme = ThemeData(
 	brightness: Brightness.light,
 
 	primaryColor: Colors.blue,
-	
+
 	accentColor: Colors.lightBlueAccent,
 
 	appBarTheme: AppBarTheme(
@@ -75,6 +75,55 @@ MaterialApp(
 		body: BooksListing(),
 	),
 );
+
+Light Pink Theme
+Let’s change the primary and accent color to pink. Unless 
+there’s an app bar specific styling needed, you don’t need 
+to specify the `appBarTheme` property. The pink
+theme is stored in the `pinkTheme` variable.
+
+ThemeData pinkTheme = ThemeData(
+// Define the default brightness and colors for the overall app.
+	brightness: Brightness.light,
+
+	primaryColor: Colors.pink,
+
+	accentColor: Colors.pinkAccent,
+
+Using Pink Theme
+The `pinkTheme` is assigned to the `theme` property of 
+MaterialApp. The BooksApp with pink colored theme.
+
+MaterialApp(
+	theme: pinkTheme,
+
+	home: Scaffold(
+		appBar: AppBar(
+			leading: Icon(Icons.home),
+
+			title: Text("Books Listing"),
+		),
+
+		body: BooksListing(),
+	),
+);
+
+Dark Theme
+Let’s define a dark theme for the BooksApp. The brightness 
+property is set to dark. Primary and accent colors are 
+modified to colors appropriate for a darker theme.
+The dark theme is stored in the `darkTheme` variable.
+
+ThemeData darkTheme = ThemeData(
+	// Define the default brightness and colors for the overall app.
+	brightness: Brightness.dark,
+
+	primaryColor: Colors.orange,
+	
+	accentColor: Colors.yellowAccent,
+);
+
+
 
 
 
