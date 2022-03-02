@@ -722,58 +722,270 @@ The default selected theme is a light blue theme.The default theme
 is defined as below in the ‘themes.dart’ file:
 
 */ 
-import 'package:flutter/material.dart';
-import 'themes.dart';
+// import 'package:flutter/material.dart';
+// import 'themes.dart';
 
+
+// enum AppThemes { light, dark }
+
+// //StatefulWidget
+// class FlutterThemeApp extends StatefulWidget {
+// 	@override
+// 	_FlutterThemeAppState createState() => _FlutterThemeAppState();
+// }
+
+
+// class _FlutterThemeAppState extends State<FlutterThemeApp> {
+// 	var currentTheme = AppThemes.light;
+	
+// 	@override
+// 	Widget build(BuildContext context) {
+// 		return MaterialApp(
+// 			debugShowCheckedModeBanner: false,
+
+// 			//NEW CODE: applying selected theme
+// 			theme: currentTheme == AppThemes.light ? defaultTheme : darkTheme,
+			
+// 			home: Scaffold(
+// 				appBar: AppBar(
+// 					leading: Icon(Icons.home),
+
+// 					title: Text("Books Listing"),
+
+// 					actions: [
+// 						IconButton(
+// 							icon: Icon(Icons.all_inclusive),
+
+// 							//NEW CODE: Toggling from light to dark theme and vice versa
+// 							onPressed: () {
+// 								setState(() {
+// 									currentTheme = currentTheme == AppThemes.light
+// 									? AppThemes.dark
+// 									: AppThemes.light;
+// 								});
+// 							},
+// 						)
+// 					]
+// 				),
+
+// 				body: BooksListing(),
+// 			),
+// 		);
+// 	}
+// }
+
+
+// List bookData() {
+// 	return [
+// 		{
+// 			'title': 'Book Title',
+// 			'authors': ['Author1', 'Author2'],
+// 			'image': "assets/images/image_pic.png",
+
+// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+// 		},
+
+// 		{
+// 			'title': 'Book Title 2',
+// 			'authors': ['Author1'],
+// 			'image': "assets/images/image_pic.png",
+
+// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+// 		},
+
+// 		{
+// 			'title': 'Book Title 3',
+// 			'authors': ['Author1'],
+// 			'image': "assets/images/image_pic.png",
+
+// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+// 		},
+
+// 		{
+// 			'title': 'Book Title 4',
+// 			'authors': ['Author1'],
+// 			'image': "assets/images/image_pic.png",
+
+// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+// 		},
+// 	];
+// }
+
+
+// class BooksListing extends StatelessWidget {
+// 	final booksListing = bookData();
+
+// 	@override
+// 	Widget build(BuildContext context) {
+// 		return Theme(
+
+// 			data: ThemeData(
+
+// 				cardColor: Colors.pinkAccent,
+
+// 				textTheme: TextTheme(
+// 					headline6: TextStyle(
+// 						fontFamily: 'Pangolin',
+
+// 						fontSize: 20,
+// 					),
+
+// 					bodyText2: Theme.of(context).copyWith(
+// 						textTheme: TextTheme(
+// 							bodyText2: TextStyle(
+// 								fontStyle: FontStyle.italic
+// 							),
+// 						),
+// 					).textTheme.bodyText2,
+// 				)
+// 			),
+
+
+// 			child: ListView.builder(
+// 				itemCount: booksListing == null ? 0 : booksListing.length,
+
+// 				itemBuilder: (context, index) {
+// 					return Card (
+						
+// 						shape: RoundedRectangleBorder(
+// 							borderRadius: BorderRadius.circular(10.0),
+// 						),
+
+// 						elevation: 5,
+
+// 						margin: EdgeInsets.all(10),
+
+// 						child: Padding(
+// 							padding: const EdgeInsets.only(left: 0, top: 0, right:16.0),
+
+// 							child: Row(
+// 								mainAxisAlignment: MainAxisAlignment.spaceBetween,
+								
+// 								children: [
+// 									Flexible(
+										
+// 										child: Padding(
+// 											padding: const EdgeInsets.all(16.0),
+
+
+// 											child: Column(
+
+// 												crossAxisAlignment: CrossAxisAlignment.start,
+
+// 												children: <Widget>[
+// 													Text(
+// 														'${booksListing[index]['title']}',
+
+// 														style: Theme.of(context).textTheme.headline6,
+// 													),
+
+// 													SizedBox(
+// 														height: 10,
+// 													),
+
+// 													Text(
+														
+// 														'${booksListing[index]['description']}',
+
+// 														textAlign: TextAlign.justify,
+														
+// 														style: TextStyle(
+// 															fontSize: 14, 
+															
+// 															fontWeight: FontWeight.bold
+// 														),
+// 													),
+
+// 													SizedBox(
+// 														height: 10,
+// 													),
+
+// 													booksListing[index]['authors'] != null
+// 														? Text(
+// 															'Author(s): ${booksListing[index]['authors'].join(", ")}',
+
+// 															style: TextStyle(fontSize: 14),
+// 														)
+
+// 														: Text(""),
+// 												],
+// 											),
+// 										),
+// 									),
+
+
+// 									booksListing[index]['image'] != null
+// 										? Container(
+// 											height: 200,
+// 											width: 250,
+
+// 											child: Image.asset(
+// 												booksListing[index]['image'],
+
+// 												fit: BoxFit.fill,
+// 											),
+// 										)
+
+// 										: Container(),
+
+// 								],
+// 							),
+// 						),				
+// 					);
+// 				}
+// 			),
+// 		);
+
+// 	}
+// }
+
+import 'package:flutter/material.dart';
+
+import 'themes.dart';
 
 enum AppThemes { light, dark }
 
-//StatefulWidget
-class FlutterThemeApp extends StatefulWidget {
-	@override
-	_FlutterThemeAppState createState() => _FlutterThemeAppState();
-}
+//Uncomment the line below to run from this file
+//void main() => runApp(BooksApp());
 
+//Showing book listing in ListView
+class FlutterThemeApp extends StatefulWidget {
+  @override
+  _FlutterThemeAppState createState() => _FlutterThemeAppState();
+}
 
 class _FlutterThemeAppState extends State<FlutterThemeApp> {
-	var currentTheme = AppThemes.light;
-	
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			debugShowCheckedModeBanner: false,
+  //NEW CODE
+  var currentTheme = AppThemes.light;
 
-			//NEW CODE: applying selected theme
-			theme: currentTheme == AppThemes.light ? defaultTheme : darkTheme,
-			
-			home: Scaffold(
-				appBar: AppBar(
-					leading: Icon(Icons.home),
-
-					title: Text("Books Listing"),
-
-					actions: [
-						IconButton(
-							icon: Icon(Icons.all_inclusive),
-
-							//NEW CODE: Toggling from light to dark theme and vice versa
-							onPressed: () {
-								setState(() {
-									currentTheme = currentTheme == AppThemes.light
-									? AppThemes.dark
-									: AppThemes.light;
-								});
-							},
-						)
-					]
-				),
-
-				body: BooksListing(),
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      //NEW CODE: applying selected theme
+      theme: currentTheme == AppThemes.light ? defaultTheme : darkTheme,
+      home: Scaffold(
+        appBar: AppBar(
+            leading: Icon(Icons.home),
+            title: Text("Books Listing"),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.all_inclusive),
+                //NEW CODE: Toggling from light to dark theme and vice versa
+                onPressed: () {
+                  setState(() {
+                    currentTheme = currentTheme == AppThemes.light
+                        ? AppThemes.dark
+                        : AppThemes.light;
+                  });
+                },
+              )
+            ]),
+        body: BooksListing(),
+      ),
+    );
+  }
 }
-
 
 List bookData() {
 	return [
@@ -813,108 +1025,70 @@ List bookData() {
 
 
 class BooksListing extends StatelessWidget {
-	final booksListing = bookData();
+  final booksListing = bookData();
 
-	@override
-	Widget build(BuildContext context) {
-		return Theme(
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: booksListing == null ? 0 : booksListing.length,
+      itemBuilder: (context, index) {
+        return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          elevation: 5,
+          margin: EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${booksListing[index]['title']}',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
 
-			data: ThemeData(
-
-				cardColor: Colors.pinkAccent,
-
-				textTheme: TextTheme(
-					headline6: TextStyle(
-						fontFamily: 'Pangolin',
-
-						fontSize: 20,
-					),
-
-					bodyText2: Theme.of(context).copyWith(
-						textTheme: TextTheme(
-							bodyText2: TextStyle(
-								fontStyle: FontStyle.italic
-							),
-						),
-					).textTheme.bodyText2,
-				)
-			),
-
-
-			child: ListView.builder(
-				itemCount: booksListing == null ? 0 : booksListing.length,
-
-				itemBuilder: (context, index) {
-					return Card (
-						
-						shape: RoundedRectangleBorder(
-							borderRadius: BorderRadius.circular(10.0),
-						),
-
-						elevation: 5,
-
-						margin: EdgeInsets.all(10),
-
-						child: Padding(
-							padding: const EdgeInsets.only(left: 0, top: 0, right:16.0),
-
-							child: Row(
-								mainAxisAlignment: MainAxisAlignment.spaceBetween,
-								
-								children: [
-									Flexible(
-										
-										child: Padding(
-											padding: const EdgeInsets.all(16.0),
-
-
-											child: Column(
-
-												crossAxisAlignment: CrossAxisAlignment.start,
-
-												children: <Widget>[
-													Text(
-														'${booksListing[index]['title']}',
-
-														style: Theme.of(context).textTheme.headline6,
-													),
-
-													SizedBox(
-														height: 10,
-													),
-
-													Text(
-														
-														'${booksListing[index]['description']}',
-
-														textAlign: TextAlign.justify,
-														
-														style: TextStyle(
-															fontSize: 14, 
-															
-															fontWeight: FontWeight.bold
-														),
-													),
-
-													SizedBox(
-														height: 10,
-													),
-
-													booksListing[index]['authors'] != null
-														? Text(
-															'Author(s): ${booksListing[index]['authors'].join(", ")}',
-
-															style: TextStyle(fontSize: 14),
-														)
-
-														: Text(""),
-												],
+                      	SizedBox(
+												height: 10,
 											),
-										),
-									),
 
 
-									booksListing[index]['image'] != null
+                      Text(
+												
+												'${booksListing[index]['description']}',
+
+												textAlign: TextAlign.justify,
+												
+												style: TextStyle(
+													fontSize: 14, 
+													
+													fontWeight: FontWeight.bold
+												),
+											),
+
+											SizedBox(
+												height: 10,
+											),
+
+
+                      booksListing[index]['authors'] != null
+                          ? Text(
+                              'Author(s): ${booksListing[index]['authors'].join(", ")}',
+                              style: TextStyle(fontSize: 14),
+                            )
+                          : Text(""),
+                    ],
+                  ),
+                ),
+
+
+                	booksListing[index]['image'] != null
 										? Container(
 											height: 200,
 											width: 250,
@@ -927,18 +1101,13 @@ class BooksListing extends StatelessWidget {
 										)
 
 										: Container(),
-
-								],
-							),
-						),				
-					);
-				}
-			),
-		);
-
-	}
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
-
-
 
 

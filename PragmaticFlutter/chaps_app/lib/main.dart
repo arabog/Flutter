@@ -19,9 +19,9 @@ import 'package:flutter/material.dart';
 
 // import 'user_interface9/user_interface.dart';
 
-// import 'flutter_themes10/flutter_themes.dart';
+import 'flutter_themes10/flutter_themes.dart';
 
-import 'persisting_data11/persisting_data.dart';
+// import 'persisting_data11/persisting_data.dart';
 
 
 
@@ -63,9 +63,9 @@ class MyApp extends StatelessWidget {
 			// home: ExpandedApp(),
 
 			// home: BookApp(),
-			// home: FlutterThemeApp(),
+			home: FlutterThemeApp(),
 
-			home: PersistingDataApp(),
+			// home: PersistingDataApp(),
 		);
 	}
 }
