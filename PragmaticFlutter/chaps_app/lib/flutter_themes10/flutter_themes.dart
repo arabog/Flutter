@@ -248,6 +248,85 @@ MaterialApp(
 );
 
 
+import 'package:flutter/material.dart';
+import 'themes.dart';
+
+class FlutterThemeApp extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
+
+			theme: defaultTheme,
+
+			home: Scaffold(
+				appBar: AppBar(
+					leading: Icon(Icons.home),
+
+					title: Center (
+						child: Text(
+							'Books Listing',
+
+							style: TextStyle(
+								fontFamily: 'Pangolin',
+
+								fontSize: 30,
+							),	
+						),
+					),
+				),
+
+				// body: BooksListing(),
+
+			),
+		);
+	}
+
+}
+
+
+LOCAL THEME
+The local theme is used to customize the theme of a part of the 
+screen rather than the whole app. The local theme is applied 
+by wrapping the target widget in the Theme widget and 
+providing the custom ThemeData for its `data` property
+
+Theme (
+	data: ThemeData(
+		//Implement custom theme here
+	),
+
+	//Theme is applied to TargetWidget
+	child: TargetWidget,
+);
+
+Card C olor
+The Card widget is wrapped as a child to the Theme (Theme class) 
+widget. This widget applies the theme to its descendant widget(s) 
+by assigning ThemeData to the `data` property of the Theme widget, 
+as shown in the code snippet below.
+The Card widget is assigned a pink color using the `cardColor` 
+property of `ThemeData`.
+
+Theme(
+	//ThemeData local to Card widget
+	data: ThemeData(
+		cardColor: Colors.pinkAccent,
+	),
+
+	child: ListView.builder(
+		itemCount: booksListing == null ? 0 : booksListing.length,
+
+		itemBuilder: (context, index) {
+			return Card(
+				...
+			);
+		},
+	),
+);
+
+
+
 
 pg 173
 
@@ -267,17 +346,20 @@ class FlutterThemeApp extends StatelessWidget {
 				appBar: AppBar(
 					leading: Icon(Icons.home),
 
-					title: Text(
-						'Books Listing',
-						style: TextStyle(
-							fontFamily: 'Pangolin',
+					title: Center (
+						child: Text(
+							'Books Listing',
 
-							fontSize: 30,
-						),	
+							style: TextStyle(
+								fontFamily: 'Pangolin',
+
+								fontSize: 30,
+							),	
+						),
 					),
 				),
 
-				// body: BooksListing(),
+				body: BooksListing(),
 
 			),
 		);
@@ -286,144 +368,166 @@ class FlutterThemeApp extends StatelessWidget {
 }
 
 
-// List bookData() {
-// 	return [
-// 		{
-// 			'title': 'Book Title',
-// 			'authors': ['Author1', 'Author2'],
-// 			'image': "assets/images/image_pic.png",
+List bookData() {
+	return [
+		{
+			'title': 'Book Title',
+			'authors': ['Author1', 'Author2'],
+			'image': "assets/images/image_pic.png",
 
-// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
-// 		},
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
 
-// 		{
-// 			'title': 'Book Title 2',
-// 			'authors': ['Author1'],
-// 			'image': "assets/images/image_pic.png",
+		{
+			'title': 'Book Title 2',
+			'authors': ['Author1'],
+			'image': "assets/images/image_pic.png",
 
-// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
-// 		},
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
 
-// 		{
-// 			'title': 'Book Title 3',
-// 			'authors': ['Author1'],
-// 			'image': "assets/images/image_pic.png",
+		{
+			'title': 'Book Title 3',
+			'authors': ['Author1'],
+			'image': "assets/images/image_pic.png",
 
-// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
-// 		},
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
 
-// 		{
-// 			'title': 'Book Title 4',
-// 			'authors': ['Author1'],
-// 			'image': "assets/images/image_pic.png",
+		{
+			'title': 'Book Title 4',
+			'authors': ['Author1'],
+			'image': "assets/images/image_pic.png",
 
-// 			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
-// 		},
-// 	];
-// }
-
-
-// class BooksListing extends StatelessWidget {
-// 	final booksListing = bookData();
-
-// 	@override
-// 	Widget build(BuildContext context) {
-// 		return ListView.builder(
-// 			itemCount: booksListing == null ? 0 : booksListing.length,
-
-// 			itemBuilder: (context, index) {
-// 				return Card (
-					
-// 					shape: RoundedRectangleBorder(
-// 						borderRadius: BorderRadius.circular(10.0),
-// 					),
-
-// 					elevation: 5,
-
-// 					margin: EdgeInsets.all(10),
-
-// 					child: Padding(
-// 						padding: const EdgeInsets.only(left: 0, top: 0, right:16.0),
-
-// 						child: Row(
-// 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
-							
-// 							children: [
-// 								Flexible(
-									
-// 									child: Padding(
-// 										padding: const EdgeInsets.all(16.0),
+			'description': "In this chapter, you learned to create the layout for the user interface for BooksApp. Flutter widgets introduced in previous chapters like Column, Row, Padding, Flexible, Image, ListView are used to implement the interface. The Card widget is used to display the book’s title and authors’ list. You briefly touched on to parse book information from JSON formatted data entries and build an interface to display book information.",
+		},
+	];
+}
 
 
-// 										child: Column(
+class BooksListing extends StatelessWidget {
+	final booksListing = bookData();
 
-// 											crossAxisAlignment: CrossAxisAlignment.start,
+	@override
+	Widget build(BuildContext context) {
+		return Theme(
+			data: ThemeData(
+				cardColor: Colors.pinkAccent,
 
-// 											children: <Widget>[
-// 												Text(
-// 													'${booksListing[index]['title']}',
+				textTheme: TextTheme(
+					headline6: TextStyle(
+						fontFamily: 'Pangolin',
 
-// 													style: TextStyle(
-// 														fontSize: 14, 
+						fontSize: 20,
+					),
+
+					bodyText2: Theme.of(context).copyWith(
+						textTheme: TextTheme(
+							bodyText2: TextStyle(fontStyle: FontStyle.italic),
+						),
+					).textTheme.bodyText2,
+				),
+			),
+
+
+			child: ListView.builder(
+				itemCount: booksListing == null ? 0 : booksListing.length,
+
+				itemBuilder: (context, index) {
+					return Card (
+						
+						shape: RoundedRectangleBorder(
+							borderRadius: BorderRadius.circular(10.0),
+						),
+
+						elevation: 5,
+
+						margin: EdgeInsets.all(10),
+
+						child: Padding(
+							padding: const EdgeInsets.only(left: 0, top: 0, right:16.0),
+
+							child: Row(
+								mainAxisAlignment: MainAxisAlignment.spaceBetween,
+								
+								children: [
+									Flexible(
+										
+										child: Padding(
+											padding: const EdgeInsets.all(16.0),
+
+
+											child: Column(
+
+												crossAxisAlignment: CrossAxisAlignment.start,
+
+												children: <Widget>[
+													Text(
+														'${booksListing[index]['title']}',
+
+														style: TextStyle(
+															fontSize: 14, 
+															
+															fontWeight: FontWeight.bold
+														),
+													),
+
+													SizedBox(
+														height: 10,
+													),
+
+													Text(
 														
-// 														fontWeight: FontWeight.bold
-// 													),
-// 												),
+														'${booksListing[index]['description']}',
 
-// 												SizedBox(
-// 													height: 10,
-// 												),
-
-// 												Text(
-													
-// 													'${booksListing[index]['description']}',
-
-// 													textAlign: TextAlign.justify,
-													
-// 													style: TextStyle(
-// 														fontSize: 14, 
+														textAlign: TextAlign.justify,
 														
-// 														fontWeight: FontWeight.bold
-// 													),
-// 												),
+														style: TextStyle(
+															fontSize: 14, 
+															
+															fontWeight: FontWeight.bold
+														),
+													),
 
-// 												SizedBox(
-// 													height: 10,
-// 												),
+													SizedBox(
+														height: 10,
+													),
 
-// 												booksListing[index]['authors'] != null
-// 													? Text(
-// 														'Author(s): ${booksListing[index]['authors'].join(", ")}',
+													booksListing[index]['authors'] != null
+														? Text(
+															'Author(s): ${booksListing[index]['authors'].join(", ")}',
 
-// 														style: TextStyle(fontSize: 14),
-// 													)
+															style: TextStyle(fontSize: 14),
+														)
 
-// 													: Text(""),
-// 											],
-// 										),
-// 									),
-// 								),
+														: Text(""),
+												],
+											),
+										),
+									),
 
 
-// 								booksListing[index]['image'] != null
-// 									? Container(
-// 										height: 200,
-// 										width: 250,
+									booksListing[index]['image'] != null
+										? Container(
+											height: 200,
+											width: 250,
 
-// 										child: Image.asset(
-// 											booksListing[index]['image'],
+											child: Image.asset(
+												booksListing[index]['image'],
 
-// 											fit: BoxFit.fill,
-// 										),
-// 									)
+												fit: BoxFit.fill,
+											),
+										)
 
-// 									: Container(),
+										: Container(),
 
-// 							],
-// 						),
-// 					),				
-// 				);
-// 			},
-// 		);
-// 	}
-// }
+								],
+							),
+						),				
+					);
+				}
+			),
+		);
+
+	}
+}
