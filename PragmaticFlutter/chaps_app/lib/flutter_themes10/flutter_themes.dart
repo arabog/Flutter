@@ -153,7 +153,7 @@ All global themes can be put in a file themes.dart to keep all themes
 together.
 
 
-theme.dart
+themes.dart
 import 'package:flutter/material.dart';
 
 //Themes definitions
@@ -194,8 +194,44 @@ ThemeData get darkTheme => ThemeData(
 	accentColor: Colors.yellowAccent,
 );
 
+Importing Themes
+The ‘themes.dart’ is imported to access the `defaultTheme` 
+from MaterialApp.
+
+import 'themes.dart'
+MaterialApp(
+	theme: defaultTheme,
+
+	home: Scaffold(
+		appBar: AppBar(
+			leading: Icon(Icons.home),
+			title: Text("Books Listing"),
+		),
+
+		body: BooksListing(),
+	),
+);
 
 
+USING CUSTOM FONTS
+Download Font
+The first step is to download the font that you want to use. 
+I have downloaded the Pangolin (Pangolin) font from Google Fonts. 
+Copy the ‘*.ttf’ file into the Flutter root project’s assets directory. 
+I have created a ‘font’ directory under ‘assets’ to keep the
+fonts-related files in one place.
+
+Configuration
+Once you have got a TTF file copied into the Flutter project, 
+it’s time to add it in the ‘pubspec.yaml’ configuration.
+```
+fonts:
+ - family: Pangolin
+  fonts:
+   - asset: assets/fonts/Pangolin-Regular.ttf
+
+
+pg 173
 
 */ 
 import 'package:flutter/material.dart';
