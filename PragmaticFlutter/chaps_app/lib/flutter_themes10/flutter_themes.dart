@@ -721,13 +721,6 @@ Light Theme
 The default selected theme is a light blue theme.The default theme 
 is defined as below in the ‘themes.dart’ file:
 
-
-
-
-
-
-pg 173
-
 */ 
 import 'package:flutter/material.dart';
 import 'themes.dart';
