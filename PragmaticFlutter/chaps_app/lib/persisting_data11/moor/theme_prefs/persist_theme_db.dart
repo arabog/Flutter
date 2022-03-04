@@ -1,7 +1,7 @@
 //Persisting selected theme using Database
 import 'package:flutter/material.dart';
 
-import './themes.dart';
+import 'themes.dart';
 import 'plugins/shared.dart';
 import 'theme_prefs.dart';
 

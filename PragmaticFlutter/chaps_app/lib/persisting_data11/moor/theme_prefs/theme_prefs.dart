@@ -47,14 +47,12 @@ class MyDatabase extends _$MyDatabase {
 	}
 
 	void activateTheme(AppThemes theme) {
-		ThemePref pref =
-		ThemePref(themeId: theme.index, themeName: theme.toString());
+		ThemePref pref = ThemePref(themeId: theme.index, themeName: theme.toString());
 
 		into(themePrefs).insert(pref);
 	}
 
-	void deactivateTheme(int i) =>
-		(delete(themePrefs)..where((t) => t.themeId.equals(i))).go();
+	void deactivateTheme(int i) => (delete(themePrefs)..where((t) => t.themeId.equals(i))).go();
 
 
 	// The stream will automatically emit new items whenever the 
