@@ -150,18 +150,7 @@ need to execute following command to generate sqlite bindings:
 
 flutter packages pub run build_runner build--delete-conflicting-outputs
 
-*/ 
 
-
-
-
-
-//Persisting selected theme using sharedPreference
-
-
-
-
-	
 import 'package:moor/moor.dart';
 import '../../flutter_themes10/themes.dart';
 part 'theme_prefs.g.dart';
@@ -186,7 +175,7 @@ class MyDatabase extends _$MyDatabase {
 	int get schemaVersion => 1;
 
 	// Keeping it simple reset the database whenever there's an update.
-	// Add light theme as default theme after first launch and
+	// Add light theme as default theme after first launch and upgrade
 	@override
 	MigrationStrategy get migration {
 		return MigrationStrategy(onCreate: (Migrator m) {
@@ -235,7 +224,79 @@ class MyDatabase extends _$MyDatabase {
 }
 
 
+Cross -Platform Database Implementation ( s )
+Different platforms have different implementations for databases. 
+We need to create a shared code that can pull in the correct database 
+implementation for a given platform. We’ll create one file to write 
+shared code, say shared.dart. This file is responsible for picking 
+the platform-specific database implementation.
+
+File: shared.dart
+export 'unsupported.dart'
+	if (dart.library.html) 'web.dart'
+	if (dart.library.io) 'native.dart';
+
+When the Flutter application is running on Android, iOS, desktop 
+(Linux/Windows/MacOS) platforms, mobile.dart implementation 
+is picked. For Flutter Web, web.dart is chosen by the platform. 
+The unsupported.dart implementation is picked for everything else.
+
+File: native.dart
+```
+import 'dart:io';
+import 'package:moor/ffi.dart';
+import 'package:moor/moor.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart' as paths;
+import '../theme_prefs.dart';
+
+//Note: Implementation borrowed from template project: 
+// https://github.com/appleeducate/moor_shared
+
+MyDatabase constructDb({bool logStatements = false}) {
+	if (Platform.isIOS || Platform.isAndroid) {
+		final executor = LazyDatabase(() async {
+			final dataDir = await paths.getApplicationDocumentsDirectory();
+			
+			final dbFile = File(p.join(dataDir.path, 'db.sqlite'));
+			
+			return VmDatabase(dbFile, logStatements: logStatements);
+		});
+
+		return MyDatabase(executor);
+	}
+
+
+	if (Platform.isMacOS || Platform.isLinux) {
+		final file = File('db.sqlite');
+		return MyDatabase(VmDatabase(file, logStatements: logStatements));
+	}
+
+	if (Platform.isWindows) {
+		final file = File('db.sqlite');
+
+		return MyDatabase(VmDatabase(file, logStatements: logStatements));
+	}
+
+	return MyDatabase(VmDatabase.memory(logStatements: logStatements));
+}
+
+File: web.dart
+import 'package:moor/moor_web.dart';
+import '../theme_prefs.dart';
+
+MyDatabase constructDb({bool logStatements = false}) {
+	return MyDatabase(WebDatabase('db', logStatements:logStatements));
+}
+
+File: unsupported.dart
+import '../theme_prefs.dart';
+MyDatabase constructDb({bool logStatements = false}) {
+	throw 'Platform not supported';
+}
+
+
+*/ 
 
 // continue from 175
 
-*/ 

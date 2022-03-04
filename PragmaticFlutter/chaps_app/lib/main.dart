@@ -23,7 +23,7 @@ import 'package:flutter/material.dart';
 
 // import 'persisting_data11/persisting_data.dart';
 
-import 'persisting_data11/moor/moor_persisting_data.dart';
+import 'persisting_data11/moor/theme_prefs/persist_theme_db.dart';
 
 
 void main() {
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
 
 			// home: PersistingDataApp(),
 
-			home: MoorDataApp(),
+			home: MoorBooksApp(),
 		);
 	}
 }
