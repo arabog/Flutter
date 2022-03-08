@@ -201,46 +201,67 @@ provided by API, along with a dividing gray line as the separator.
 
 
 ANATOMY OF CUSTOM LIST ENTRY WIDGET
-Let’s first understand the structure of the custom
-list entry widget. The custom list entry widget is built using the following primitive Flutter
-widgets:
-• Card Widget
-• Padding Widget
-• Row Widget
-• Flexible Widget
-• Column Widget
-• Text Widget
-• Image Widget
-Since image, title, and overview text are aligned vertically, we can use the Column widget.
+Let’s first understand the structure of the custom list entry widget. 
+The custom list entry widget is built using the following primitive 
+Flutter widgets:
+	• Card Widget
+	• Padding Widget
+	• Row Widget
+	• Flexible Widget
+	• Column Widget
+	• Text Widget
+	• Image Widget
+
+Since image, title, and overview text are aligned vertically, we 
+can use the Column widget.
+
+
+BookTile Stateless Widget
+The BookTile widget can be a Stateless widget since it creates 
+a part of the interface and doesn’t change its state afterward. 
+Create a file booktile.dart to hold stateless BookTile widget 
+class. The variable `final book` holds the current
+book information passed from the ListView.builder() constructor.
+
 import 'package:flutter/material.dart';
-class BookTile extends StatelessWidget { final book;
-const BookTile({Key key, this.book}) : super(key: key);
-@override
-Widget build(BuildContext context) {
-//Card widget
-//Card's child is Padding
-//Padding's child is Row
-//Row's children are Flexible and Image
-//Flexible's child is Column//Column's children are two Text widgets
-child: Padding(
-child: Row(
-children: [
-Flexible(
-child: Column(
-children: <Widget>[
-Text(),
-Text(),
-],
-),
-),
-Image.network()
-],
-),
-),
-);
+
+class BookTile extends StatelessWidget { 
+	final book;
+	const BookTile({Key key, this.book}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		//Card widget
+		//Card's child is Padding
+		//Padding's child is Row
+		//Row's children are Flexible and Image
+		//Flexible's child is Column
+		//Column's children are two Text widgets
+		
+		return Card(
+			child: Padding(
+				child: Row(
+					children: [
+						Flexible(
+							child: Column(
+								children: <Widget>[
+									Text(),
+									
+									Text(),
+								],
+							),
+						),
+
+						Image.network()
+					],
+				),
+			),
+		);
+	}
 }
-}
-return Card(
+
+
+
 Card wiDget
 The Card Widget (Card class) creates a Material Design Card (Cards). It’s a useful
 widget to show related information together. Since we want to display title, authors, and
