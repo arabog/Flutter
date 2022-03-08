@@ -293,18 +293,21 @@ models to better manage code.
 
 import 'package:flutter/material.dart'; 
 import 'package:http/http.dart' as http; 
-import '../config.dart'; 
+// import '../config.dart'; 
 
 //Making HTTP request 
 Future<String> makeHttpCall() async { 
-	final apiKey = "$YOUR_API_KEY"; 
-	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python"; 
+	final apiKey = "AIzaSyDia0hBKqs0Rd6gDc7zx1qUqF0NGjkzkPU"; 
+
+	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding";
 
 	final http.Response response =
-	await http.get(apiEndpoint, headers: {'Accept': 'application/json'});
+		await http.get(
+			Uri.parse(apiEndpoint), 
+			
+			headers: {'Accept': 'application/json'}
+		);
 	
-	 //This will print `flutter: Instance of 'Response'` on console. 
-	print(response); 
 	return response.body; 
 }
 
