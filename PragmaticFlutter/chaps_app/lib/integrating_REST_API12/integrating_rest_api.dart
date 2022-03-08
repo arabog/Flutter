@@ -39,23 +39,35 @@ a variable `apiKey` to store the API key to access the Google Books API.
 final apiKey = "YOUR_API_KEY";
 
 API ENDPOINT
-An endpoint is a place where the resource lives and where an API sends requests to.
-Usually, an endpoint is a URL of the service
-maKe httP RequeSt
-At this point, you’re ready to make a REST API call to fetch book listing from your
-Flutter app. Let’s check out the code to make an HTTP call to Google Books API. The
-package http imported earlier is used to make the HTTP request in the code snippet below.
-Let’s create a function `m a keHttpCall()` to make such calls. The `http.get(...)` method
-returns a `Future` object. That’s why it must be called from an `async` function. This is thereason to mark `m a keHttpCall()` function with `async` keyword. The await keyword is
-used to make network calls asynchronously without blocking the main thread. The
-following code returns the API response of the HtttpResponse (HttpResponse class) type.
-It will print this text on the console: `flutter: Instance of 'Response'`.
-//Making HTTP request
-Future<String> makeHttpCall() async { final apiKey = "$YOUR_API_KEY";
-final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=pyt
-hon+programming"; final http.Response response =
-await http.get(apiEndpoint, headers:
-{'Accept': 'application/json'});
+An endpoint is a place where the resource lives and where an API sends 
+requests to. Usually, an endpoint is a URL of the service
+
+Make http Request
+At this point, you’re ready to make a REST API call to fetch book listing 
+from your Flutter app. Let’s check out the code to make an HTTP call to 
+Google Books API. The package http imported earlier is used to make the 
+HTTP request in the code snippet below.
+
+Let’s create a function `makeHttpCall()` to make such calls. The 
+`http.get(...)` method returns a `Future` object. That’s why it must be 
+called from an `async` function. This is the reason to mark `makeHttpCall()` 
+function with `async` keyword. The await keyword is used to make network 
+calls asynchronously without blocking the main thread. 
+
+The following code returns the API response of the HtttpResponse 
+(HttpResponse class) type. It will print this text on the console: `
+flutter: Instance of 'Response'`.
+
+Making HTTP request
+Future<String> makeHttpCall() async { 
+	final apiKey = "$YOUR_API_KEY";
+	
+	final apiEndpoint = 
+	"https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+programming"; 
+
+	final http.Response response =
+		await http.get(apiEndpoint, headers: {'Accept': 'application/json'});
+		
 //This will print 'flutter: Instance of 'Response'' on console.
 print(response);
 return response.body; }
