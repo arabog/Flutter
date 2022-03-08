@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class BookTile extends StatelessWidget { 
 	final book;
+	
 	const BookTile({Key key, this.book}) : super(key: key);
 
 	@override

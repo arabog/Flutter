@@ -227,6 +227,7 @@ import 'package:flutter/material.dart';
 
 class BookTile extends StatelessWidget { 
 	final book;
+
 	const BookTile({Key key, this.book}) : super(key: key);
 
 	@override
@@ -246,7 +247,7 @@ class BookTile extends StatelessWidget {
 							child: Column(
 								children: <Widget>[
 									Text(),
-									
+
 									Text(),
 								],
 							),
@@ -262,29 +263,48 @@ class BookTile extends StatelessWidget {
 
 
 
-Card wiDget
-The Card Widget (Card class) creates a Material Design Card (Cards). It’s a useful
-widget to show related information together. Since we want to display title, authors, and
-image related to one book item, it makes sense to Card widget as a list entry. It has
+Card Widget
+The Card Widget (Card class) creates a Material Design Card 
+(Cards). It’s a useful widget to show related information together. 
+Since we want to display title, authors, and image related to one 
+book item, it makes sense to use Card widget as a list entry. It has
 slightly rounded corners and shadows that we can tweak.
-The RoundedRectangleBorder for the shape attribute is used to assign a rounded corner
-shape to the Card widget. The elevation can be adjusted using the elevation property. The
-margin property is used to give spacing around the Card widget. The Padding widget was
-added as its child.
+
+The RoundedRectangleBorder for the shape attribute is used to 
+assign a rounded corner shape to the Card widget. 
+
+The elevation can be adjusted using the elevation property. 
+
+The margin property is used to give spacing around the Card widget. 
+
+The Padding widget was added as its child.
+
 Card(
-shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10.0), ),
-elevation: 5,
-margin: EdgeInsets.all(10), child: Padding(...),
+	shape: RoundedRectangleBorder( 
+		borderRadius: BorderRadius.circular(10.0), 
+	),
+
+	elevation: 5,
+
+	margin: EdgeInsets.all(10), 
+	
+	child: Padding(...),
 )
-Padding wiDget
-We want little space between the Card widget edges and Row widget. We can achieve
-this padding around the Row widget using Padding Widget. The Padding widget is used
-to give padding around the Row widget.
+
+
+Padding Widget
+We want little space between the Card widget edges and Row widget. 
+The Padding widget is used to give padding around the Row widget.
+
 Padding(
-padding: const EdgeInsets.all(8.0),
-child: Row(),
+	padding: const EdgeInsets.all(8.0),
+
+	child: Row(),
 )
-Row widgetThe Row widget (Row class) aligns its children in a horizontal direction. Row widget is
+
+Row WIDGET
+The Row widget (Row class) aligns its children in a horizontal direction. 
+Row widget is
 used to display the title and author text to the left side of the screen and the book’s cover
 page image to the right side. The mainAxisAlignment property tells Row how to place its
 children widgets in the available space. The MainAxisAlignment. spaceBetween helps to
