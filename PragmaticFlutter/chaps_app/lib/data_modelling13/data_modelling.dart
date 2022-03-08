@@ -126,21 +126,34 @@ fetchBooks() async {
 }
 
 
-The items property in the JSON response above holds the list of books as JSON objects.
-The response is assigned to the results returned from the makeHttpCall()function. The
-booksListing is assigned to the response["items"] returned from the API. Since the
-response variable stores the JSON response above, response["items"] would give the
-list of books as a list of JSON objects. We will use this list of JSON objects to retrieve the
-book information and eventually render it in Flutter applications. Note: The
-response["items"] returns a list of LinkedHashMap as List<dynamic>. LinkedHashMap
-(LinkedHashMap<K, V> class) is a Hashtable implementation of the Map. The
-LinkedHashMap preserves the insertion order of keys. Each JSON object of this list
-contains the book information that needs to be displayed in each row of the app’s books list.
-In our app, we’re interested in displaying the title, authors, and thumbnail image of the book.
-We can use the following attributes from the above JSON object(s) to get that information. •
-volumeInfo->title: title of the book. • volumeInfo->description: description of the book •
-volumeInfo->imageLinks->thumbnail: Link to thumbnail image of the book’s cover page. Now
-that we know how to fetch and access information about the book listing, let’s start building
+The items property in the JSON response above holds the list 
+of books as JSON objects. The response is assigned to the results 
+returned from the makeHttpCall()function. The booksListing is 
+assigned to the response["items"] returned from the API. 
+
+Since the response variable stores the JSON response above, 
+response["items"] would give the list of books as a list of JSON 
+objects. We will use this list of JSON objects to retrieve the
+book information and eventually render it in Flutter applications. 
+
+Note: The response["items"] returns a list of LinkedHashMap as 
+List<dynamic>. LinkedHashMap (LinkedHashMap<K, V> class) i
+s a Hashtable implementation of the Map. The LinkedHashMap 
+preserves the insertion order of keys. 
+
+Each JSON object of this list contains the book information that 
+needs to be displayed in each row of the app’s books list.
+
+In our app, we’re interested in displaying the title, authors, and 
+thumbnail image of the book. We can use the following attributes 
+from the above JSON object(s) to get that information. •
+	• volumeInfo->title: title of the book. 
+	• volumeInfo->description: description of the book 
+	• volumeInfo->imageLinks->thumbnail: Link to thumbnail image 
+		of the book’s cover page. 
+
+
+Now that we know how to fetch and access information about the book listing, let’s start building
 the interface.
 ListView WIDGET:
 LISTING ENTRIES In the previous chapter (Chapter 12: Integrating REST API), a big blob
