@@ -153,32 +153,48 @@ from the above JSON object(s) to get that information. •
 		of the book’s cover page. 
 
 
-Now that we know how to fetch and access information about the book listing, let’s start building
-the interface.
-ListView WIDGET:
-LISTING ENTRIES In the previous chapter (Chapter 12: Integrating REST API), a big blob
-of API responses was displayed on the main screen. In this section, you’ll see how
-to display each book entry in its own row using the ListView (ListView class) Flutter
-widget.ListView wiDget
-The ListView widget is used for laying out its children in a scrolling manner. One way to
-build a ListView widget is to use ListView.builder. It has two main properties: • itemCount:
-This property includes the number of items to be displayed in ListView. • itemBuilder:
-This property takes an anonymous function with two parameters (context, index) to render
-each row of the list. The index keeps track of the number of the item in the list. A
-BuildContext (BuildContext class) is like the handle to the location of a widget in the widget
-tree.
-We saw earlier that `booksListing = response["items"];` holds the entries of the books
-returned as the API response. The ListView.builder(...) creates a scrollable, linear array of
-book item widgets that can be created on-demand. We’ll be creating a BookTile widget to
-encapsulate the book item widget. This BookTile widget takes the current item from the
-booksListing and passes on book information for rendering in the list.
+Now that we know how to fetch and access information about the book 
+listing, let’s start building the interface.
+
+
+ListView WIDGET: LISTING ENTRIES 
+In the previous chapter, a big blob of API responses was displayed 
+on the main screen. In this section, you’ll see how to display each 
+book entry in its own row using the ListView (ListView class) Flutter
+widget.
+
+ListView WIDGET
+The ListView widget is used for laying out its children in a scrolling 
+manner. One way to build a ListView widget is to use ListView.builder. 
+It has two main properties: 
+	• itemCount: This property includes the number of items to be 
+	displayed in ListView. 
+	• itemBuilder: This property takes an anonymous function with 
+	two parameters (context, index) to render each row of the list. 
+	The index keeps track of the number of the item in the list. 
+	
+A BuildContext (BuildContext class) is like the handle to the 
+location of a widget in the widget tree.
+
+We saw earlier that `booksListing = response["items"];` holds the 
+entries of the books returned as the API response. 
+The ListView.builder(...) creates a scrollable, linear array of book 
+item widgets that can be created on-demand. We’ll be creating a 
+BookTile widget to encapsulate the book item widget. This BookTile 
+widget takes the current item from the booksListing and passes on 
+book information for rendering in the list.
+
 ListView.builder(
-itemCount: booksListing == null? 0 : booksListing.length,
-itemBuilder: (context, index) {
-//current book information passed on to BookTile
-return BookTile(book: booksListing[index]); }, ),
-CUSTOM WIDGET:
-BookTile
+	itemCount: booksListing == null ? 0 : booksListing.length,
+
+	itemBuilder: (context, index) {
+		//current book information passed on to BookTile
+		return BookTile(book: booksListing[index]); 
+	}, 
+),
+
+
+CUSTOM WIDGET: BookTile
 The BookTile widget is used to show each entry in the book listing. It consists of the book
 title, authors, and cover image information provided by API, along with a dividing gray line as
 the separator
