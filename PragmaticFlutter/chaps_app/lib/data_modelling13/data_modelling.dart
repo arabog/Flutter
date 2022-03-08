@@ -581,49 +581,30 @@ class _BooksListingState extends State<BooksListing> {
 
 
 CONSTRUCTING DATA MODEL
-In this section, you’ll learn to create a data model object from a JSON formatted API
-response. We will create a BookModel Dart class to parse the JSON response returned
-from API. BookModel class will have members for each of the response["items"] JSON
-attributes returned as API response.
-ReviSiting booKS aPi ReSPonSe StRuctuRe
-The JSON response returned from Books API looks like a huge blob of string. It could be
-hard to access the attributes by calling their names every time from code. A spelling mistake
-can make debugging very hard. To avoid this problem, it makes sense to create a Dart
-object mapped to the response. We iwill call this class BookModel. Earlier, if you would want
-to access the ‘title’ of the book, you had to access it as
-response["items"]["volumeInfo"]["title"]. After mapping data to the BookModel class, you
-can access ‘title’ as bookModelObj.volumeInfo.title and so on.
-{
-"items": [ {
-"volumeInfo": {
-"title": "Learning Python",
-"subtitle": "Powerful
-Object-Oriented Programming",
-"authors": [
-"Mark Lutz"
-],
-"publisher":
-"\"O'Reilly Media, Inc.\"",
-"publishedDate": "2013-06-12",
-"description": "Get a
-comprehensive, in-depth introduction to the core Python language with this hands-on book.",
-"imageLinks": {
-"smallThumbnail": "http://books.google.com/books/
-content?id=4pgQfXQvekcC&printsec=frontcover&img=1&zoom=5&edge=
-curl&source=gbs_api",
-"thumbnail": "http://books.google.com/books/content?
-id=4pgQfXQvekcC&printsec=frontcover&img=1&zoom=1&edge= curl&source=gbs_api"
-}
-},
-"saleInfo": {
-"saleability": "FOR_SALE",
-"buyLink": "https://play.google.com/store/books/detail
-s?id=4pgQfXQvekcC&rdid=book-4pgQfXQvekcC&rdot=1&source=gbs_ api"
-},"accessInfo": {
-"webReaderLink": "http://play.google.com/books/reader?
-id=4pgQfXQvekcC&hl=&printsec=frontcover&source=gbs_api"
-} } ] }
-conStRucting BookModel
+In this section, you’ll learn to create a data model object from a 
+JSON formatted API response. We will create a BookModel Dart 
+class to parse the JSON response returned from API. 
+
+BookModel class will have members for each of the response["items"] 
+JSON attributes returned as API response.
+
+REVISITING BOOKS API RESPONSE STRUCTURE
+The JSON response returned from Books API looks like a huge 
+blob of string. It could be hard to access the attributes by calling 
+their names every time from code. A spelling mistake can make 
+debugging very hard. To avoid this problem, it makes sense to create 
+a Dart object mapped to the response. 
+
+We will call this class BookModel. 
+
+Earlier, if you would want to access the ‘title’ of the book, you had 
+to access it as response["items"]["volumeInfo"]["title"]. 
+
+After mapping data to the BookModel class, you can access ‘title’ 
+as bookModelObj.volumeInfo.title and so on.
+
+
+CONSTRUCTING BookModel
 Let’s create a BookModel class to hold the API movie listing data set. The BookModel
 class will have members for each attribute of the JSON response. the
 BookModel.fromJson(...) The BookModel.fromJson(Map<String, dynamic> json) takes a
@@ -797,3 +778,92 @@ return BookTile(bookModelObj: booksListing[index]);
 }
 
 */ 
+
+// FINISHED CODE (PART 1):
+import 'dart:convert'; 
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http; 
+import './booktile.dart';
+
+// import '../../config.dart'; 
+
+//Showing book listing in ListView 
+class BooksApp extends StatelessWidget { 
+	@override 
+	Widget build(BuildContext context) { 
+		return MaterialApp(
+		debugShowCheckedModeBanner: false,
+
+		home: BooksListing(), ); 
+	} 
+}
+
+
+//Making HTTP request 
+//Function to make REST APIcall 
+Future<dynamic> makeHttpCall() async {
+	 //API Key: To be replaced with your key 
+	final apiKey = "AIzaSyDia0hBKqs0Rd6gDc7zx1qUqF0NGjkzkPU"; 
+
+
+	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
+
+	final http.Response response = await http.get(
+		Uri.parse(apiEndpoint),
+		
+		headers: {'Accept': 'application/ json'}
+	); 
+	
+	//Parsing API's HttpResponse to JSON format 
+	//Converting string response body to JSON representation 
+	final jsonObject = json.decode(response.body); 
+
+	print(jsonObject);
+
+	return jsonObject; 
+} 
+
+
+class BooksListing extends StatefulWidget {
+	@override 
+	_BooksListingState createState() => _BooksListingState(); 
+} 
+
+
+class _BooksListingState extends State<BooksListing> { 
+	var booksListing; 
+	
+	fetchBooks() async {
+		var response = await makeHttpCall(); 
+
+		setState(() {
+			booksListing = response["items"];
+		});
+	} 
+
+	@override 
+	void initState() { 
+		super.initState(); 
+		
+		fetchBooks(); 
+	} 
+	
+	@override 
+	Widget build(BuildContext context) { 
+		return Scaffold(
+			appBar: AppBar(
+				title: Text("Books Listing"),
+			),
+
+			body: ListView.builder(
+				itemCount: booksListing == null ? 0 : booksListing.length,
+
+				itemBuilder: (context, index) {
+					return BookTile(book: booksListing[index]);
+				},
+				
+			), 
+		); 
+	} 
+}
