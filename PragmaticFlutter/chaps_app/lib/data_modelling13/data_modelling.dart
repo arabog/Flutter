@@ -424,81 +424,154 @@ book['volumeInfo']['imageLinks']['thumbnail'] != null
 	: Container(),
 
 
-FiniSheD coDe (PaRt 1): BookTile wiDget
-import 'package:flutter/material.dart'; class BookTile extends StatelessWidget { final book;
-const BookTile({Key key, this.book}) : super(key: key); @override Widget
-build(BuildContext context) { return Card(
-shape: RoundedRectangleBorder(
-borderRadius: BorderRadius.circular(10.0),
-),
-elevation: 5,
-margin:
-EdgeInsets.all(10),
-child: Padding(
-padding: const EdgeInsets.all(8.0),
-child:
-Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
-children: [
-Flexible(
-child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-children: <Widget>[
-Text(
-'${book['volumeInfo']['title']}',
-style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-),
-book['volumeInfo']['authors'] != null
-? Text(
-'Author(s):
-${book['volumeInfo']['authors'].join(", ")}',
-style: TextStyle(fontSize: 14),
-)
-: Text(""),
-],
-),
-),
-book['volumeInfo']['imageLinks']['thumbnail'] != null
-book['volumeInfo']['imageLinks'] ['thumbnail'],
-],
-),
-),
-? Image.network(
-); }
-FiniSheD coDe (PaRt 1): main methoD
-//importing the Dart package import 'dart:convert'; import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; import
-'package:pragmatic_flutter/chapter15/part1/booktile. dart'; import '../../config.dart'; //Showing
-book listing in ListView class BooksApp extends StatelessWidget { @override Widget
-build(BuildContext context) { return MaterialApp(
-debugShowCheckedModeBanner:
-false,
-home: BooksListing(), ); } } //Making HTTP request //Function to make REST APIcall Future<dynamic> makeHttpCall() async { //API Key: To be replaced with your key final
+FINISHED CODE (PART 1): MAIN METHOT
+import 'package:flutter/material.dart'; 
+
+
+class BookTile extends StatelessWidget { 
+	final book;
+
+	const BookTile({Key key, this.book}) : super(key: key); 
+
+	@override 
+	Widget build(BuildContext context) { 
+		return Card(
+			shape: RoundedRectangleBorder(
+				borderRadius: BorderRadius.circular(10.0),
+			),
+
+			elevation: 5,
+
+			margin: EdgeInsets.all(10),
+
+			child: Padding(
+				padding: const EdgeInsets.all(8.0),
+
+				child: Row(
+					mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+					children: [
+						Flexible(
+							child: Column(
+								crossAxisAlignment: CrossAxisAlignment.start,
+									
+								children: <Widget>[
+									Text(
+										'${book['volumeInfo']['title']}',
+										
+										style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+									),
+
+									book['volumeInfo']['authors'] != null
+										? Text(
+											'Author(s): ${book['volumeInfo']['authors'].join(", ")}',
+
+											style: TextStyle(fontSize: 14),
+										)
+
+									: Text(""),
+								],
+							),
+						),
+
+						book['volumeInfo']['imageLinks']['thumbnail'] != null
+							? Image.network (
+								book['volumeInfo']['imageLinks'] ['thumbnail'],
+
+								fit: BoxFit.fill,
+							)
+							: Container(),
+					],
+				),
+			),
+		),
+	}
+}
+
+
+FINISHED CODE (PART 1): MAIN METHOD
+//importing the Dart package 
+import 'dart:convert'; 
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http; 
+import './booktile. dart'; 
+
+// import '../../config.dart'; 
+
+//Showing book listing in ListView 
+class BooksApp extends StatelessWidget { 
+	@override 
+	Widget build(BuildContext context) { 
+		return MaterialApp(
+debugShowCheckedModeBanner: false,
+home: BooksListing(), ); } }
+
+//Making HTTP request 
+//Function to make REST APIcall 
+Future<dynamic> makeHttpCall() async {
+	 //API Key: To be replaced with your key final
 apiKey = "$YOUR_API_KEY";
-final apiEndpoint = "https://www.googleapis.com/books/v1
-/volumes?key=$apiKey&q=python+coding"; final http.Response response = await
-http.get(apiEndpoint, headers: {'Accept': 'application/ json'}); //Parsing API's HttpResponse
-to JSON format //Converting string response body to JSON representation final jsonObject
-= json.decode(response.body); //Prints JSON formatted response on console
-print(jsonObject); return jsonObject; } class BooksListing extends StatefulWidget {
-@override _BooksListingState createState() => _BooksListingState(); } class
-_BooksListingState extends State<BooksListing> { var booksListing; fetchBooks() async {
-var response = await makeHttpCall(); setState(() {
+
+final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
+
+final http.Response response = await http.get(
+	apiEndpoint, 
+	
+	headers: {'Accept': 'application/ json'}
+	); 
+	
+	//Parsing API's HttpResponse to JSON format 
+
+//Converting string response body to JSON representation 
+final jsonObject
+= json.decode(response.body); 
+
+//Prints JSON formatted response on console
+print(jsonObject); 
+return jsonObject; 
+} 
+
+
+class BooksListing extends StatefulWidget {
+@override 
+_BooksListingState createState() => _BooksListingState(); 
+} 
+
+class _BooksListingState extends State<BooksListing> { 
+	var booksListing; 
+	
+	fetchBooks() async {
+var response = await makeHttpCall(); 
+
+setState(() {
 booksListing = response["items"];
-}); } @override void initState() { super.initState(); fetchBooks(); } @override Widget
-build(BuildContext context) { return Scaffold(
+}); } 
+
+@override 
+void initState() { 
+	super.initState(); fetchBooks(); 
+	} 
+	
+	@override 
+	Widget build(BuildContext context) { 
+		return Scaffold(
 appBar: AppBar(
 title: Text("Books
 Listing"),
 ),
+
 body: ListView.builder(
-itemCount: booksListing == null? 0 :
-booksListing. length,
+itemCount: booksListing == null ? 0 : booksListing. length,
+
 itemBuilder: (context, index) {
-return BookTile(book:
-booksListing[index]);
+	return BookTile(book:
+	
+	booksListing[index]);
 },
 ), ); } }
+
+
 CONSTRUCTING DATA MODEL
 In this section, you’ll learn to create a data model object from a JSON formatted API
 response. We will create a BookModel Dart class to parse the JSON response returned
