@@ -195,10 +195,13 @@ ListView.builder(
 
 
 CUSTOM WIDGET: BookTile
-The BookTile widget is used to show each entry in the book listing. It consists of the book
-title, authors, and cover image information provided by API, along with a dividing gray line as
-the separator
-anatomy oF cuStom liSt entRy wiDget Let’s first understand the structure of the custom
+The BookTile widget is used to show each entry in the book listing. 
+It consists of the book title, authors, and cover image information 
+provided by API, along with a dividing gray line as the separator.
+
+
+ANATOMY OF CUSTOM LIST ENTRY WIDGET
+Let’s first understand the structure of the custom
 list entry widget. The custom list entry widget is built using the following primitive Flutter
 widgets:
 • Card Widget
