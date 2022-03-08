@@ -50,8 +50,8 @@ Future<dynamic> makeHttpCall() async {
 	//Converting string response body to JSON representation
 	final jsonObject = json.decode(response.body); 
 
-	//Prints JSON formatted response on
-	console print(jsonObject); 
+	//Prints JSON formatted response on console 
+	print(jsonObject); 
 	
 	return jsonObject; 
 }
@@ -59,45 +59,73 @@ Future<dynamic> makeHttpCall() async {
 
 The print(jsonObject) function prints the JSON object on the console.
 We need only some parts of the book information to show in the BooksApp.
-JSon FoRmatteD ReSPonSe
-The jsonObject is a JSON encoded response from API. The JSON returned from the API
-looks like below. The JSON object consists of items key to hold an array of book
-information. The API returns about ten items at one time by default. I have omitted a few
-attributes to simplify the structure. Each book or item contains the following attributes/keys
-returned from API:
-• volumeInfo
-• title: Book’s title.
-• subtitle: Book’s subtitle.• authors: Book’s authors.
-• publisher: Book’s publisher.
-• publishedDate: Publication date.
-• description: Book description.
-• imageLinks– smallThumbnail: Link to smaller sized thumbnail.– thumbnail: Link to
-thumbnail for book image.
-• saleInfo– saleability: Information whether a book is available for sale or not.– buyLink:
-Link to smaller sized thumbnail.
-• accessInfo– webReaderLink: Link to read the text in the browser.
-JSON data structure is shown below for one book entry.
-{
-"items": [
-{
-"volumeInfo": {
-"title": "Learning Python", Pragmatic Flutter
-"subtitle": "Powerful Object-Oriented
-Programming",
-"authors": [
-"Mark Lutz"
-],
-"publisher": "\"O'Reilly Media,
-Inc.\"",
-"publishedDate": "2013-06-12",
-"description": "Get a comprehensive,
-in-depth
-Let’s re-examine the fetchBooks() method of _ BooksListingState class in the previous
-chapter (Chapter 12: Integrating REST API).
+
+
+JSON FORMATTED RESPONSE
+The jsonObject is a JSON encoded response from API. The 
+JSON returned from the API looks like below. 
+
+The JSON object consists of items key to hold an array of book
+information. The API returns about ten items at one time by default. 
+I have omitted a few attributes to simplify the structure. Each book 
+or item contains the following attributes/keys returned from API:
+	• volumeInfo
+	• title: Book’s title.
+	• subtitle: Book’s subtitle.• authors: Book’s authors.
+	• publisher: Book’s publisher.
+	• publishedDate: Publication date.
+	• description: Book description.
+	• imageLinks
+		– smallThumbnail: Link to smaller sized thumbnail.
+		– thumbnail: Link to thumbnail for book image.
+
+	• saleInfo
+		– saleability: Information whether a book is available for sale or not.
+		– buyLink: Link to smaller sized thumbnail.
+
+	• accessInfo
+		– webReaderLink: Link to read the text in the browser.
+	
+	JSON data structure is shown below for one book entry.
+	{
+		"items": [
+			{
+				"volumeInfo": {
+					"title": "Learning Python", 
+					"subtitle": "Powerful Object-Oriented Programming",
+					"authors": [
+						"Mark Lutz"
+					],
+					"publisher": "\"O'Reilly Media,
+					Inc.\"",
+					"publishedDate": "2013-06-12",
+					"description": "Get a comprehensive, in-depth ....,
+				},
+
+				"saleInfo": {
+					"saleability": "FOR_SALE",
+
+					"buyLink": "https://play.google.com/store/books/details?id=4pgQfXQvekcC&rdid=book-4pgQfXQvekcC&rdot=1&source=gbs_api"
+				},
+			}
+		]
+	}
+
+
+
+Let’s re-examine the fetchBooks() method of _ BooksListingState class 
+in the previous chapter (Chapter 12: Integrating REST API).
+
 var booksListing;
-fetchBooks() async { var response = await makeHttpCall(); setState(() {
-response["items"]; }); }
-booksListing =
+fetchBooks() async { 
+	var response = await makeHttpCall(); 
+	
+	setState(() {
+		booksListing = response["items"]; 
+	}); 
+}
+
+
 The items property in the JSON response above holds the list of books as JSON objects.
 The response is assigned to the results returned from the makeHttpCall()function. The
 booksListing is assigned to the response["items"] returned from the API. Since the

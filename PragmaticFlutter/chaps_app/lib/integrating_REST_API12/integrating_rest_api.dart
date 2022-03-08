@@ -339,8 +339,9 @@ class _BookListingState extends State<BookListing> {
 		var response = await makeHttpCall(); 
 
 	//Updating booksResponse to fetched remote data 
-	setState(() {
-		booksResponse = response; }); 
+    setState(() {
+      booksResponse = response; 
+    }); 
 	} 
 
 	@override 
