@@ -605,40 +605,81 @@ as bookModelObj.volumeInfo.title and so on.
 
 
 CONSTRUCTING BookModel
-Let’s create a BookModel class to hold the API movie listing data set. The BookModel
-class will have members for each attribute of the JSON response. the
-BookModel.fromJson(...) The BookModel.fromJson(Map<String, dynamic> json) takes a
-JSON map and assigns corresponding values to the BookModel object’s members. This is
-the entry point method that is called to parse JSON responses received from the
-network. In this case, JSON response attributes are tiered. Each tier will have its own
-models. The BookModel class needs access to volumeInfo, accessInfo, and saleInfo
-attributes/members.
-BookModel claSS
-BookModel.fromJson() uses a factory constructor. The factory constructor is used when
-implementing a constructor that doesn’t always create a new instance of its class. It’s useful
-when getting an object from a cache rather than creating a duplicate.
-class BookModel { final VolumeInfo volumeInfo; final AccessInfo accessInfo; final SaleInfo
-saleInfo; BookModel({this.volumeInfo, this.accessInfo, this.saleInfo}); factory
-BookModel.fromJson(Map<String, dynamic> json) { return BookModel(
-volumeInfo:
-VolumeInfo.fromJson(json['volumeInfo']),
-accessInfo:
-AccessInfo.fromJson(json['accessInfo']),
-saleInfo: SaleInfo.fromJson(json['saleInfo'])); }
+Let’s create a BookModel class to hold the API listing data set. 
+The BookModel class will have members for each attribute of the 
+JSON response. 
+
+THE BookModel.fromJson(...) 
+The BookModel.fromJson(Map<String, dynamic> json) takes a
+JSON map and assigns corresponding values to the BookModel 
+object’s members. This is the entry point method that is called to 
+parse JSON responses received from the network. In this case, 
+JSON response attributes are tiered. Each tier will have its own
+models. The BookModel class needs access to volumeInfo,
+accessInfo, and saleInfo attributes/members.
+
+
+BookModel CLASS
+BookModel.fromJson() uses a factory constructor. The factory 
+constructor is used when implementing a constructor that doesn’t 
+always create a new instance of its class. It’s useful when getting 
+an object from a cache rather than creating a duplicate.
+
+class BookModel { 
+	final VolumeInfo volumeInfo; 
+	
+	final AccessInfo accessInfo; 
+
+	final SaleInfo saleInfo; 
+
+	BookModel({this.volumeInfo, this.accessInfo, this.saleInfo}); 
+
+	factory BookModel.fromJson(Map<String, dynamic> json) { 
+		return BookModel(
+			volumeInfo: VolumeInfo.fromJson(json['volumeInfo']),
+
+			accessInfo: AccessInfo.fromJson(json['accessInfo']),
+
+			saleInfo: SaleInfo.fromJson(json['saleInfo'])
+		); 
+	}
 }
+
+
 VolumeInfo Class
-The VolumeInfo class has a title, authors as its members. It has a reference to the
-ImageLinks class to access thumbnail information.
-class VolumeInfo { final String title; final String subtitle; final String description; final
-List<dynamic> authors; final String publisher; final String publishedDate; final ImageLinks
-imageLinks; VolumeInfo(
-{this.title,
-this.subtitle,
-this.description,
-this.authors,
-this.publisher,
-this.publishedDate,
-this.imageLinks}); factory
+The VolumeInfo class has a title, authors as its members. It has 
+a reference to the ImageLinks class to access thumbnail information.
+
+
+class VolumeInfo { 
+	final String title; 
+	
+	final String subtitle; 
+	
+	final String description; 
+	
+	final List<dynamic> authors; 
+	
+	final String publisher; 
+	
+	final String publishedDate; 
+	
+	final ImageLinks imageLinks; 
+
+	VolumeInfo(
+		{
+			this.title,
+			this.subtitle,
+			this.description,
+			this.authors,
+			this.publisher,
+			this.publishedDate,
+			this.imageLinks
+		}
+	); 
+
+
+factory
 VolumeInfo.fromJson(Map<String, dynamic> json) { return VolumeInfo(
 title:
 json['title'],
