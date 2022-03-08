@@ -394,24 +394,36 @@ book['volumeInfo']['authors'] != null
 	? Text( 
 		Author(s): ${book['volumeInfo']['authors'].join(", ")}',
 
-		style: TextStyle(fontSize: 14
+		style: TextStyle(fontSize: 14),
 	)
 
 	: Text(""),
 )
-Both Text widgets are styled with the same font size. However, the title is styled to
-be bold as well.
-Image wiDget
-The Image widget is used to display the book’s cover page image. The `Image. n etwork()`
-method uses network URL to load and display images. The fit property is assigned to
-BoxFit.fill, which helps to fit the image in the given target box. An empty Container widget is
-added when there’s no thumbnail information available.
+
+
+Both Text widgets are styled with the same font size. However, 
+the title is styled to be bold as well.
+
+
+Image WIDGET
+The Image widget is used to display the book’s cover page image. 
+The `Image.network()` method uses network URL to load and 
+display images. The fit property is assigned to BoxFit.fill, which 
+helps to fit the image in the given target box. 
+
+An empty Container widget is added when there’s no thumbnail 
+information available.
+
+
 book['volumeInfo']['imageLinks']['thumbnail'] != null
-? Image.network(
-book['volumeInfo']['imageLinks']['thumbnail'],
-)
-: Container(),
-fit: BoxFit.fill,
+	? Image.network(
+		book['volumeInfo']['imageLinks']['thumbnail'],
+		
+		fit: BoxFit.fill,
+	)
+	: Container(),
+
+
 FiniSheD coDe (PaRt 1): BookTile wiDget
 import 'package:flutter/material.dart'; class BookTile extends StatelessWidget { final book;
 const BookTile({Key key, this.book}) : super(key: key); @override Widget
