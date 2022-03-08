@@ -17,25 +17,46 @@ information and is human-readable. Dart provides the
 dart:convert (dart:convert library) library to parse JSON data.
 
 The dart:convert LIBRARY
-The dart:convert library parses the JSON response into the Dart collection Map. In the
-following code, the apiResponse is the response returned from http.get(apiEndPoint). The
-HTTP headers are set to accept JSON encoding using `application/ json`. The
-json.decode(...) method takes the response’s body to parse it into Dart data structures. It
-returns a Map (Map<K, V> class) as a Future object. Futures are the objects that return
-the results of the asynchronous operations.
+The dart:convert library parses the JSON response into the Dart 
+collection Map. In the following code, the apiResponse is the 
+response returned from http.get(apiEndPoint). 
+
+The HTTP headers  are set to accept JSON encoding using 
+`application/ json`. The json.decode(...) method takes the response’s 
+body to parse it into Dart data structures. It returns a 
+Map (Map<K, V> class) as a Future object. 
+
+Futures are the objects that return the results of the 
+asynchronous operations.
+
 //importing the Dart package
 import 'dart:convert';
+
 //Making HTTP request
-//Function to make REST API call Future<dynamic> makeHttpCall() async { //API Key: To
-be replaced with your key
-final apiKey = "$YOUR_API_KEY"; final apiEndpoint =
-"https://www.googleapis.com/books/v1/ volumes?key=$apiKey&q=python+coding"; final
-http.Response response = await http.get(apiEndpoint, headers: {'Accept':
-'application/json'});
-//Parsing API's HttpResponse to JSON format
-//Converting string response body to JSON representation
-final jsonObject = json.decode(response.body); //Prints JSON formatted response on
-console print(jsonObject); return jsonObject; }
+//Function to make REST API call 
+Future<dynamic> makeHttpCall() async { 
+	//API Key: To be replaced with your key
+	final apiKey = "$YOUR_API_KEY"; 
+
+	final apiEndpoint =
+	"https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
+	
+	final http.Response response = await http.get(
+		apiEndpoint, 
+		headers: {'Accept': 'application/json'}
+	);
+
+	//Parsing API's HttpResponse to JSON format
+	//Converting string response body to JSON representation
+	final jsonObject = json.decode(response.body); 
+
+	//Prints JSON formatted response on
+	console print(jsonObject); 
+	
+	return jsonObject; 
+}
+
+
 The print(jsonObject) function prints the JSON object on the console.
 We need only some parts of the book information to show in the BooksApp.
 JSon FoRmatteD ReSPonSe
