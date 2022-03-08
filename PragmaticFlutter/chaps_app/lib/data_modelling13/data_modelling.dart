@@ -1,16 +1,22 @@
 /*
 Data Modeling
-In this chapter, you will learn to convert the response into JSON and parse it to render
-views in the Flutter ListView (ListView class) widget. Later in this chapter, the JSON
-formatted response is converted into the BookModel data model by mapping JSON
-response into the data model class. These Dart objects are used to build the same book
-listing Flutter user interface.
+In this chapter, you will learn to convert the response into 
+JSON and parse it to render views in the Flutter ListView 
+(ListView class) widget. 
+
+Later in this chapter, the JSON formatted response is 
+converted into the BookModel data model by mapping JSON
+response into the data model class. These Dart objects are 
+used to build the same book listing 4 Flutter user interface.
+
 PARSING JSON
-The JavaScript Object Notation or JSON is a type of data interchange format. The JSON
-format is programming language independent and text-based. It uses key/value pairs to
-store information and is human-readable. Dart provides the dart:convert (dart:convert
-library) library to parse JSON data.
-the dart:convert libRaRy
+The JavaScript Object Notation or JSON is a type of data 
+interchange format. The JSON format is programming language 
+independent and text-based. It uses key/value pairs to store 
+information and is human-readable. Dart provides the 
+dart:convert (dart:convert library) library to parse JSON data.
+
+The dart:convert LIBRARY
 The dart:convert library parses the JSON response into the Dart collection Map. In the
 following code, the apiResponse is the response returned from http.get(apiEndPoint). The
 HTTP headers are set to accept JSON encoding using `application/ json`. The
