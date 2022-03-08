@@ -627,12 +627,16 @@ an object from a cache rather than creating a duplicate.
 
 class BookModel { 
 	final VolumeInfo volumeInfo; 
-	
 	final AccessInfo accessInfo; 
-
 	final SaleInfo saleInfo; 
 
-	BookModel({this.volumeInfo, this.accessInfo, this.saleInfo}); 
+	BookModel(
+		{
+			this.volumeInfo, 
+			this.accessInfo, 
+			this.saleInfo
+		}
+	); 
 
 	factory BookModel.fromJson(Map<String, dynamic> json) { 
 		return BookModel(
@@ -653,17 +657,11 @@ a reference to the ImageLinks class to access thumbnail information.
 
 class VolumeInfo { 
 	final String title; 
-	
 	final String subtitle; 
-	
 	final String description; 
-	
 	final List<dynamic> authors; 
-	
 	final String publisher; 
-	
 	final String publishedDate; 
-	
 	final ImageLinks imageLinks; 
 
 	VolumeInfo(
@@ -679,24 +677,53 @@ class VolumeInfo {
 	); 
 
 
-factory
-VolumeInfo.fromJson(Map<String, dynamic> json) { return VolumeInfo(
-title:
-json['title'],
-subtitle: json['subtitle'],
-description: json['description'],
-authors:
-json['authors'] as List,
-publisher: json['publisher'],
-publishedDate:
-json['publishedDate'],
-imageLinks: ImageLinks.fromJson(json['imageLinks'])); } }
-The ImageLinks class provides information about the image thumbnails. A null check helps
-to handle cases where there’s no thumbnail information available.
-class ImageLinks { final String smallThumbnail; final String thumbnail;
-ImageLinks({this.smallThumbnail, this.thumbnail}); factory
-ImageLinks.fromJson(Map<String, dynamic> json) { return ImageLinks( smallThumbnail:
-json != null? json['smallThumbnail'] : '', } }
+	factory VolumeInfo.fromJson(Map<String, dynamic> json) { 
+		return VolumeInfo(
+			title: json['title'],
+
+			subtitle: json['subtitle'],
+
+			description: json['description'],
+
+			authors: json['authors'] as List,
+
+			publisher: json['publisher'],
+
+			publishedDate: json['publishedDate'],
+
+			imageLinks: ImageLinks.fromJson(json['imageLinks'])
+		); 
+	} 
+}
+
+
+The ImageLinks class provides information about the image thumbnails.
+A null check helps to handle cases where there’s no thumbnail information 
+available.
+
+class ImageLinks { 
+	final String smallThumbnail; 
+	
+	final String thumbnail;
+
+	ImageLinks(
+		{
+			this.smallThumbnail, 
+			this.thumbnail
+		}
+	); 
+
+	factory ImageLinks.fromJson(Map<String, dynamic> json) { 
+		return ImageLinks( 
+			smallThumbnail: json != null ? json['smallThumbnail'] : '', 
+			
+			thumbnail: json != null? json['thumbnail'] : ''
+		);
+
+	} 
+}
+
+
 AccessInfo Class
 The AccessInfo class provides the webReaderLink, a link to the URL to read on the web.class AccessInfo { String webReaderLink; AccessInfo({this.webReaderLink}); factory
 AccessInfo.fromJson(Map<String, dynamic> json) { return AccessInfo(webReaderLink:
