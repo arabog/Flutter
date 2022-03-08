@@ -725,14 +725,48 @@ class ImageLinks {
 
 
 AccessInfo Class
-The AccessInfo class provides the webReaderLink, a link to the URL to read on the web.class AccessInfo { String webReaderLink; AccessInfo({this.webReaderLink}); factory
-AccessInfo.fromJson(Map<String, dynamic> json) { return AccessInfo(webReaderLink:
-json['webReaderLink']); } }
-SaleInfo claSS
+The AccessInfo class provides the webReaderLink, a link to the URL to 
+read on the web.
+
+class AccessInfo { 
+	String webReaderLink; 
+	
+	AccessInfo(
+		{
+			this.webReaderLink
+		}
+	); 
+
+	factory AccessInfo.fromJson(Map<String, dynamic> json) { 
+		return AccessInfo(
+			webReaderLink: json['webReaderLink']
+		); 
+	} 
+}
+
+
+SaleInfo Class
 The class SaleInfo provides the link to buy the book as 'buyLink'.
-class SaleInfo { final String saleability; final String buyLink; SaleInfo({this.saleability,
-this.buyLink}); factory SaleInfo.fromJson(Map<String, dynamic> json) { return
-SaleInfo(saleability: json['saleability'], buyLink: json['buyLink']); } }
+
+class SaleInfo { 
+	final String saleability; 
+	
+	final String buyLink; 
+	
+	SaleInfo(
+		{
+			this.saleability,
+
+			this.buyLink
+		}
+	); 
+
+	factory SaleInfo.fromJson(Map<String, dynamic> json) { 
+		return SaleInfo(saleability: json['saleability'], buyLink: json['buyLink']); 
+	} 
+}
+
+
 CONVERTING API RESPONSE TO BookModel LIST
 In this section, you’ll learn to use the BookModel object to build a list of book entries
 returned from the API response. You will convert the API response to a list of BookModel
