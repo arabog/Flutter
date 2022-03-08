@@ -377,7 +377,7 @@ The authors’ list is available at path 'volumeInfo'->'authors'.
 
 Text( 
 	'${book['volumeInfo']['title']}',
-	
+
 	style: TextStyle(
 		fontSize: 14,
 
@@ -385,15 +385,19 @@ Text(
 	),
 )
 
-The second Text widget is to display the author(s) name(s). The author’s name(s) is
-available as a List. The authors’ name list is concatenated with commas. A null check is
-added for authors’ information to handle cases when there’s no author list available.
+The second Text widget is to display the author(s) name(s). The 
+author’s name(s) is available as a List. The authors’ name list is 
+concatenated with commas. A null check is added to handle cases 
+when there’s no author list available.
+
 book['volumeInfo']['authors'] != null
-? Text(
-'Author(s)
-: ${book['volumeInfo']['authors'].join(", ")}',
-: Text(""),
-style: TextStyle(fontSize: 14),
+	? Text( 
+		Author(s): ${book['volumeInfo']['authors'].join(", ")}',
+
+		style: TextStyle(fontSize: 14
+	)
+
+	: Text(""),
 )
 Both Text widgets are styled with the same font size. However, the title is styled to
 be bold as well.
