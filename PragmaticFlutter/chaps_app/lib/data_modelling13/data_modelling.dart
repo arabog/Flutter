@@ -304,52 +304,88 @@ Padding(
 
 Row WIDGET
 The Row widget (Row class) aligns its children in a horizontal direction. 
-Row widget is
-used to display the title and author text to the left side of the screen and the book’s cover
-page image to the right side. The mainAxisAlignment property tells Row how to place its
-children widgets in the available space. The MainAxisAlignment. spaceBetween helps to
-distribute the free space evenly between the children. The Row widget has two children to
-display the book’s text details and image.
+Row widget is used to display the title and author text to the left side of 
+the screen and the book’s cover page image to the right side. 
+
+The mainAxisAlignment property tells Row how to place its children 
+widgets in the available space. The MainAxisAlignment.spaceBetween 
+helps to distribute the free space evenly between the children. The Row 
+widget has two children to display the book’s text details and image.
+
 Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
-children: [ Flexible(), Image.network() ], )
-Flexible wiDget
-The Flexible widget (Flexible class) is used to display the book’s text details. It uses the
-Column widget as its child to align title and author information vertically. The Flexible
-widget gives Column widget flexibility to expand to fill the available space in the main axis.
-If the book’s title is too long, it’ll expand vertically rather than overflowing.
+	mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+	children: [ 
+		Flexible(), 
+		
+		Image.network() 
+	], 
+)
+
+Flexible WIDGET
+The Flexible widget (Flexible class) is used to display the book’s 
+text details. It uses the Column widget as its child to align title 
+and author information vertically. The Flexible widget gives 
+Column widget flexibility to expand to fill the available space in 
+the main axis. If the book’s title is too long, it’ll expand vertically 
+rather than overflowing.
+
 Flexible(
-child: Column()
+	child: Column()
 )
-Column wiDget
-The Column widget (Column class) aligns its children vertically. The book’s title and
-author’s information are displayed in Column widget’s children. The crossAxisAlignment
-property is set to CrossAxisAlignment.start, which helps to place the children with their
-start edge aligned with the start side of the cross axis. This property makes sure that
-children widgets are aligned to the left of the Column widget.
+
+
+Column WIDGET
+The Column widget (Column class) aligns its children vertically. 
+The book’s title and author’s information are displayed in Column 
+widget’s children. 
+
+The crossAxisAlignment property is set to CrossAxisAlignment.start, 
+which helps to place the children with their start edge aligned with 
+the start side of the cross axis. This property makes sure that children 
+widgets are aligned to the left of the Column widget.
+
 Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-children: <Widget>[ Text(), Text() ],
+	crossAxisAlignment: CrossAxisAlignment.start,
+
+	children: <Widget>[ 
+		Text(), 
+		
+		Text() 
+	],
 )
-Text wiDgetS
-The Text (Text class) widgets are used to display text. Two Text widgets are placed
-vertically in the Column widget. The first Text widget is for the book’s title text. The
-variable book is a parsed JSON response returned from the API for the given index. The
+
+
+Text WIDGETS
+The Text (Text class) widgets are used to display text. Two Text 
+widgets are placed vertically in the Column widget. The first Text 
+widget is for the book’s title text. The variable book is a parsed 
+JSON response returned from the API for the given index. The
 related piece of JSON is:
-"volumeInfo": {
-"title": "Learning Python",
-"authors": [
-"Mark Lutz"
-],
-}
+
+	"volumeInfo": {
+		"title": "Learning Python",
+
+		"authors": [
+			"Mark Lutz"
+		],
+	}
+
 The title is available at path 'volumeInfo'->'title'.
 The authors’ list is available at path 'volumeInfo'->'authors'.
-Text( '${book['volumeInfo']['title']}',
-style: TextStyle(
-fontSize: 14,
-fontWeight: FontWeight.bold
-),
-)The second Text widget is to display the author(s) name(s). The author’s name(s) is
+
+
+Text( 
+	'${book['volumeInfo']['title']}',
+	
+	style: TextStyle(
+		fontSize: 14,
+
+		fontWeight: FontWeight.bold
+	),
+)
+
+The second Text widget is to display the author(s) name(s). The author’s name(s) is
 available as a List. The authors’ name list is concatenated with commas. A null check is
 added for authors’ information to handle cases when there’s no author list available.
 book['volumeInfo']['authors'] != null
