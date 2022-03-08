@@ -153,32 +153,55 @@ class _BookListingState extends State<BookListing> {
 
 
 Loading Data at App Startup
-As you can see that `build()` method is triggered whenever `setState()` is updated. However,
-it may not be a wise choice because every time the interface is rebuilt, `fetchBooks()` will be
-called, and an API request in turn. It can quickly go in a cycle and end up making a
-network request every time. This could lead to numerous amounts of API calls to Google
-Books API and can run out your free API quota limit quickly and/or can incur API request
-charges needlessly. To solve this problem, it makes sense to make sure that you make
-REST API call only whenever needed. In our case, we need to fetch data only once.
-To do so, it makes sense to call `initState()` method from ` _ BookListingState`. This method
-is executed only one time in the lifecycle of the StatefulWidget
+As you can see that `build()` method is triggered whenever `setState()` is 
+updated. However, it may not be a wise choice because every time the 
+interface is rebuilt, `fetchBooks()` will be called, and an API request in 
+turn. It can quickly go in a cycle and end up making a network request 
+every time. This could lead to numerous amounts of API calls to Google
+Books API and can run out your free API quota limit quickly and/or can 
+incur API request charges needlessly. 
+
+To solve this problem, it makes sense to make sure that you make REST API 
+call only whenever needed. In our case, we need to fetch data only once.
+
+To do so, it makes sense to call `initState()` method from ` _ BookListingState`. 
+This method is executed only one time in the lifecycle of the StatefulWidget
+
 class _BookListingState extends State<BookListing> {
-String booksResponse;
-//method to fetch books asynchronously fetchBooks() async {
-//making REST API call
-var response = await makeHttpCall(); //Updating booksResponse to fetched remote data
-setState(() {
-booksResponse = response; }); } @override
-void initState() { super.initState(); fetchBooks(); }
-@override
-Widget build(BuildContext context) { return Scaffold(
-body: SingleChildScrollView(
-child: booksResponse != null
-? Text("Google Books API response\n $booksResponse")
-6 : Text("No Response from API"),
-),);
+	String booksResponse;
+
+	//method to fetch books asynchronously 
+	fetchBooks() async {
+		//making REST API call
+		var response = await makeHttpCall(); 
+
+		//Updating booksResponse to fetched remote data
+		setState(() {
+			booksResponse = response; 
+		}); 
+	} 
+		
+		
+	@override
+	void initState() { 
+		super.initState(); 
+		
+		fetchBooks(); 
+	}
+
+	@override
+	Widget build(BuildContext context) { 
+		return Scaffold(
+			body: SingleChildScrollView(
+				child: booksResponse != null
+					? Text("Google Books API response\n $booksResponse")
+					: Text("No Response from API"),
+			),
+		);
+	}
 }
-}
+
+
 DiSPlaying Data in aPP
 Now that we’ve remote data fetched and updated in the `booksResponse` variable, we are
 ready to display it in our interface. Since this data is a large blob of text, we need a widget
