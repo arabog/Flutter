@@ -504,72 +504,80 @@ class BooksApp extends StatelessWidget {
 	@override 
 	Widget build(BuildContext context) { 
 		return MaterialApp(
-debugShowCheckedModeBanner: false,
-home: BooksListing(), ); } }
+		debugShowCheckedModeBanner: false,
+
+		home: BooksListing(), ); 
+	} 
+}
+
 
 //Making HTTP request 
 //Function to make REST APIcall 
 Future<dynamic> makeHttpCall() async {
 	 //API Key: To be replaced with your key final
-apiKey = "$YOUR_API_KEY";
+	apiKey = "$YOUR_API_KEY";
 
-final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
+	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
 
-final http.Response response = await http.get(
-	apiEndpoint, 
-	
-	headers: {'Accept': 'application/ json'}
+	final http.Response response = await http.get(
+		apiEndpoint, 
+		
+		headers: {'Accept': 'application/ json'}
 	); 
 	
 	//Parsing API's HttpResponse to JSON format 
+	//Converting string response body to JSON representation 
+	final jsonObject = json.decode(response.body); 
 
-//Converting string response body to JSON representation 
-final jsonObject
-= json.decode(response.body); 
+	//Prints JSON formatted response on console
+	print(jsonObject); 
 
-//Prints JSON formatted response on console
-print(jsonObject); 
-return jsonObject; 
+	return jsonObject; 
 } 
 
 
 class BooksListing extends StatefulWidget {
-@override 
-_BooksListingState createState() => _BooksListingState(); 
+	@override 
+	_BooksListingState createState() => _BooksListingState(); 
 } 
+
 
 class _BooksListingState extends State<BooksListing> { 
 	var booksListing; 
 	
 	fetchBooks() async {
-var response = await makeHttpCall(); 
+		var response = await makeHttpCall(); 
 
-setState(() {
-booksListing = response["items"];
-}); } 
+		setState(() {
+			booksListing = response["items"];
+		}
+	} 
 
-@override 
-void initState() { 
-	super.initState(); fetchBooks(); 
+	@override 
+	void initState() { 
+		super.initState(); fetchBooks(); 
 	} 
 	
 	@override 
 	Widget build(BuildContext context) { 
 		return Scaffold(
-appBar: AppBar(
-title: Text("Books
-Listing"),
-),
+			appBar: AppBar(
+				title: Text("Books Listing"),
+			),
 
-body: ListView.builder(
-itemCount: booksListing == null ? 0 : booksListing. length,
+			body: ListView.builder(
+				itemCount: booksListing == null ? 0 : booksListing. length,
 
-itemBuilder: (context, index) {
-	return BookTile(book:
-	
-	booksListing[index]);
-},
-), ); } }
+				itemBuilder: (context, index) {
+					return BookTile(book:
+
+					booksListing[index]);
+				},
+				
+			), 
+		); 
+	} 
+}
 
 
 CONSTRUCTING DATA MODEL
