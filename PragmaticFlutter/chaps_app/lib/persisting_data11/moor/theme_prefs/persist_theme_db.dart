@@ -5,6 +5,7 @@ import 'themes.dart';
 import 'plugins/shared.dart';
 import 'theme_prefs.dart';
 
+
 //Uncomment the line below to run from this file
 void main() => runApp(MoorBooksApp());
 
@@ -98,13 +99,13 @@ List bookData() {
 		{
 			'title': 'Book Title',
 			'authors': ['Author1', 'Author2'],
-			'image': 'assets/book_cover.png'
+			'image': 'assets/images/image_pic.png'
 		},
 
 		{
 			'title': 'Book Title 2',
 			'authors': ['Author1'],
-			'image': 'assets/book_cover.png'
+			'image': 'assets/images/image_pic.png'
 		}
 	];
 }

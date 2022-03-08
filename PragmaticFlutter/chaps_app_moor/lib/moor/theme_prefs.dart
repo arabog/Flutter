@@ -2,6 +2,9 @@ import 'package:moor/moor.dart';
 import './themes.dart';
 part 'theme_prefs.g.dart';
 
+
+enum AppThemes { light, dark }
+
 // It will generate a table called "theme_prefs" for us. The rows of 
 // that table will be represented by a class called "ThemePref".
 

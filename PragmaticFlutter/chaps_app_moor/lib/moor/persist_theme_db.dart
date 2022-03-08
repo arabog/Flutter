@@ -98,13 +98,13 @@ List bookData() {
 		{
 			'title': 'Book Title',
 			'authors': ['Author1', 'Author2'],
-			'image': 'assets/book_cover.png'
+			'image': 'assets/images/image_pic.png'
 		},
 
 		{
 			'title': 'Book Title 2',
 			'authors': ['Author1'],
-			'image': 'assets/book_cover.png'
+			'image': 'assets/images/image_pic.png'
 		}
 	];
 }
@@ -156,9 +156,14 @@ class BooksListing extends StatelessWidget {
 								),
 
 								booksListing[index]['image'] != null
-									? Image.asset(
-										booksListing[index]['image'],
-										fit: BoxFit.fill,
+									? Container(
+										height: 200,
+										width: 200,
+										
+										child: Image.asset(
+											booksListing[index]['image'],
+											fit: BoxFit.fill,
+										)
 									)
 									: Container(),
 							],
