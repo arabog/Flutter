@@ -768,81 +768,146 @@ class SaleInfo {
 
 
 CONVERTING API RESPONSE TO BookModel LIST
-In this section, you’ll learn to use the BookModel object to build a list of book entries
-returned from the API response. You will convert the API response to a list of BookModel
-objects. The makeHttpCall() function returns the Future of List<BookModel>
-//Function to make REST API call Future<List<BookModel>> makeHttpCall() async {
-//API Key: To be replaced with your key
-final apiKey = "$YOUR_API_KEY";
-final apiEndpoint = "https://www.googleapis.com/books/v1/
-volumes?key=$apiKey&q=python+coding"; final http.Response response = await
-http.get(apiEndpoint, headers: {'Accept': 'application/ json'});
-//Converting string response body to JSON representation
-final jsonObject = json.decode(response.body);
-var list = jsonObject['items'] as List;
-//return the list of Book objects
-return list.map((e) => BookModel.fromJson(e)).toList(); }
-PaSSing BookModel to BookTile wiDget The booksListing holds the list of BookModel
-objects returned from the REST API call. The ListView.builder() builds the BookTile
+In this section, you’ll learn to use the BookModel object to build a list of 
+book entries returned from the API response. You will convert the API 
+response to a list of BookModel objects. The makeHttpCall() function 
+returns the Future of List<BookModel>
+
+
+//Function to make REST API call 
+Future<List<BookModel>> makeHttpCall() async {
+	//API Key: To be replaced with your key
+	final apiKey = "$YOUR_API_KEY";
+
+	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
+	
+	final http.Response response = await http.get(
+		apiEndpoint, 
+		
+		headers: {'Accept': 'application/ json'}
+	);
+
+	//Converting string response body to JSON representation
+	final jsonObject = json.decode(response.body);
+
+	var list = jsonObject['items'] as List;
+
+	//return the list of Book objects
+	return list.map((e) => BookModel.fromJson(e)).toList(); 
+}
+
+
+Passing BookModel to BookTile widget 
+The booksListing holds the list of BookModel objects returned from 
+the REST API call. The ListView.builder() builds the BookTile
 widgets for each entry passing BookModel for the current index.
-class _BooksListingState extends State<BooksListing> { List<BookModel> booksListing;
-fetchBooks() async {
-var response = await makeHttpCall(); setState(() {
-booksListing = response; }); }
-@override Widget build(BuildContext context) { return Scaffold(
-body: ListView.builder(
-itemCount: booksListing == null? 0 : booksListing. length,
-itemBuilder: (context, index) {
-//Passing bookModelObj to BookTile widget
-return BookTile(bookModelObj:
-booksListing[index]);
-},
-), ); } }
-DiSPlaying Data Now, data values can be accessed from the BookModel object using its
-members. For example, b ook['volumeInfo']['title']can be accessed as
+
+class _BooksListingState extends State<BooksListing> { 
+	List<BookModel> booksListing;
+	
+	fetchBooks() async {
+		var response = await makeHttpCall(); 
+		
+		setState(() {
+			booksListing = response; 
+		}); 
+	}
+
+	@override 
+	Widget build(BuildContext context) { 
+		return Scaffold(
+			body: ListView.builder(
+				itemCount: booksListing == null? 0 : booksListing. length,
+
+				itemBuilder: (context, index) {
+					//Passing bookModelObj to BookTile widget
+					return BookTile(bookModelObj: booksListing[index]);
+				},
+			), 
+		); 
+	} 
+
+}
+
+
+Displaying Data 
+Now, data values can be accessed from the BookModel object using its
+members. For example, book['volumeInfo']['title']can be accessed as
 bookModelObj.volumeInfo.title, and so on.
-FiniSheD coDe (PaRt 2): BookTile wiDget The BookTile is a stateless widget.import 'package:flutter/material.dart'; import 'book.dart'; class BookTile extends
-StatelessWidget { final BookModel bookModelObj; const BookTile({Key key,
-this.bookModelObj}) : super(key: key); @override Widget build(BuildContext context) {
-return Card(
-shape: RoundedRectangleBorder(
-borderRadius:
-BorderRadius.circular(10.0),
-),
-elevation: 5,
-margin: EdgeInsets.all(10),
-child:
-Padding(
-padding: const EdgeInsets.all(8.0),
-child: Row(
-mainAxisAlignment:
-MainAxisAlignment.spaceBetween,
-children: [
-Flexible(
-child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-children: <Widget>[
-Text(
-'${bookModelObj.volumeInfo.title}',
-style: TextStyle(fontSize: 14, fontWeight:
-FontWeight.bold),
-),
-bookModelObj.volumeInfo.authors != null
-? Text(
-'Author(s): ${bookModelObj. volumeInfo.authors.join(", ")}',
-style: TextStyle(fontSize: 14),
-)
-: Text(""),
-],
-),
-),
-bookModelObj.volumeInfo.imageLinks.thumbnail != null
-bookModelObj.volumeInfo.imageLinks. thumbnail,
-],
-),
-? Image.network(
-), ); } }
-FiniSheD coDe (PaRt 2): Main methoD
+
+
+
+FINISHED CODE (PART 2): BOOKTILE WIDGET
+The BookTile is a stateless widget.
+
+import 'package:flutter/material.dart'; 
+import 'book.dart'; 
+
+
+class BookTile extends StatelessWidget { 
+	final BookModel bookModelObj; 
+	const BookTile({Key key, this.bookModelObj}) : super(key: key); 
+
+	@override 
+	Widget build(BuildContext context) {
+		return Card(
+			shape: RoundedRectangleBorder(
+				borderRadius: BorderRadius.circular(10.0),
+			),
+
+			elevation: 5,
+			margin: EdgeInsets.all(10),
+
+			child: Padding(
+				padding: const EdgeInsets.all(8.0),
+
+				child: Row(
+					mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+					children: [
+						Flexible(
+							child: Column(
+								crossAxisAlignment: CrossAxisAlignment.start,
+
+								children: <Widget>[
+									Text(
+										'${bookModelObj.volumeInfo.title}',
+										
+										style: TextStyle(
+											fontSize: 14, 
+											fontWeight: FontWeight.bold
+										),
+									),
+
+
+								bookModelObj.volumeInfo.authors != null
+									? Text(
+										'Author(s): ${bookModelObj. volumeInfo.authors.join(", ")}',
+
+										style: TextStyle(fontSize: 14),
+									)
+									: Text(""),
+								],
+							),
+						),
+
+						bookModelObj.volumeInfo.imageLinks.thumbnail != null
+							? Image.network(
+								bookModelObj.volumeInfo.imageLinks. thumbnail,
+
+								fit: BoxFit.fill,
+							)
+
+							: Container(),
+					],
+				),
+			), 
+		); 
+	} 
+}
+
+
+FINISHED CODE (PART 2): MAIN METHOD
 //importing the Dart package import 'dart:convert'; import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; import '../../config.dart'; import 'book.dart'; import
 'booktile.dart'; //Showing book listing in ListView class BooksApp extends StatelessWidget {
