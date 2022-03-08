@@ -67,60 +67,92 @@ Future<String> makeHttpCall() async {
 
 	final http.Response response =
 		await http.get(apiEndpoint, headers: {'Accept': 'application/json'});
-		
-//This will print 'flutter: Instance of 'Response'' on console.
-print(response);
-return response.body; }
-The `response.body` will return the body of the response, which is the actual book listing
-information that we’re interested in.
+
+	//This will print 'flutter: Instance of 'Response'' on console.
+	print(response);
+	return response.body; 
+}
+
+
+The `response.body` will return the body of the response, which is the actual 
+book listing information that we’re interested in.
+
 BUILDING SIMPLE INTERFACE
-Let’s create a simple, scrollable interface that can accommodate the large text blob. Let’s
-create a simple Flutter app say, BooksApp, which makes a REST API call to fetch book
-listing data from Books API and later displays this big blob of text in a scrollable interface.
-BooksApp
-wiDget class BooksApp extends StatelessWidget {
-@override
-Widget build(BuildContext context) {
-return MaterialApp(
-debugShowCheckedModeBanner: false,
-} }
-home: BookListing(),
-);
+Let’s create a simple, scrollable interface that can accommodate the large 
+text blob. Let’s create a simple Flutter app say, BooksApp, which makes 
+a REST API call to fetch book listing data from Books API and later displays 
+this big blob of text in a scrollable interface.
+
+BooksApp Widget 
+class BooksApp extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
+		);
+
+		home: BookListing(),
+	} 
+}
+
 Next, we’ll work on BookListing, a StatefulWidget used as the homepage.
-The BooksApp has BookListing stateful widget as its home property. This widget actually
-makes the REST call to fetch jobs data. Since remote data is fetched asynchronously, it may
-not be available at the time of the building widget. The app may need to update the
-displayed data later on. The BookListing widget is a StatefulWidget. The StatefulWidget
-helps to rebuild the interface whenever data is changed/updated. It uses the `setState()`
-method to update the data. The interface rebuilds whenever data is changed inside the
-`setState()` method. The widget’s state is managed by the ` _ BookListingState` class. The `
-_ BookListingState` defines the method to fetch book listings as the `fetchBooks()` method.
-This is marked `async` to support making API calls asynchronously without blocking the
-app. The `build()` method makes the REST call using the `fetchBooks()` method and
-then goes on building its interface. The variable `booksResponse` of type `String` holds the
-data fetched from the HTTP call. The `fetchBooks()` method makes the remote call via
-`makeHttpCall()` and receives data over the network asynchronously. It stores network
-response in variable `response`.Later, `booksResponse` is updated with `response` in `setState()` method, and `build()`
-method is called to rebuild the interface again.
-class BookListing extends StatefulWidget { @override
-_BookListingState createState() => _BookListingState(); } class _BookListingState extends
-State<BookListing> {
-String booksResponse;
-//method to fetch books asynchronously fetchBooks() async {
-//making REST API call
-var response = await makeHttpCall(); //Updating booksResponse to fetched remote data
-setState(() {
-booksResponse = response; }); }
-@override
-Widget build(BuildContext context) { //fetching books listing
-fetchBooks();
-return Scaffold(
-body: SingleChildScrollView(
-child: booksResponse != null
-? Text("Google Books API response\n $booksResponse")
-: Text("No Response from API"),
-), ); } }
-loaDing Data at aPP StaRtuP
+This widget actually makes the REST call to fetch books data. Since remote 
+data is fetched asynchronously, it may not be available at the time of the 
+building widget. The app may need to update the displayed data later on. 
+The BookListing widget is a StatefulWidget. 
+The StatefulWidget helps to rebuild the interface whenever data is 
+changed/updated. It uses the `setState()`method to update the data. The 
+interface rebuilds whenever data is changed inside the`setState()` method. 
+
+The widget’s state is managed by the ` _ BookListingState` class. The `
+_ BookListingState` defines the method to fetch book listings as the 
+`fetchBooks()` method.
+This is marked `async` to support making API calls asynchronously 
+without blocking the app. The `build()` method makes the REST call using 
+the `fetchBooks()` method and then goes on building its interface. The 
+variable `booksResponse` of type `String` holds the data fetched from the 
+HTTP call. The `fetchBooks()` method makes the remote call via
+`makeHttpCall()` and receives data over the network asynchronously. It 
+stores network response in variable `response`.
+Later, `booksResponse` is updated with `response` in `setState()` method, 
+and `build()` method is called to rebuild the interface again.
+
+class BookListing extends StatefulWidget { 
+	@override
+	_BookListingState createState() => _BookListingState(); 
+}
+
+class _BookListingState extends State<BookListing> {
+	String booksResponse;
+	
+	//method to fetch books asynchronously 
+	fetchBooks() async {
+		//making REST API call
+		var response = await makeHttpCall(); 
+		
+		//Updating booksResponse to fetched remote data
+		setState(() {
+			booksResponse = response; 
+		}); 
+	}
+
+	@override
+	Widget build(BuildContext context) { 
+		//fetching books listing
+		fetchBooks();
+
+		return Scaffold(
+			body: SingleChildScrollView(
+				child: booksResponse != null
+					? Text("Google Books API response\n $booksResponse")
+					: Text("No Response from API"),
+			), 
+		); 
+	} 
+}
+
+
+Loading Data at App Startup
 As you can see that `build()` method is triggered whenever `setState()` is updated. However,
 it may not be a wise choice because every time the interface is rebuilt, `fetchBooks()` will be
 called, and an API request in turn. It can quickly go in a cycle and end up making a

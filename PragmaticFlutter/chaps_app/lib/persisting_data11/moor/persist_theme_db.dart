@@ -157,10 +157,15 @@ class BooksListing extends StatelessWidget {
 								),
 
 								booksListing[index]['image'] != null
-									? Image.asset(
-										booksListing[index]['image'],
-										fit: BoxFit.fill,
-									)
+									? Container(
+                    width: 200,
+                    height: 200,
+
+                    child: Image.asset(
+                      booksListing[index]['image'],
+                      fit: BoxFit.fill,
+                    )
+                  )
 									: Container(),
 							],
 						),
