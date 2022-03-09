@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
 
 			// home: MoorBooksApp(),
 
-      home: BooksApp(),
+			home: BooksApp(),
 		);
 	}
 }

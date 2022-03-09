@@ -1001,7 +1001,7 @@ class _BooksListingState extends State<BooksListing> {
 	}
 }
 
-*/ 
+
 
 // FINISHED CODE (PART 1):
 import 'dart:convert'; 
@@ -1010,16 +1010,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; 
 import './booktile.dart';
 
-// import '../../config.dart'; 
+import '../config/config.dart';
 
 //Showing book listing in ListView 
 class BooksApp extends StatelessWidget { 
 	@override 
 	Widget build(BuildContext context) { 
 		return MaterialApp(
-		debugShowCheckedModeBanner: false,
+			debugShowCheckedModeBanner: false,
 
-		home: BooksListing(), ); 
+			home: BooksListing(), 
+		); 
 	} 
 }
 
@@ -1028,7 +1029,7 @@ class BooksApp extends StatelessWidget {
 //Function to make REST APIcall 
 Future<dynamic> makeHttpCall() async {
 	 //API Key: To be replaced with your key 
-	final apiKey = "AIzaSyDia0hBKqs0Rd6gDc7zx1qUqF0NGjkzkPU"; 
+	final apiKey = apiKeyValue; 
 
 
 	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
@@ -1077,7 +1078,7 @@ class _BooksListingState extends State<BooksListing> {
 	Widget build(BuildContext context) { 
 		return Scaffold(
 			appBar: AppBar(
-				title: Text("Books Listing"),
+				title: Text("Books Listing from API"),
 			),
 
 			body: ListView.builder(
@@ -1090,4 +1091,93 @@ class _BooksListingState extends State<BooksListing> {
 			), 
 		); 
 	} 
+}
+
+*/ 
+
+import 'dart:convert'; 
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http; 
+
+import './booktile.dart';
+
+import '../config/config.dart';
+// import 'book.dart'; 
+
+//Showing book listing in ListView 
+class BooksApp extends StatelessWidget {
+	@override 
+	Widget build(BuildContext context) { 
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
+
+			home: BooksListing(), 
+		); 
+	} 
+} 
+	
+	
+Future<List<BookModel>> makeHttpCall() async {
+	final apiKey = apiKeyValue; 
+	
+	final apiEndpoint = "https://www.googleapis.com/books/v1/volumes?key=$apiKey&q=python+coding"; 
+
+	final http.Response response = await http.get(
+		Uri.parse(apiEndpoint), 
+		
+		headers: {'Accept': 'application/ json'}
+	); 
+	
+	final jsonObject = json.decode(response.body); 
+	
+	var list = jsonObject['items'] as List; 
+	
+	return list.map((e) => BookModel.fromJson(e)).toList(); 
+}
+
+
+class BooksListing extends StatefulWidget { 
+	@override
+	_BooksListingState createState() => _BooksListingState(); 
+} 
+
+
+class _BooksListingState extends State<BooksListing> { 
+	List<BookModel> booksListing; 
+	
+	fetchBooks() async { 
+		var response = await makeHttpCall(); 
+	
+		setState(() {
+			booksListing = response; 
+		}); 
+	}
+
+
+	@override 
+	void initState() { 
+		super.initState();
+		
+		fetchBooks(); 
+	} 
+	
+	@override 
+	Widget build(BuildContext context) { 
+		return Scaffold(
+			appBar: AppBar(
+				title: Text("Books Listing"),
+			),
+
+			body: ListView.builder(
+				itemCount: booksListing == null ? 0 : booksListing. length,
+				
+				itemBuilder: (context, index) {
+					BookTile widget
+					
+					return BookTile(bookModelObj: booksListing[index]);
+				},
+			), 
+		); 
+	}
 }
