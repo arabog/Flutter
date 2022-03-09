@@ -1103,7 +1103,7 @@ import 'package:http/http.dart' as http;
 import './booktile.dart';
 
 import '../config/config.dart';
-// import 'book.dart'; 
+import './book_model.dart'; 
 
 //Showing book listing in ListView 
 class BooksApp extends StatelessWidget {
@@ -1172,9 +1172,7 @@ class _BooksListingState extends State<BooksListing> {
 			body: ListView.builder(
 				itemCount: booksListing == null ? 0 : booksListing. length,
 				
-				itemBuilder: (context, index) {
-					BookTile widget
-					
+				itemBuilder: (context, index) {					
 					return BookTile(bookModelObj: booksListing[index]);
 				},
 			), 

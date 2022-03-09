@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; 
-import './bookmodel.dart'; 
+import './book_model.dart'; 
 
 
 class BookTile extends StatelessWidget { 
@@ -51,7 +51,7 @@ class BookTile extends StatelessWidget {
 
 						bookModelObj.volumeInfo.imageLinks.thumbnail != null
 							? Image.network(
-								bookModelObj.volumeInfo.imageLinks. thumbnail,
+								bookModelObj.volumeInfo.imageLinks.thumbnail,
 
 								fit: BoxFit.fill,
 							)
