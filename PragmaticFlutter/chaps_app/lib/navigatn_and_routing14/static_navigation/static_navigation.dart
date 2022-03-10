@@ -11,8 +11,8 @@ import '../book_model.dart';
 import '../book_details_page.dart';
 
 
-List<BookModel> booksListing;
 
+List<BookModel> booksListing;
 
 //Showing book listing in ListView 
 class BooksAppNavStatic extends StatelessWidget {
@@ -49,6 +49,8 @@ Future<List<BookModel>> makeHttpCall() async {
 	final jsonObject = json.decode(response.body); 
 	
 	var list = jsonObject['items'] as List; 
+
+	print(booksListing);
 	
 	return list.map((e) => BookModel.fromJson(e)).toList(); 
 }
@@ -61,7 +63,8 @@ class BooksListing extends StatefulWidget {
 
 
 class _BooksListingState extends State<BooksListing> { 
-	List<BookModel> booksListing; 
+	// ds has been declared globally
+	// List<BookModel> booksListing; 
 	
 	fetchBooks() async { 
 		var response = await makeHttpCall(); 
