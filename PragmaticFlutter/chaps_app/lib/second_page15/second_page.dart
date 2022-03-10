@@ -302,6 +302,66 @@ method allows FAB to be more giant and have icons and
 label as well. The `onPressed: ` has the implementation 
 to launch the URL for FAB.
 
+class ActionsWidget extends StatelessWidget {
+	final BookModel book;
+
+	const ActionsWidget({Key key, this.book}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		return Padding(
+			padding: const EdgeInsets.all(8.0),
+
+			child: Row(
+				mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+				children: [
+					book.accessInfo.webReaderLink != null
+						? FloatingActionButton.extended(
+							label: Text("Read"),
+
+							heroTag: "webReaderLink",
+
+							onPressed: () => launch(book.accessInfo.webReaderLink),
+						)
+						: Container(),
+
+					book.saleInfo.saleability == "FOR_SALE"
+						? FloatingActionButton.extended(
+							label: Text("Buy"),
+
+							heroTag: "buy_book",
+
+							onPressed: () => launch(book.saleInfo.buyLink),
+						)
+						: Container(),
+				],
+			),
+		);
+	}
+}
+
+
+DescriptionWidget
+The description widget is a simple widget to render the book’s 
+description in the Text widget. This widget is not required to be 
+in its own widget. However, I extracted this widget on its own 
+to keep things simple. Here’s the DescriptionWidget
+implementation.
+```
+class DescriptionWidget extends StatelessWidget {
+	final BookModel book;
+
+	const DescriptionWidget({Key key, this.book}) : super(key: key);
+
+	@override
+		Widget build(BuildContext context) {
+		return book.volumeInfo.description != null
+			? Text(book.volumeInfo.description.toString())
+
+			: Container();
+	}
+}
 
 
 
