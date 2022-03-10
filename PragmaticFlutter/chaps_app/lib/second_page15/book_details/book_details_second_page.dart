@@ -14,7 +14,7 @@ import './page_not_found.dart';
 
 
 //Showing book listing in ListView 
-class BooksAppNavDynamic extends StatelessWidget {
+class BooksAppSecondPage extends StatelessWidget {
 	@override 
 	Widget build(BuildContext context) { 
 		return MaterialApp(
