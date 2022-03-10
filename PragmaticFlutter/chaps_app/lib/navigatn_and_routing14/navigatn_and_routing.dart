@@ -178,6 +178,30 @@ onTap: () =>
 	),
 )
 
+STATIC NAVIGATION
+In a static navigation application’s top-level routing table is 
+implemented using a Map (Map<K, V> class) of routes 
+(pages/screens). This routing table is assigned to MaterialApp 
+routes (routes property) property. The route names for pages are 
+pushed using Navigator.pushNamed(...) (pushNamed<T extends Object>
+method). This routing is known as Named Routing because each page 
+is given a unique name, which is pushed on the Navigator widget.
+
+The MaterialApp and WidgetApp provide the routes property. This 
+property enables assigning routes as Map<String, WidgetBuilder>. 
+This option works better when there are not many logical steps 
+wrapped around the routes. For example, authentication or verification 
+related code wrapped around the logic for navigating to a particular 
+page. In this type of navigation, only the app’s global data can be 
+passed on to the second page.
+
+Entry Point
+The static navigation provides two ways to assign the initial page 
+– BooksListing widget. One option is to assign BooksListing widget 
+to the home property.
+Second option is to assign a route Map containing </, BooksListing()> 
+entry to routes property. The ‘/’ stands for the home page mapping.
+
 
 
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; 
-import './book_model.dart'; 
+import 'book_model.dart'; 
 
 
 class BookTile extends StatelessWidget { 
