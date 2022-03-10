@@ -202,8 +202,68 @@ to the home property.
 Second option is to assign a route Map containing </, BooksListing()> 
 entry to routes property. The ‘/’ stands for the home page mapping.
 
+//The booksListing data is available global to app
+List<BookModel> booksListing;
 
+class BooksApp extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		//Using Static Navigation (Named Routing)
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
 
+			//home: BooksListing(),
+
+			//Named-Routing using Map routing-table
+			routes: <String, WidgetBuilder>{
+				'/': (BuildContext context) => BooksListing(),
+
+				'/details': (BuildContext context) => BookDetailsPage(
+					book: booksListing[0],
+				),
+			},
+		);
+	}
+}
+
+In static navigation, the routing table is assigned statically. That 
+means any object can be passed in the routing map only. This 
+requires data to be available at the top-level. We need to pass the 
+`book` object to the BookDetailsPage for the `/details` route name. 
+
+As you can see that this value is static and cannot be changed with 
+the update in the book selection in the BookListing book items list. 
+The value is retrieved by accessing `List<BookModel> booksListing`,
+which gets updated after the REST API response is returned. For the 
+`/details` route, only one book object is assigned for the lifecycle of 
+the app as `book: booksListing[0]`. This causes to show the same 
+book’s details for every book displayed in the BookListing widget.
+
+Navigation Implementation
+All routes/pages have entries in the routing table above. The Map 
+entry ‘</details, BookDetailsPage()>‘is added to navigate to the 
+BookDetailsPage screen.
+
+The ' /details' is the alias/name to the BookDetailsPage screen. 
+This name is pushed on the Navigator widget using 
+Navigator.pushNamed (pushNamed<T extends Object> method).
+
+DETECTING GESTURE
+The navigation is initiated from the user activity on the homepage 
+screen, similar to a direct navigation example. The GestureDetector 
+widget is used to detect the gestures. It handles the tap gesture on the 
+listing with 'onTap: ' property. Please note the named route ' /details' 
+are pushed on the Navigator stack. This route is declared in the 
+MaterialApp routing table.
+
+onTap: () => Navigator.pushNamed(context, '/details')
+
+PASSING DATA
+As we saw earlier, the data can be passed to the BookDetailsPage() 
+at the top-level only when the routes are assigned to routes property. 
+In this case, only globally available data can be passed to another 
+widget. In this implementation, only the first item `booksListing[0]` 
+detail page is available for any selection on the homepage.
 
 
 */ 
