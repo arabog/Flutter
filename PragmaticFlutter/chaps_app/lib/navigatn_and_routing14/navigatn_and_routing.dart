@@ -265,5 +265,125 @@ In this case, only globally available data can be passed to another
 widget. In this implementation, only the first item `booksListing[0]` 
 detail page is available for any selection on the homepage.
 
+DYNAMIC NAVIGATION
+In dynamic navigation, routes are generated dynamically with the 
+help of a function. This function implements the onGenerateRoute 
+(onGenerateRoute property) callback in the MaterialApp class. 
+This is a type of Named Routing that makes use of onGenerateRoute 
+property. 
+
+The MaterialApp and WidgetApp provide the onGenerateRoute 
+property to assign the callback function, say generateRoute 
+returning a route. It allows the data to pass using RouteSettings 
+(RouteSettings class). It carries the data to help construct a 
+Route (Route class).
+
+Any authorization or verification logic can be extracted to a single 
+place. This routing provides the option to show a default page 
+when a route or match is not found. In our BooksApp, we will 
+use the `PageNotFound` widget when no route is matched. It’s 
+a simple page that displays the message that the requested page 
+is not available.
+
+Entry Point
+The entry page BookListing is assigned to home property. The 
+initialRoute property can be used to set the beginning route/page. 
+The generateRoute callback function handles the navigational logic.
+
+class BooksApp extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		//Using Dynamic Navigation (Named Routing)
+		return MaterialApp(
+			debugShowCheckedModeBanner: false,
+
+			home: BooksListing(),
+
+			//Named with onGenerateRoute
+			initialRoute: '/', onGenerateRoute: generateRoute,
+		);
+	}
+}
+
+
+THE generateRoute() FUNCTION
+The generateRoute() function takes the RouteSettings as an 
+argument, which allows sending data along. The arguments 
+property on the RouteSettings object retrieves any arguments 
+sent with the widget.
+
+Route<dynamic> generateRoute(RouteSettings routeSettings) {
+	final args = routeSettings.arguments;
+
+	switch (routeSettings.name) {
+		case '/':
+			return MaterialPageRoute(
+				builder: (context) => BooksListing(),
+			);
+
+		case '/details':
+			if (args is BookModel) {
+				return MaterialPageRoute(
+					builder: (context) => BookDetailsPage(
+						book: args,
+					),
+				);
+			}
+
+			return MaterialPageRoute(
+				builder: (context) => PageNotFound(),
+			);
+
+		default:
+			return MaterialPageRoute(
+				builder: (context) => PageNotFound(),
+			);
+	}
+}
+
+Navigation Implementation
+The Navigator uses the Route object to represent the page/screen. 
+The generateRoute() function returns the appropriate route based 
+on the matching name. The RouteSettings is useful in passing around 
+these route names and arguments, if any. The route name is extracted 
+using routeSettings.name. The arguments can be extracted using 
+routeSettings.arguments. When no match is found, a common default 
+page is shown to display the appropriate message.
+
+DETECTING GESTURE
+The navigation is initiated from the user activity on the homepage 
+screen, similar to direct and static navigation examples. The 
+GestureDetector widget is used to detect the gestures. It handles 
+the tap gesture on the listing with `onTap: ` property.
+
+PASSING DATA
+Dynamic navigation uses named-routing as well. This routing allows 
+passing selected book object `booksListing[index]` as an argument 
+to generateRoute() callback function. The generateRoute() function 
+extracts the route name and its arguments using the RouteSettings 
+object. Refer to generateRoute() to understand extracting route 
+names and arguments from the RouteSettings object.
+
+onTap: () =>
+	Navigator.pushNamed(
+	context,
+
+	'/details',
+	
+	arguments: booksListing[index],
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 */ 
