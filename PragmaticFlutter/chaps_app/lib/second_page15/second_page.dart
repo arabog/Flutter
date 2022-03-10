@@ -156,18 +156,151 @@ class InformationWidget extends StatelessWidget {
 						],
 					),
 				),
-				
+
 				//Displaying cover image
 			],
 		);
 	}
 }
 
+The book title, subtitle, author(s), publisher, and published date 
+are rendered in a Text widget. The image is rendered in the Image 
+widget. Only the non-null values are rendered in the Text and/or 
+Image widget; otherwise, an empty Container widget is rendered. 
+A style is applied to Text widgets to font size as fourteen and
+bold font weight.
+
+style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)
+
+Let’s checkout implementations for each of the widgets in the code below:
+
+class InformationWidget extends StatelessWidget {
+	final BookModel book;
+
+	const InformationWidget({Key key, this.book}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		return Row(
+			mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+			children: [
+				Flexible(
+					child: Column(
+						crossAxisAlignment: CrossAxisAlignment.start,
+						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+						children: <Widget>[
+							//Book Title
+							book.volumeInfo.title != null
+								? Text(
+									’${book.volumeInfo.title}’,
+									
+									style: TextStyle(
+										fontSize: 14, 
+
+										fontWeight: FontWeight.bold
+									),
+								)
+								: Container(),
+
+							//Book subtitle
+							book.volumeInfo.subtitle != null
+								? Text(
+									’${book.volumeInfo.subtitle}’,
+
+									style: TextStyle(
+										fontSize: 14,
+
+										fontWeight: FontWeight.bold,
+
+										fontStyle: FontStyle.italic
+									),
+								)
+								: Container(),
+
+							//Book authors. Used join() method on list to convert list into comma-separated String
+							book.volumeInfo.authors != null
+								? Text(
+									’Author(s): ${book.volumeInfo.authors.join(", ")}’,
+
+									style:TextStyle(
+										fontSize: 14, 
+										
+										fontWeight: FontWeight.bold
+									),
+								)
+								: Container(),
+
+							//Publisher
+							book.volumeInfo.publisher != null
+								? Text(
+									"Published by: ${book.volumeInfo.publisher}",
+
+									style: TextStyle(
+										fontSize: 14, 
+										
+										fontStyle:FontStyle.italic
+									),
+								)
+								: Container(),
+
+							//PublishedDate
+							book.volumeInfo.publishedDate != null
+								? Text(
+									"Published on: ${book.volumeInfo.publishedDate}",
+
+									style: TextStyle(
+										fontSize: 14, 
+										
+										fontStyle: FontStyle.italic
+									),
+								)
+								: Container(),
+						],
+					),
+				),
+
+				
+				//Rendering cover page image
+				book.volumeInfo.imageLinks.thumbnail != null
+					? Image.network(
+						book.volumeInfo.imageLinks.thumbnail,
+
+						fit: BoxFit.fill,
+					)
+
+				: Container(),
+			],
+		);
+	}
+}
+
+ActionsWidget
+The ActionsWidget renders two material design floating action 
+buttons (FABs) to let users read the sample and/or buy the book 
+by clicking on respective buttons. These buttons are implemented 
+using the FloatingActionButton (FloatingActionButton class) widget. 
+Clicking on each button, launch the URL provides by Books API for 
+the given book. For launching URL, the url _ launcher plugin 
+(url_launcher plugin) is used.
 
 
+Add this dependency in pubspec.yaml under the dependencies` section.
+```
+dependencies:
+	#To open web reader link and buyLink from BookDetailsPage
+	url_launcher: ^5.4.11
 
-
-
+The ActionsWidget sits below the InformationWidget in 
+BookDetailsPage. The ActionsWidget has a Padding widget 
+at the top. The Padding widget has a child Row widget. The 
+Row widget aligns its children horizontally. This Row widget
+has two children of type FloatingActionButton or FAB with 
+the extended variant. The FloatingActionButton.extended() 
+method allows FAB to be more giant and have icons and 
+label as well. The `onPressed: ` has the implementation 
+to launch the URL for FAB.
 
 
 
