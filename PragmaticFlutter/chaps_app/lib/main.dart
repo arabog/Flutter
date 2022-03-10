@@ -27,7 +27,9 @@ import 'package:flutter/material.dart';
 
 // import 'integrating_REST_API12/integrating_rest_api.dart';
 
-import 'data_modelling13/data_modelling.dart';
+// import 'data_modelling13/data_modelling.dart';
+
+import 'navigatn_and_routing14/direct_navigation/direct_navigation.dart';
 
 
 void main() {
@@ -74,7 +76,9 @@ class MyApp extends StatelessWidget {
 
 			// home: MoorBooksApp(),
 
-			home: BooksApp(),
+			// home: BooksApp(),
+
+      	home: BooksAppNavDirect(),
 		);
 	}
 }

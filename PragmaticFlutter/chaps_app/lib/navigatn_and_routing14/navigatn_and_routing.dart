@@ -115,9 +115,68 @@ widgets are pages or screens pushed on the Navigator widget.
 The Navigator widget refers to these children as Route 
 (Route class) objects.
 
+DETECTING GESTURE
+The navigation is initiated from the user activity on the homepage 
+screen. That means the BookListing page list items need to be 
+interacted with to navigate to its detailed page. The GestureDetector 
+(GestureDetector class) widget is used to detect the gestures. It 
+handles the taps on the listing items using its `onTap:` property.
+
+class BooksListing extends StatefulWidget {
+	@override
+	_BooksListingState createState() => _BooksListingState();
+}
 
 
+class _BooksListingState extends State<BooksListing> {
+	List<BookModel> booksListing;
+	...
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			...
+			body: ListView.builder(
+				itemCount: booksListing == null ? 0 : booksListing.length,
 
+				itemBuilder: (context, index) {
+					//Passing bookModelObj to BookTile widget
+					return GestureDetector(
+						child: BookTile(bookModelObj: booksListing[index]),
+						
+						onTap: () {}
+					);
+				},
+			),
+		);
+	}
+}
+
+PASSING DATA
+The MaterialPageRoute uses a builder to build the primary contents 
+of the route (page/screen). The `book` object is passed as an argument 
+to the BookDetailsPage widget.
+```
+onTap: () {
+	Navigator.of(context).push(
+		MaterialPageRoute(
+			builder: (context) => BookDetailsPage(
+				book: booksListing[index],
+			),
+		),
+	);
+},
+
+Tip
+The above code can also be written in one line without using curly braces.
+```
+onTap: () =>
+	Navigator.of(context).push(
+	MaterialPageRoute(
+		builder: (context) => BookDetailsPage(
+			book: booksListing[index],
+		),
+	),
+)
 
 
 
