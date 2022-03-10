@@ -31,7 +31,9 @@ import 'package:flutter/material.dart';
 
 // import 'navigatn_and_routing14/direct_navigation/direct_navigation.dart';
 
-import 'navigatn_and_routing14/static_navigation/static_navigation.dart';
+// import 'navigatn_and_routing14/static_navigation/static_navigation.dart';
+
+import 'navigatn_and_routing14/dynamic_navigation/dynamic_navigation.dart';
 
 
 void main() {
@@ -82,7 +84,9 @@ class MyApp extends StatelessWidget {
 
       	// home: BooksAppNavDirect(),
 
-        home: BooksAppNavStatic(),
+        // home: BooksAppNavStatic(),
+
+        home: BooksAppNavDynamic(),
 		);
 	}
 }
